@@ -10,6 +10,13 @@ export default <Partial<Config>> {
     './app.vue'
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: "15px",
+        xl: "20px",
+      },
+    },
     screens: {
       xs: "320px",
       sm: "576px",
@@ -20,20 +27,29 @@ export default <Partial<Config>> {
       "3xl": "1760px",
     },
     fontFamily: {
-      raleway: ["Raleway", "sans"],
+      raleway: ["Montserrat", "sans"],
     },
     extend: {
+      backgroundImage: {
+        'auth-bg': "linear-gradient(to bottom, #EDEDE4 40%, #ffffff 40%)",
+      },
+      boxShadow: {
+        'auth-shadow': '0px 0px 15px #DCDCDC',
+      },
       colors: {
         white: "#FFFFFF",
         black: "#111111",
         gray: {
-          1: "#DCDCDC",
-          2: "#F5F5F3"
+          50: "#F5F5F3",
+          100: "#DCDCDC"
         },
+        "dark-transparent": "#0000001f",
+        beige: "#EDEDE4",
       },
       screens: {
         "is-hover": { raw: "(hover: hover)" },
       },
     },
   },
+  plugins: [require('tailwind-hamburgers')],
 }

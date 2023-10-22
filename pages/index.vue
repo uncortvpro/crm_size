@@ -1,13 +1,8 @@
-<script setup lang="ts">
-const ui = /*ui*/ {
-  background: "bg-black dark:bg-slate-900",
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div>
-<p class="text-primary-500">authorize</p>
-    <UCard :ui="ui" />
+    <!-- <p class="text-primary-500">main</p> -->
   </div>
 </template>
 
