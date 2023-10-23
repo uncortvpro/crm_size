@@ -23,6 +23,8 @@ export default defineNuxtConfig({
     "@img": "./assets/img",
   },
   app: {
+    baseURL: '/crm_size/', // baseURL: '/<repository>/'
+    buildAssetsDir: 'assets',
     head: {
       title: 'Size SRM',
     }
