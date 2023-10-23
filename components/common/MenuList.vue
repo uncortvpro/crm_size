@@ -16,9 +16,9 @@ defineProps<{
     </Transition>
     <Transition name="page">
       <ul
-        v-if="isActive"
         class="flex bg-white flex-col rounded-b-[3px] text-center mx-[-15px] gap-[26px] relative z-[15] py-4 lg:py-0 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
-      >
+        :class="{flex: isActive}"
+        >
         <li>
           <CommonMenuLink to="/">МОЖЛИВОСТІ</CommonMenuLink>
         </li>
