@@ -39,6 +39,8 @@ const onRegistration = () => {
   auth
     .register(credentials)
     .then((res: any) => {
+      console.log(message);
+
       if ((res.message = "User created successfully")) {
         message.value = "Користувача успішно створено.";
       } else {
@@ -119,6 +121,9 @@ const onRegistration = () => {
         </div>
         <UiTextPrimary class="!text-red-600" v-if="error">{{
           error
+        }}</UiTextPrimary>
+        <UiTextPrimary class="!text-green-600" v-if="message">{{
+          message
         }}</UiTextPrimary>
         <UiButtonPrimary
           type="submit"
