@@ -2,7 +2,7 @@
 import { ref, watch } from "vue";
 
 const props = defineProps<{
-  placeholder: string;
+  placeholder?: string;
   type: any;
   inputType: string;
 }>();
@@ -12,13 +12,14 @@ const emits = defineEmits(["changeValue"]);
 const value = ref("");
 
 watch(value, () => {
-  emits("changeValue", value);
+  emits("changeValue", props.inputType, value);
 });
 </script>
 
 <template>
   <label class="flex flex-col gap-[5px]" for="">
-    <span class="text-[9px] lg:text-[15px] text-black"><slot /></span>
+    <UiTextPrimary><slot /></UiTextPrimary>
+
     <UiInputPrimary
       v-model="value"
       :placeholder="placeholder"
