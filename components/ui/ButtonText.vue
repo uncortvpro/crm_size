@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <button class="text-[11px] md:text-[15px] lg:text-[20px] py-[9px] font-semibold rounded-[2px] uppercase lg:py-[18px] text-black bg-transparent hover:opacity-[60%] duration-200 px-[25px] lg:px-[35px] xl:px-[47px]">
+  <button class="font-semibold text-[9px] md:text-[12px] lg:text-[15px] duration-200 hover:opacity-hover">
     <slot />
   </button>
 </template>

@@ -16,9 +16,9 @@ const switchMenu = (value: boolean) => {
           class="flex items-center"
         ></CommonLogo>
         <div class="flex lg:order-2">
-          <UiButtonText class="hidden lg:block" @click="router.push('/register')" type="button">
+          <UiButtonTransparent class="hidden lg:block" @click="router.push('/register')" type="button">
             РЕЄСТРАЦІЯ
-          </UiButtonText>
+          </UiButtonTransparent>
           <UiButtonPrimary type="button" @click="router.push('/authorize')">
             УВІЙТИ
           </UiButtonPrimary>

@@ -30,6 +30,9 @@ export default <Partial<Config>> {
       raleway: ["Montserrat", "sans"],
     },
     extend: {
+      opacity: {
+        'hover': '60%',
+      },
       backgroundImage: {
         'auth-bg': "linear-gradient(to bottom, #EDEDE4 40%, #ffffff 40%)",
       },
@@ -41,8 +44,9 @@ export default <Partial<Config>> {
         black: "#111111",
         gray: {
           50: "#F5F5F3",
-          100: "#DCDCDC"
+          100: "#DCDCDC",
         },
+
         "dark-transparent": "#0000001f",
         beige: "#EDEDE4",
       },

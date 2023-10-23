@@ -29,7 +29,7 @@ defineProps<{
           <CommonMenuLink to="/">КОНТАКТИ</CommonMenuLink>
         </li>
         <li>
-          <UiButtonText class="lg:hidden !px-[0px]">РЕЄСТРАЦІЯ</UiButtonText>
+          <UiButtonTransparent class="lg:hidden !px-[0px]">РЕЄСТРАЦІЯ</UiButtonTransparent>
         </li>
       </ul>
     </Transition>

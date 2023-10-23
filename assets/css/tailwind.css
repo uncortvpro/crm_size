@@ -16,4 +16,11 @@
   body {
     font-family: "Montserrat", sans-serif;
   }
+  .input_without_arrow::-webkit-outer-spin-button,
+  .input_without_arrow::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  .input_without_arrow[type="number"] {
+    -moz-appearance: textfield;
+  }
 }
