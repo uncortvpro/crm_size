@@ -108,11 +108,11 @@ const onRegistration = () => {
           >
         </div>
         <div class="mt-[12px] grid grid-cols-1 lg:grid-cols-2 gap-[12px]">
-          <UiCheckbox required
+          <UiCheckbox :required="true"
             >Ви приймаєте
             <span class="font-semibold">умови використання</span></UiCheckbox
           >
-          <UiCheckbox required
+          <UiCheckbox :required="true"
             >Я хочу отримувати листи на email з новинами та спеціальними
             пропозиціями</UiCheckbox
           >
@@ -125,7 +125,9 @@ const onRegistration = () => {
           class="!rounded-[5px] mt-[15px] md:mt-[30px] lg:mt-[40px] w-full"
           >Зареєструватися</UiButtonPrimary
         >
-        <div class="flex items-center justify-center mt-[12px] lg:mt-[25px]">
+        <div
+          class="flex gap-[7px] items-center justify-center mt-[12px] lg:mt-[25px]"
+        >
           <UiTextPrimary> Вже зареєстровані? </UiTextPrimary>
           <UiButtonText type="button" @click="router.push('/authorize')"
             >Увійти</UiButtonText

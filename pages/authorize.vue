@@ -76,7 +76,7 @@ const login = () => {
         <UiButtonGoogle type="button" class="w-full mt-[9px] lg:mt-[15px]"
           >Увійти з Google</UiButtonGoogle
         >
-        <div class="flex items-center justify-center mt-[12px] lg:mt-[25px]">
+        <div class="flex gap-[7px] items-center justify-center mt-[12px] lg:mt-[25px]">
           <UiTextPrimary> Ще не зареєстровані? </UiTextPrimary>
           <UiButtonText type="button" @click="router.push('/register')"
             >Зареєструватися</UiButtonText
