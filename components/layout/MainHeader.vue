@@ -63,11 +63,6 @@ provide("switchMenu", switchMenu);
             <li>
               <CommonMenuLink to="/">КОНТАКТИ</CommonMenuLink>
             </li>
-            <li>
-              <UiButtonTransparent class="lg:hidden !px-[0px]"
-                >РЕЄСТРАЦІЯ</UiButtonTransparent
-              >
-            </li>
           </ul>
         </template>
       </CommonMenuList>

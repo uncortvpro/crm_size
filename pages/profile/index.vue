@@ -6,7 +6,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="grid relative grid-cols-profile-section">
+  <div class="lg:grid relative grid-cols-profile-section">
     <div
       class="hidden lg:block rounded-r-[20px] min-h-[700px] px-[30px] pt-[30px] 2xl:px-[44px] 2xl:pt-[44px] bg-beige"
     >

@@ -5,7 +5,7 @@ defineProps<{
 </script>
 <template>
   <div
-    class="items-center hidden relative z-[-1] justify-between w-full lg:flex lg:w-auto lg:order-1"
+    class="items-center hidden relative z-[-1] lg:z-0 justify-between w-full lg:flex lg:w-auto lg:order-1"
     :class="{ '!block': isActive }"
   >
     <Transition name="custom-flip">
@@ -16,7 +16,7 @@ defineProps<{
     </Transition>
 
     <Transition name="mobile-show">
-      <div v-if="isActive" class="lg:hidden fixed z-[15] top-0 left-0 w-full">
+      <div v-if="isActive" class="lg:hidden fixed z-[40] top-0 left-0 w-full">
         <slot name="mobile"></slot>
       </div>
     </Transition>
