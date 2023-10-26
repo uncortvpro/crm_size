@@ -30,6 +30,9 @@ export default <Partial<Config>> {
       raleway: ["Montserrat", "sans"],
     },
     extend: {
+      gridTemplateColumns: {
+        'profile-section': '293px auto',
+      },
       transitionDuration: {
         'hover': '200ms',
       },

@@ -15,6 +15,7 @@
 
   body {
     font-family: "Montserrat", sans-serif;
+    background-color: #ffffff;
   }
   .input_without_arrow::-webkit-outer-spin-button,
   .input_without_arrow::-webkit-inner-spin-button {
@@ -22,5 +23,10 @@
   }
   .input_without_arrow[type="number"] {
     -moz-appearance: textfield;
+  }
+  .container-reset {
+    padding: 0;
+    width: 100%;
+    max-width: none!important;
   }
 }

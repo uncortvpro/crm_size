@@ -5,6 +5,8 @@ const isMobileMenu = ref<boolean>(false);
 const switchMenu = (value: boolean) => {
   isMobileMenu.value = value;
 };
+
+provide("switchMenu", switchMenu);
 </script>
 
 <template>
@@ -30,7 +32,7 @@ const switchMenu = (value: boolean) => {
       <CommonMenuList :isActive="isMobileMenu">
         <template #mobile>
           <ul
-            class="flex bg-white flex-col pt-[63px] rounded-b-[3px] text-center mx-[-15px] gap-[26px] relative z-[15] py-4 lg:py-0 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+            class="flex bg-white flex-col pt-[67px] rounded-b-[3px] text-center mx-[-15px] gap-[26px] relative z-[15] py-4 lg:py-0 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
           >
             <li>
               <CommonMenuLink to="/">МОЖЛИВОСТІ</CommonMenuLink>

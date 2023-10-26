@@ -1,10 +1,10 @@
-<script setup></script>
+<script setup lang="ts"></script>
 
 <template>
   <ul
   >
     <li>
-      <CommonMenuProfileItem to="/">
+      <CommonMenuProfileItem to="/profile/clients">
         <template #logo>
           <SvgoClients class="!w-full !h-auto"></SvgoClients>
         </template>
@@ -12,7 +12,7 @@
       </CommonMenuProfileItem>
     </li>
     <li>
-      <CommonMenuProfileItem to="/">
+      <CommonMenuProfileItem to="/profile/objectives">
         <template #logo>
           <SvgoTasks class="!w-full !h-auto"></SvgoTasks>
         </template>
@@ -20,7 +20,7 @@
       </CommonMenuProfileItem>
     </li>
     <li>
-      <CommonMenuProfileItem to="/">
+      <CommonMenuProfileItem to="/profile/finance">
         <template #logo>
           <SvgoFinance
             color="transparent"
@@ -31,7 +31,7 @@
       </CommonMenuProfileItem>
     </li>
     <li>
-      <CommonMenuProfileItem to="/">
+      <CommonMenuProfileItem to="/profile/warehouses">
         <template #logo>
           <SvgoStock class="!w-full !h-auto"></SvgoStock>
         </template>
@@ -39,7 +39,7 @@
       </CommonMenuProfileItem>
     </li>
     <li>
-      <CommonMenuProfileItem to="/">
+      <CommonMenuProfileItem to="/profile/my_orders">
         <template #logo>
           <SvgoOrders class="!w-full !h-auto"></SvgoOrders>
         </template>
@@ -47,7 +47,7 @@
       </CommonMenuProfileItem>
     </li>
     <li>
-      <CommonMenuProfileItem to="/">
+      <CommonMenuProfileItem to="/profile/mailing_list">
         <template #logo>
           <SvgoNewsletter class="!w-full !h-auto"></SvgoNewsletter>
         </template>
@@ -55,7 +55,7 @@
       </CommonMenuProfileItem>
     </li>
     <li>
-      <CommonMenuProfileItem to="/">
+      <CommonMenuProfileItem to="/profile/analytics">
         <template #logo>
           <SvgoAnalytics class="!w-full !h-auto"></SvgoAnalytics>
         </template>
