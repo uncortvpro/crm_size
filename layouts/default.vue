@@ -1,6 +1,6 @@
 <template>
   <LayoutBase>
-    <LayoutHeader></LayoutHeader>
+    <LayoutMainHeader></LayoutMainHeader>
     <NuxtPage />
   </LayoutBase>
 </template>

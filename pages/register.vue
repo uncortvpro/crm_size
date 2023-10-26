@@ -39,7 +39,6 @@ const onRegistration = () => {
   auth
     .register(credentials)
     .then((res: any) => {
-      console.log(message);
 
       if ((res.message = "User created successfully")) {
         message.value = "Користувача успішно створено.";

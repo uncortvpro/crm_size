@@ -1,34 +1,17 @@
-<script setup lang="ts">
-const router = useRouter();
-const isMobileMenu = ref(false);
-
-const switchMenu = (value: boolean) => {
-  isMobileMenu.value = value;
-};
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <header class="container">
     <nav class="bg-white dark:bg-gray-900 w-full z-20">
-      <div class="flex flex-wrap items-center justify-between mx-auto py-4">
+      <div class="flex bg-white z-20 flex-wrap items-center justify-between mx-auto py-4">
         <CommonLogo
           href="https://flowbite.com/"
-          class="flex items-center"
+          class="flex relative bg-white z-20 items-center"
         ></CommonLogo>
-        <div class="flex lg:order-2">
-          <UiButtonTransparent class="hidden lg:block" @click="router.push('/register')" type="button">
-            РЕЄСТРАЦІЯ
-          </UiButtonTransparent>
-          <UiButtonPrimary type="button" @click="router.push('/authorize')">
-            УВІЙТИ
-          </UiButtonPrimary>
-          <CommonButtonBurger
-            class="self-center ml-[15px] lg:hidden"
-            :isActive="isMobileMenu"
-            @click="switchMenu(!isMobileMenu)"
-          />
+        <div class="flex relative z-20 lg:order-2">
+          <slot name="header-items"></slot>
         </div>
-        <CommonMenuList :isActive="isMobileMenu" />
+        <slot name="header-menu-list"></slot>
       </div>
     </nav>
   </header>

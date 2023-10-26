@@ -3,6 +3,7 @@ const router = useRouter();
 const auth = useAuthStore();
 definePageMeta({
   layout: "without-header-footer",
+  middleware: ["guest"],
 });
 const successAuth = (token: string) => auth.successAuth(token);
 const credentials = reactive<LoginCredentials>({
@@ -23,7 +24,6 @@ const login = () => {
         error.value = "Користувач не існує";
       }
       successAuth(res.access_token);
-      router.push("/profile");
     })
     .catch((err) => {
       error.value = "Користувач не існує";

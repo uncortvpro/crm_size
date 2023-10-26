@@ -1,15 +1,29 @@
+import { log } from "console";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("authStore", () => {
-    
+    const router = useRouter();
+
     const isLoggedIn = ref(false);
+    const token = computed(() => localStorage.getItem('token'));
+
+
+    function fetchUser() {
+        useAuthFetch(`${useApiUrl()}/validate_tokens`)
+            // .then(res => successAuth(token.value as string));
+    }
 
     function successAuth(token: string) {
-        if(!token) return false;
         localStorage.setItem('token', token);
         isLoggedIn.value = true;
-        return true
-      }
+        router.push("/profile");
+    }
+
+    function failedAuth() {
+        localStorage.removeItem('token');
+        isLoggedIn.value = false;
+        router.push("/authorize");
+    }
 
     function login(credentials: LoginCredentials) {
         return useApiFetch(`${useApiUrl()}/login`, {
@@ -20,7 +34,7 @@ export const useAuthStore = defineStore("authStore", () => {
             }
         })
     }
-    
+
     function register(credentials: RegisterCredentials) {
         return useApiFetch(`${useApiUrl()}/register`, {
             method: 'POST',
@@ -37,6 +51,9 @@ export const useAuthStore = defineStore("authStore", () => {
         isLoggedIn,
         register,
         login,
-        successAuth
+        successAuth,
+        token,
+        failedAuth,
+        fetchUser
     };
 });

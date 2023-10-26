@@ -8,11 +8,7 @@ export default defineNuxtConfig({
   },
   ssr: false,
   css: ['~/assets/css/main.css'],
-  modules: [
-    '@nuxt/ui',
-    "nuxt-svgo",
-    '@pinia/nuxt',
-  ],
+  modules: ['@nuxt/ui', "nuxt-svgo", '@pinia/nuxt', "@nuxt/image"],
   pinia: {
     storesDirs: ['./stores/**'],
   },

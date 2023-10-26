@@ -30,6 +30,9 @@ export default <Partial<Config>> {
       raleway: ["Montserrat", "sans"],
     },
     extend: {
+      transitionDuration: {
+        'hover': '200ms',
+      },
       opacity: {
         'hover': '60%',
       },
@@ -48,7 +51,7 @@ export default <Partial<Config>> {
         },
 
         "dark-transparent": "#0000001f",
-        beige: "#EDEDE4",
+        beige: "#EDEDE4", 
       },
       screens: {
         "is-hover": { raw: "(hover: hover)" },

@@ -7,7 +7,7 @@ defineProps<{
 
 <template>
   <UCheckbox
-    required
+    :required="required"
     :ui="{
       base: 'w-[11px] text-black h-[11px] lg:w-[14px] lg:h-[14px]',
       label: 'flex py-[5px] lg:py-[2px] lg:inline-block',
