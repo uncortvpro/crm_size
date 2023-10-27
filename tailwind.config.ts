@@ -24,14 +24,18 @@ export default <Partial<Config>> {
       lg: "992px",
       xl: "1200px",
       "2xl": "1400px",
-      "3xl": "1760px",
+      "3xl": "1600px",
+      "4xl": "1760px",
     },
     fontFamily: {
       raleway: ["Montserrat", "sans"],
     },
     extend: {
       gridTemplateColumns: {
-        'profile-section': '293px auto',
+        'profile-section': '260px auto',
+        'profile-section-4xl': '293px auto',
+        'table-9': 'repeat(9, minmax(0, auto))',
+        'auto-3': 'repeat(3, minmax(0, auto))',
       },
       transitionDuration: {
         'hover': '200ms',
@@ -54,7 +58,8 @@ export default <Partial<Config>> {
         },
 
         "dark-transparent": "#0000001f",
-        beige: "#EDEDE4", 
+        beige: "#EDEDE4",
+        'beige-1': "#C8C8BE",  
       },
       screens: {
         "is-hover": { raw: "(hover: hover)" },
