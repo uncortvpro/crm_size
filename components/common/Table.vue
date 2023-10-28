@@ -1,4 +1,11 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps({
+  pagination: {
+    default: true,
+    type: Boolean,
+  },
+});
+</script>
 
 <template>
   <div
@@ -8,14 +15,17 @@
       <thead>
         <tr class="hidden 3xl:table-row border-b border-beige-1">
           <slot name="headers"></slot>
-          <th></th>
+          <!-- <th></th> -->
         </tr>
       </thead>
       <tbody>
         <slot name="items"></slot>
       </tbody>
     </table>
-    <div class="flex mt-[15px] items-center justify-between md:justify-end gap-[20px] xl:gap-[40px]">
+    <div
+      class="flex mt-[15px] items-center justify-between md:justify-end gap-[20px] xl:gap-[40px]"
+      v-if="pagination"
+    >
       <UiButtonTextArrowLeft disabled>Попередня сторінка</UiButtonTextArrowLeft>
       <UiButtonTextArrowRight>Наступна сторінка</UiButtonTextArrowRight>
     </div>

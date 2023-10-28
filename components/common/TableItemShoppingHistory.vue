@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <UiTableItem>
+  <UiTableItem :isMobileClose="true">
     <template #header> 23.10.2023 </template>
     <template #elements="{ active }">
       <UiTransitionTableCell :vIf="active">
@@ -27,7 +27,7 @@
       <UiTransitionTableCell :vIf="active">
         <template #title>Статус замовлення</template>
         <template #value>
-          <CommonStatusOutput>Відправлено</CommonStatusOutput>
+          <CommonStatusOutput class="inline-block">Відправлено</CommonStatusOutput>
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active" class="3xl:hidden col-span-2">

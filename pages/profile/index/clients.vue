@@ -1,14 +1,26 @@
 <script setup lang="ts">
 const router = useRouter();
-
 const isOpen = ref(false);
+
+const fetchClients = () => {
+  useAuthFetch(`${useApiUrl()}/clients`, {
+    method: 'GET',
+    body: {
+      page: 1,
+      per_page: 10,
+      keyword: "",
+    },
+  }).then((res) => console.log(res));
+};
+
+// fetchClients();
 </script>
 
 <template>
   <LayoutProfilePage title="Клієнти">
     <template #content>
       <div class="mt-[15px] xl:mt-[25px]">
-        <CommonModalRemoveClient v-model="isOpen"></CommonModalRemoveClient>
+        <!-- <CommonModalRemoveClient v-model="isOpen"></CommonModalRemoveClient> -->
         <div class="flex justify-between gap-[15px] items-center">
           <UiButtonOpacityBorderAddItem
             @click="router.push('new_client')"
@@ -26,7 +38,7 @@ const isOpen = ref(false);
             <UiTableCellHeader>Історія покупок </UiTableCellHeader>
             <UiTableCellHeader>Тотал сума покупок</UiTableCellHeader>
             <UiTableCellHeader>
-              <UiButtonTextArrowTop @click="isOpen = true" class="!font-normal"
+              <UiButtonTextArrowTop class="!font-normal"
                 >Дата останньої покупки</UiButtonTextArrowTop
               >
             </UiTableCellHeader>

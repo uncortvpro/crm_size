@@ -36,6 +36,8 @@ export default <Partial<Config>> {
         'profile-section-4xl': '293px auto',
         'table-9': 'repeat(9, minmax(0, auto))',
         'auto-3': 'repeat(3, minmax(0, auto))',
+        'order-details-modal-md': '60px auto auto',
+        'order-details-modal-xs': '40px auto auto'
       },
       transitionDuration: {
         'hover': '200ms',

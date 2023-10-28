@@ -2,8 +2,6 @@
 const props = defineProps<{
   vIf: boolean;
 }>();
-
-console.log(props.vIf);
 </script>
 
 <template>

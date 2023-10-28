@@ -1,28 +1,28 @@
-import { log } from "console";
 import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("authStore", () => {
     const router = useRouter();
-
-    const isLoggedIn = ref(false);
-    const token = computed(() => localStorage.getItem('token'));
+    const user = ref(null);
+    const isLoggedIn = computed(() => !!user.value);
+    const token = localStorage.getItem('token');
 
 
     function fetchUser() {
         useAuthFetch(`${useApiUrl()}/validate_tokens`)
-            // .then(res => successAuth(token.value as string));
+            .then(res => {
+                user.value = res;
+            });
     }
 
-    function successAuth(token: string) {
+    async function successAuth(token: string) {
         localStorage.setItem('token', token);
-        isLoggedIn.value = true;
+        await fetchUser();
         router.push("/profile");
     }
 
-    function failedAuth() {
+    function failedToken() {
         localStorage.removeItem('token');
-        isLoggedIn.value = false;
-        router.push("/authorize");
+        user.value = null;
     }
 
     function login(credentials: LoginCredentials) {
@@ -47,13 +47,14 @@ export const useAuthStore = defineStore("authStore", () => {
             }
         })
     }
+
+    fetchUser();
     return {
         isLoggedIn,
         register,
         login,
         successAuth,
-        token,
-        failedAuth,
+        failedToken,
         fetchUser
     };
 });

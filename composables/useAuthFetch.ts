@@ -1,6 +1,6 @@
 export function useAuthFetch<T>(url: string, options: any = {}) {
     const auth = useAuthStore();
-    const token = computed(() => auth.token);
+    const token = localStorage.getItem('token');
     
     let headers: any = {};
 
@@ -10,23 +10,16 @@ export function useAuthFetch<T>(url: string, options: any = {}) {
 
     return $fetch<T>(url, {
         ...options,
-        method: 'POST',
+        method: options.method || 'POST',
         headers: {
             ...headers,
             ...options?.headers,
         },
         body: {
-            access_token: token.value,
+            access_token: token,
             ...options?.body
         }
     }).then((res: any) => {
-        if(res.valid) {
-            return res;
-        }
-        auth.failedAuth();
-        return res.message;
-    }).catch(err => {
-        auth.failedAuth();
-        return false;
-    });
+        return res;
+    })
 }

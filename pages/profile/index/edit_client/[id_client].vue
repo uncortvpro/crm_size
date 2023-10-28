@@ -1,18 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const isOpen = ref(false);
+const switchOpen = (value: boolean) => {
+  isOpen.value = value;
+};
+</script>
 
 <template>
   <LayoutProfilePage title="Редагувати клієнта">
     <template #header>
       <div class="items-center gap-[40px] hidden lg:flex">
         <UiButtonOpacityBorder disabled> Оновити </UiButtonOpacityBorder>
-        <UiButtonIcon :value="'Видалити'" class="w-fit">
+        <UiButtonIcon
+          @click="isOpen = !isOpen"
+          :value="'Видалити'"
+          class="w-fit"
+        >
           <SvgoDelete class="-order-10"></SvgoDelete>
         </UiButtonIcon>
       </div>
     </template>
     <template #content>
       <LayoutClient></LayoutClient>
-
+      <CommonModalOrderDetails
+        v-model="isOpen"
+        label="Деталі замовлення"
+        @closeModal="switchOpen"
+      ></CommonModalOrderDetails>
       <div class="mt-[25px] xl:mt-[40px]">
         <UiHeader2>Історія покупок</UiHeader2>
         <CommonTable>
