@@ -9,9 +9,11 @@
     </template>
     <template #content>
       <LayoutClient></LayoutClient>
-      <UiButtonOpacityBorder disabled class="lg:hidden">
-        Створити
-      </UiButtonOpacityBorder>
+      <div class="flex justify-center">
+        <UiButtonOpacityBorder disabled class="lg:hidden">
+          Створити
+        </UiButtonOpacityBorder>
+      </div>
     </template>
   </LayoutProfilePage>
 </template>

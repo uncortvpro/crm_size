@@ -8,11 +8,8 @@ defineProps<{
   <UiButtonIcon
     :value="value"
     color="gray"
-    class="shadow-none rounded-[3px] hover:bg-beige bg-beige ring-0 h-[25px] px-[10px] md:h-[35px] md:px-[15px]"
+    class="shadow-none rounded-[3px] text-black text-[9px] md:text-[12px] leading-[135%] hover:bg-beige bg-beige ring-0 h-[25px] px-[10px] md:h-[35px] md:px-[15px]"
   >
-    <span class="text-black text-[9px] md:text-[12px] leading-[135%]">{{
-      value
-    }}</span>
     <slot />
   </UiButtonIcon>
 </template>

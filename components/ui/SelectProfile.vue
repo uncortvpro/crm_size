@@ -37,12 +37,12 @@ watch(value, () => {
     }"
   >
     <UiButtonIconProfile :value="value" :open="open">
-      <UIcon
-        name="i-heroicons-chevron-right-20-solid"
-        class="transition-transform rotate-90 w-[20px] h-[20px]"
-        :class="[open && 'transform rotate-[270deg]']"
-      />
-    </UiButtonIconProfile>
+        <UIcon
+          name="i-heroicons-chevron-right-20-solid"
+          class="transition-transform rotate-90 w-[20px] h-[20px]"
+          :class="[open && 'transform rotate-[270deg]']"
+        />
+      </UiButtonIconProfile>
   </USelectMenu>
 </template>
 

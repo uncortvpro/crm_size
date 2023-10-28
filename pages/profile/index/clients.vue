@@ -23,7 +23,7 @@ const fetchClients = () => {
         <!-- <CommonModalRemoveClient v-model="isOpen"></CommonModalRemoveClient> -->
         <div class="flex justify-between gap-[15px] items-center">
           <UiButtonOpacityBorderAddItem
-            @click="router.push('new_client')"
+            @click="navigateTo('new_client')"
             class="flex-shrink-0"
             >Додати клієнта</UiButtonOpacityBorderAddItem
           >
