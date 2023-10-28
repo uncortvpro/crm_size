@@ -20,6 +20,9 @@ export function useAuthFetch<T>(url: string, options: any = {}) {
             ...options?.body
         }
     }).then((res: any) => {
+        if(res.message === 'Access token or refresh token is missing') {
+            auth.failedToken();
+        }
         return res;
     })
 }

@@ -8,16 +8,19 @@ export const useAuthStore = defineStore("authStore", () => {
 
 
     function fetchUser() {
-        useAuthFetch(`${useApiUrl()}/validate_tokens`)
+        return useAuthFetch(`${useApiUrl()}/validate_tokens`)
             .then(res => {
                 user.value = res;
+            }).catch(err => {
+                failedToken();
             });
     }
 
     async function successAuth(token: string) {
         localStorage.setItem('token', token);
-        await fetchUser();
-        router.push("/profile");
+        await fetchUser().then(res => {
+            router.push("/profile");
+        });
     }
 
     function failedToken() {

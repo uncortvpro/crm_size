@@ -19,11 +19,11 @@ const changeCredentials = (type: keyof LoginCredentials, value: string) => {
 const login = () => {
   auth
     .login(credentials)
-    .then((res: any) => {
+    .then(async (res: any) => {
       if (!res.access_token) {
         error.value = "Користувач не існує";
       }
-      successAuth(res.access_token);
+      await successAuth(res.access_token);
     })
     .catch((err) => {
       error.value = "Користувач не існує";
@@ -76,7 +76,9 @@ const login = () => {
         <UiButtonGoogle type="button" class="w-full mt-[9px] lg:mt-[15px]"
           >Увійти з Google</UiButtonGoogle
         >
-        <div class="flex gap-[7px] items-center justify-center mt-[12px] lg:mt-[25px]">
+        <div
+          class="flex gap-[7px] items-center justify-center mt-[12px] lg:mt-[25px]"
+        >
           <UiTextPrimary> Ще не зареєстровані? </UiTextPrimary>
           <UiButtonText type="button" @click="router.push('/register')"
             >Зареєструватися</UiButtonText

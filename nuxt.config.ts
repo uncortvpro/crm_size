@@ -6,6 +6,9 @@ export default defineNuxtConfig({
       url: process.env.NUXT_URL,
     }
   },
+  colorMode: {
+    preference: "light",
+  },
   ssr: false,
   css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
   build: {
