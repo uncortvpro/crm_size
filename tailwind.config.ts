@@ -50,16 +50,20 @@ export default <Partial<Config>> {
         'auth-shadow': '0px 0px 15px #DCDCDC',
       },
       colors: {
+        danger: '#E33629',
         white: "#FFFFFF",
         black: "#111111",
         gray: {
           50: "#F5F5F3",
           100: "#DCDCDC",
         },
+        'gray-1': "#DCDCDC",
 
         "dark-transparent": "#0000001f",
+       'beige-light': '#FAFAF7',
         beige: "#EDEDE4",
         'beige-1': "#C8C8BE",  
+        'beige-2': '#7D7D79'
       },
       screens: {
         "is-hover": { raw: "(hover: hover)" },

@@ -7,7 +7,10 @@ export default defineNuxtConfig({
     }
   },
   ssr: false,
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
+  build: {
+    transpile: ['@vuepic/vue-datepicker']
+  },
   modules: ['@nuxt/ui', "nuxt-svgo", '@pinia/nuxt', "@nuxt/image", '@vueuse/nuxt'],
   pinia: {
     storesDirs: ['./stores/**'],

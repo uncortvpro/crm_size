@@ -12,6 +12,9 @@
   .container {
     max-width: 1760px !important;
   }
+  .no_scroll_bar::-webkit-scrollbar {
+    width: 0;
+  }
   .scroll_bar {
     scrollbar-width: 3px;
     scrollbar-color: #c8c8be #c8c8be;

@@ -8,7 +8,7 @@ definePageMeta({
 <template>
   <div class="lg:grid relative grid-cols-profile-section 4xl:grid-cols-profile-section-4xl">
     <div
-      class="hidden lg:block rounded-r-[20px] max-h-[700px] h-[100vh] overflow-x-scroll scroll_bar px-[30px] pt-[30px] 4xl:px-[44px] 4xl:pt-[44px] bg-beige"
+      class="hidden lg:block sticky top-0 rounded-r-[20px] max-h-[700px] h-[100vh] overflow-x-scroll scroll_bar px-[30px] pt-[30px] 4xl:px-[44px] 4xl:pt-[44px] bg-beige"
     >
       <CommonLogo></CommonLogo>
       <CommonMenuProfileList
@@ -26,7 +26,7 @@ definePageMeta({
           </template>
         </UiButtonOpacityUser>
       </div>
-      <div class="container relative mt-[33px] lg:container-reset">
+      <div class="container relative py-[33px] lg:container-reset">
         <NuxtPage></NuxtPage>
       </div>
     </div>

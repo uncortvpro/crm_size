@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <UiTableCellPadding class="grid grid-cols-2  3xl:table-cell">
+  <UiTableCellPadding class="grid grid-cols-2  3xl:table-cell col-span-2">
     <UiTableText class="3xl:hidden"><slot name="title" /></UiTableText>
     <UiTableText class="= truncate"><slot name="value" /></UiTableText>
   </UiTableCellPadding>
