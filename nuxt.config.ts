@@ -6,6 +6,11 @@ export default defineNuxtConfig({
       url: process.env.NUXT_URL,
     }
   },
+  router: {
+    options: {
+      hashMode: true,
+    }
+  },
   colorMode: {
     preference: "light",
   },
