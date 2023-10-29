@@ -1,11 +1,12 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   labelStatus: string;
+  inputs: Client;
 }>();
 
 const emits = defineEmits(["updateInputs"]);
 
-const inputs = reactive({
+const inputs = ref<Client>({
   name: "",
   phone: "",
   secondPhone: "",
@@ -17,17 +18,24 @@ const inputs = reactive({
   comment: "",
   status: "",
   photo: null,
-}) as Client;
-
+});
 
 const handlerChange = (value: any, type: keyof Client) => {
-  inputs[type] = value;
+  inputs.value[type] = value;
 };
 
 watch(
   inputs,
   () => {
-    emits("updateInputs", inputs);
+    emits("updateInputs", inputs.value);
+  },
+  { deep: true }
+);
+
+watch(
+  () => props.inputs,
+  () => {
+    inputs.value = props.inputs;
   },
   { deep: true }
 );

@@ -39,7 +39,6 @@ const onRegistration = () => {
   auth
     .register(credentials)
     .then((res: any) => {
-
       if ((res.message = "User created successfully")) {
         message.value = "Користувача успішно створено.";
       } else {
@@ -118,12 +117,8 @@ const onRegistration = () => {
             пропозиціями</UiCheckbox
           >
         </div>
-        <UiTextPrimary class="!text-red-600" v-if="error">{{
-          error
-        }}</UiTextPrimary>
-        <UiTextPrimary class="!text-green-600" v-if="message">{{
-          message
-        }}</UiTextPrimary>
+        <AlertDanger v-if="error">{{ error }}</AlertDanger>
+        <UiAlertSuccess v-if="message">{{ message }}</UiAlertSuccess>
         <UiButtonPrimary
           type="submit"
           class="!rounded-[5px] mt-[15px] md:mt-[30px] lg:mt-[40px] w-full"

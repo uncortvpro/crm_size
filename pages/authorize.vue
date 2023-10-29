@@ -66,9 +66,9 @@ const login = () => {
             Забули пароль?
           </UiButtonText>
         </div>
-        <UiTextPrimary class="!text-red-600 mt-[15px]" v-if="error">{{
+        <UiAlertDanger class="!text-red-600 mt-[15px]" v-if="error">{{
           error
-        }}</UiTextPrimary>
+        }}</UiAlertDanger>
         <UiButtonPrimary
           class="!rounded-[5px] mt-[15px] md:mt-[30px] lg:mt-[40px] w-full"
           >Увійти</UiButtonPrimary

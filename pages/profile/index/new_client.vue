@@ -1,48 +1,61 @@
 <script setup lang="ts">
 const inputs = ref<Client>({} as Client);
-const fromData = ref();
+const formData = ref();
+const auth = useAuthStore();
+const error = ref("");
+const messageToUser = ref("");
+const failedToken = () => auth.failedToken();
 
-// const updateInputs = () => {
-//   const token = localStorage.getItem("token");
+const updateInputs = () => {
+  const token = localStorage.getItem("token");
 
-//   const formData = new FormData();
-//   formData.append("additional_phone", inputs.value.secondPhone);
-//   formData.append("email", inputs.value.email);
-//   formData.append("gender", inputs.value.gender);
-//   formData.append("birthday", inputs.value.dateBirth);
-//   formData.append("instagram", inputs.value.instagram);
-//   formData.append("telegram", inputs.value.telegram);
-//   formData.append("comment", inputs.value.comment);
-//   formData.append("status", inputs.value.status);
-//   formData.append("userpic", inputs.value.photo);
-//   formData.append("phone", inputs.value.phone);
-//   formData.append("name", inputs.value.name);
-//   formData.append("access_token", token || "");
+  const data = new FormData();
+  data.append("additional_phone", inputs.value.secondPhone);
+  data.append("email", inputs.value.email);
+  data.append("gender", inputs.value.gender);
+  data.append("birthday", inputs.value.dateBirth);
+  data.append("instagram", inputs.value.instagram);
+  data.append("telegram", inputs.value.telegram);
+  data.append("comment", inputs.value.comment);
+  data.append("status", inputs.value.status);
+  data.append("userpic", inputs.value.photo);
+  data.append("phone", inputs.value.phone);
+  data.append("name", inputs.value.name);
+  data.append("access_token", token || "");
 
-//   fromData.value = formData;
-// };
+  formData.value = data;
+};
 
 const handlerChange = (value: Client) => {
   inputs.value = value;
 };
 
+const validateResponse = (message: string) => {
+  if (message === "Client already exists") {
+    error.value = "Клієнт вже існує";
+    return false;
+  }
+  if (message === "Client created successfully") {
+    messageToUser.value = "Клієнта успішно створено";
+    inputs.value = {} as Client;
+    return false;
+  }
+};
+
 const createClient = () => {
-  // updateInputs();
-  useAuthFetch(`${useApiUrl()}/add_client`, {
-    body: {
-      additional_phone: inputs.value.secondPhone,
-      email: inputs.value.email,
-      gender: inputs.value.gender,
-      birthday: inputs.value.dateBirth,
-      instagram: inputs.value.instagram,
-      telegram: inputs.value.telegram,
-      comment: inputs.value.comment,
-      status: inputs.value.status,
-      userpic: inputs.value.photo,
-      phone: inputs.value.phone,
-      name: inputs.value.name,
-    },
-  });
+  const token = localStorage.getItem("token");
+  updateInputs();
+
+  useApiFetch(`${useApiUrl()}/add_client`, {
+    method: "POST",
+    body: formData.value,
+  })
+    .then((res: any) => {
+      validateResponse(res.message);
+    })
+    .catch((res) => {
+      console.log(res);
+    });
 };
 </script>
 
@@ -54,7 +67,10 @@ const createClient = () => {
       </UiButtonOpacityBorder>
     </template>
     <template #content>
+      <UiAlertDanger v-if="error">{{ error }}</UiAlertDanger>
+      <UiAlertSuccess v-if="messageToUser">{{ messageToUser }}</UiAlertSuccess>
       <LayoutClient
+        :inputs="inputs"
         :labelStatus="'Статус клієнта:'"
         @updateInputs="handlerChange"
       >
