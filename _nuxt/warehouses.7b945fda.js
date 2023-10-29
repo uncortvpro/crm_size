@@ -1,1 +1,0 @@
-import{_ as e}from"./ProfilePage.vue.5d186352.js";import{_ as t,j as c,o as r}from"./entry.890d78c2.js";const s={};function _(a,n){const o=e;return r(),c(o,{title:"Склади"})}const m=t(s,[["render",_]]);export{m as default};

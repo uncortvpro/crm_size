@@ -1,0 +1,1 @@
+import{_ as e}from"./TextPrimary.43fa7ffe.js";import{_,o as n,j as r,w as s,n as c}from"./entry.9807b606.js";const a={};function m(t,p){const o=e;return n(),r(o,{class:"!text-red-600 mt-[15px]"},{default:s(()=>[c(t.$slots,"default")]),_:3})}const i=_(a,[["render",m]]);export{i as _};
