@@ -15,7 +15,6 @@ defineProps({
       <thead>
         <tr class="hidden 3xl:table-row border-b border-beige-1">
           <slot name="headers"></slot>
-          <!-- <th></th> -->
         </tr>
       </thead>
       <tbody>

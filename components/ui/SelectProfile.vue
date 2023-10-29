@@ -1,7 +1,8 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   options: any;
   selected?: number;
+  typeSelect?: string
 }>();
 
 const value = ref<any>("");
@@ -13,7 +14,7 @@ const onSwitch = (value: boolean) => {
 const emits = defineEmits(["updateValue"]);
 
 watch(value, () => {
-  emits("updateValue", value.value);
+  emits("updateValue", value.value, props?.typeSelect);
 });
 </script>
 

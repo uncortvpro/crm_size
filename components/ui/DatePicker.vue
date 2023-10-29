@@ -2,7 +2,27 @@
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
+const props = defineProps<{
+  typeSelect?: string;
+}>();
+
 const date = ref();
+const formatDate = ref("");
+
+const emits = defineEmits(["updateValue"]);
+
+const format = (date: any) => {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  formatDate.value = `${day}-${month}-${year}`;
+  return formatDate.value;
+};
+
+watch(date, () => {
+  emits("updateValue", formatDate.value, props?.typeSelect);
+});
 </script>
 
 <template>
@@ -12,6 +32,7 @@ const date = ref();
     locale="uk"
     :enable-time-picker="false"
     auto-apply
+    :format="format"
   >
     <template #dp-input="{ value }">
       <UiButtonIconProfile :value="value">

@@ -24,10 +24,10 @@
         <template #title>Оплата</template>
         <template #value>Картка</template>
       </UiTransitionTableCell>
-      <UiTransitionTableCell :vIf="active">
+      <UiTransitionTableCell :vIf="active" class="w-[12%]">
         <template #title>Статус замовлення</template>
         <template #value>
-          <CommonStatusOutput class="inline-block">Відправлено</CommonStatusOutput>
+          <CommonStatusOutput>Відправлено</CommonStatusOutput>
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active" class="3xl:hidden col-span-2">

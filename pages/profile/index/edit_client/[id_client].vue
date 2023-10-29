@@ -20,7 +20,7 @@ const switchOpen = (value: boolean) => {
       </div>
     </template>
     <template #content>
-      <LayoutClient></LayoutClient>
+      <LayoutClient :labelStatus="'Змінити статус клієнта:'"> </LayoutClient>
       <CommonModalOrderDetails
         v-model="isOpen"
         label="Деталі замовлення"
