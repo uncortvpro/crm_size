@@ -52,7 +52,7 @@ const router = useRouter();
     </template>
     <template #additional-buttons>
       <UiButtonOpacityEdit
-        @click.stop="router.push('/profile/edit_client/client_id')"
+        @click.stop="navigateTo('/profile/edit_client/client_id')"
       />
       <UiButtonOpacityDelete @click.stop="" />
     </template>
