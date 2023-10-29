@@ -3,6 +3,11 @@ const isOpen = ref(false);
 const switchOpen = (value: boolean) => {
   isOpen.value = value;
 };
+
+const handlerChange = (value: Client) => {
+  inputs.value = value;
+};
+const inputs = ref<Client>({} as Client);
 </script>
 
 <template>
@@ -20,7 +25,12 @@ const switchOpen = (value: boolean) => {
       </div>
     </template>
     <template #content>
-      <LayoutClient :labelStatus="'Змінити статус клієнта:'"> </LayoutClient>
+      <LayoutClient
+        :labelStatus="'Змінити статус клієнта:'"
+        :inputs="inputs"
+        @updateInputs="handlerChange"
+      >
+      </LayoutClient>
       <CommonModalOrderDetails
         v-model="isOpen"
         label="Деталі замовлення"
