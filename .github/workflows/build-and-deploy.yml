@@ -1,5 +1,5 @@
 name: Build and Deploy
-on:
+on: 
   push:
     branches:
       - main
@@ -13,7 +13,7 @@ jobs:
       matrix:
         node-version: [18]
     steps:
-    - name: Checkout 🛎
+    - name: Checkout 🛎️
       uses: actions/checkout@v3
 
     - name: Use Node.js ${{ matrix.node-version }}
@@ -28,8 +28,7 @@ jobs:
       env:
         NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL  }}
 
-    - name: Start Nuxt.js Server 🚀
-      run: |
-        node ./server/index.mjs
-      env:
-        NUXT_APP_BASE_URL: ${{ vars.NUXT_APP_BASE_URL  }}
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: dist
