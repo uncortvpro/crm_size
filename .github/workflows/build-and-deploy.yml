@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "18"  # Здесь укажите нужную версию Node.js
+          node-version: "16"  # Используйте версию 16 Node.js
 
       - name: Install dependencies
         run: npm install
@@ -42,7 +42,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          personal_token: ${{ secrets.GITHUB_TOKEN }}
-          external_repository: username/repo-name  # Замените на имя пользователя и название репозитория
-          branch: gh-pages  # Имя ветки для развертывания
-          folder: .output/public
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./.output/public
