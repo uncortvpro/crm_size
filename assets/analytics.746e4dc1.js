@@ -1,1 +1,0 @@
-import{_ as t}from"./ProfilePage.vue.6ebd0dd4.js";import{_ as c,j as e,o as a}from"./entry.bb6b57ef.js";const n={};function r(_,s){const o=t;return a(),e(o,{title:"Аналітика"})}const m=c(n,[["render",r]]);export{m as default};
