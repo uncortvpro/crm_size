@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Size SRM',
     },
-    baseURL: '/nuxt-github-pages/',
+    baseURL: '/crm_size/',
     buildAssetsDir: 'assets',
   },
 })
