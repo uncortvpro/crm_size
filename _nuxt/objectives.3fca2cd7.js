@@ -1,1 +1,0 @@
-import{_ as e}from"./ProfilePage.vue.eaf42991.js";import{_ as t,j as c,o as r}from"./entry.ac76e28b.js";const _={};function n(s,a){const o=e;return r(),c(o,{title:"Задачі"})}const m=t(_,[["render",n]]);export{m as default};
