@@ -5,40 +5,43 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits(["updateInputs"]);
+const gender = computed(() => props.inputs.gender);
 
-const inputs = ref<Client>({
-  name: "",
-  phone: "",
-  secondPhone: "",
-  email: "",
-  gender: "",
-  dateBirth: "",
-  instagram: "",
-  telegram: "",
-  comment: "",
-  status: "",
-  photo: null,
-});
+// const inputs = ref({
+//   name: props.inputs.name || "",
+//   phone: props.inputs.phone || "",
+//   additional_phone: props.inputs.additional_phone || "",
+//   email: props.inputs.email || "",
+//   gender: props.inputs.gender || "",
+//   birthday: props.inputs.birthday || "",
+//   instagram: props.inputs.instagram || "",
+//   telegram: props.inputs.telegram || "",
+//   comment: props.inputs.comment || "",
+//   status: props.inputs.status || "",
+//   userpic: props.inputs.userpic || null,
+// } as Client);
+
+// console.log(inputs.value.gender);
 
 const handlerChange = (value: any, type: keyof Client) => {
-  inputs.value[type] = value;
+  emits("updateInputs", value, type);
 };
 
-watch(
-  inputs,
-  () => {
-    emits("updateInputs", inputs.value);
-  },
-  { deep: true }
-);
+// watch(
+//   inputs,
+//   () => {
+//     emits("updateInputs", inputs.value);
+//   },
+//   { deep: true }
+// );
 
-watch(
-  () => props.inputs,
-  () => {
-    inputs.value = props.inputs;
-  },
-  { deep: true }
-);
+// watch(
+//   () => props.inputs,
+//   () => {
+//     inputs.value = props.inputs;
+//   },
+//   { deep: true }
+// );
 </script>
 
 <template>
@@ -63,7 +66,9 @@ watch(
               class="whitespace-nowrap truncate"
               label="Додатковий номер телефону:"
             >
-              <UiInputProfile v-model="inputs.secondPhone"></UiInputProfile>
+              <UiInputProfile
+                v-model="inputs.additional_phone"
+              ></UiInputProfile>
             </UiLabelProfile>
             <UiLabelProfile label="Email:">
               <UiInputProfile v-model="inputs.email"></UiInputProfile>
@@ -73,6 +78,8 @@ watch(
             </div>
             <UiLabelProfile label="Стать:">
               <UiSelectProfile
+                :valueSelect="inputs.gender"
+                v-model="inputs.gender"
                 typeSelect="gender"
                 @updateValue="handlerChange"
                 :options="['Чоловіча', 'Жіноча']"
@@ -81,8 +88,8 @@ watch(
             </UiLabelProfile>
             <UiLabelProfile label="Дата народження:">
               <UiDatePicker
-                typeSelect="dateBirth"
-                @updateValue="handlerChange"
+                v-model="inputs.birthday"
+                :valueData="inputs.birthday"
               ></UiDatePicker>
             </UiLabelProfile>
             <UiLabelProfile label="Instagram:">
@@ -103,7 +110,7 @@ watch(
       <UiDivBorderBg class="max-w-[527px] flex flex-col items-center">
         <UiHeader2 class="text-center">Фото</UiHeader2>
         <UiInputFilePhoto
-          typeInput="photo"
+          typeInput="userpic"
           @updateInput="handlerChange"
         ></UiInputFilePhoto>
 
@@ -111,10 +118,16 @@ watch(
           :label="labelStatus"
           class="self-stretch mt-[15px] lg:mt-[25px]"
         >
-          <UiSelectProfile
+          <!-- <CommonSelectClientStatus
             typeSelect="status"
             @updateValue="handlerChange"
+          ></CommonSelectClientStatus> -->
+          <UiSelectProfile
+            @updateValue="handlerChange"
             :options="['Постійний', 'Постійний']"
+            :valueSelect="inputs.status"
+            v-model="inputs.status"
+            typeSelect="gender"
           >
           </UiSelectProfile>
         </UiLabelProfile>

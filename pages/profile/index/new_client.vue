@@ -10,15 +10,15 @@ const updateInputs = () => {
   const token = localStorage.getItem("token");
 
   const data = new FormData();
-  data.append("additional_phone", inputs.value.secondPhone);
+  data.append("additional_phone", inputs.value.additional_phone);
   data.append("email", inputs.value.email);
   data.append("gender", inputs.value.gender);
-  data.append("birthday", inputs.value.dateBirth);
+  data.append("birthday", inputs.value.birthday);
   data.append("instagram", inputs.value.instagram);
   data.append("telegram", inputs.value.telegram);
   data.append("comment", inputs.value.comment);
   data.append("status", inputs.value.status);
-  data.append("userpic", inputs.value.photo);
+  data.append("userpic", inputs.value.userpic);
   data.append("phone", inputs.value.phone);
   data.append("name", inputs.value.name);
   data.append("access_token", token || "");
@@ -26,8 +26,8 @@ const updateInputs = () => {
   formData.value = data;
 };
 
-const handlerChange = (value: Client) => {
-  inputs.value = value;
+const handlerChange = (value: any, type: keyof Client) => {
+  inputs.value[type] = value;
 };
 
 const validateResponse = (message: string) => {
@@ -43,7 +43,6 @@ const validateResponse = (message: string) => {
 };
 
 const createClient = () => {
-  const token = localStorage.getItem("token");
   updateInputs();
 
   useApiFetch(`${useApiUrl()}/add_client`, {
@@ -57,6 +56,14 @@ const createClient = () => {
       console.log(res);
     });
 };
+
+watch(
+  () => inputs.value,
+  () => {
+    console.log(inputs.value);
+  },
+  { deep: true }
+);
 </script>
 
 <template>

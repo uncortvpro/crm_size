@@ -1,7 +1,7 @@
 export function useAuthFetch<T>(url: string, options: any = {}) {
     const auth = useAuthStore();
     const token = localStorage.getItem('token');
-    
+
     let headers: any = {};
 
     headers = {
@@ -19,10 +19,14 @@ export function useAuthFetch<T>(url: string, options: any = {}) {
             access_token: token,
             ...options?.body
         }
-    }).then((res: any) => {
-        if(res.message === 'Access token or refresh token is missing') {
-            auth.failedToken();
+    }).then(async (res: any) => {
+        if (res.token !== undefined && res.token === false) {
+
+            return auth.failedToken();
+        } else {
+            return res;
         }
-        return res;
-    })
+    }).catch((error) => {
+        // auth.failedToken();
+    });
 }

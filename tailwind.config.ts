@@ -28,7 +28,7 @@ export default <Partial<Config>> {
       "4xl": "1760px",
     },
     fontFamily: {
-      raleway: ["Montserrat", "sans"],
+      montserrat: ["Montserrat", "sans"],
     },
     extend: {
       gridTemplateColumns: {

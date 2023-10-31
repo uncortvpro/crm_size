@@ -3,10 +3,8 @@ import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 
 const props = defineProps<{
-  typeSelect?: string;
+  valueData: string;
 }>();
-
-const date = ref();
 const formatDate = ref("");
 
 const emits = defineEmits(["updateValue"]);
@@ -19,16 +17,11 @@ const format = (date: any) => {
   formatDate.value = `${day}-${month}-${year}`;
   return formatDate.value;
 };
-
-watch(date, () => {
-  emits("updateValue", formatDate.value, props?.typeSelect);
-});
 </script>
 
 <template>
   <VueDatePicker
     class="date_picker"
-    v-model="date"
     locale="uk"
     :enable-time-picker="false"
     auto-apply
@@ -36,7 +29,7 @@ watch(date, () => {
   >
     <template #dp-input="{ value }">
       <UiButtonIconProfile :value="value">
-        <SvgoCalendar v-if="!date"></SvgoCalendar>
+        <SvgoCalendar v-if="!valueData"></SvgoCalendar>
       </UiButtonIconProfile>
     </template>
   </VueDatePicker>

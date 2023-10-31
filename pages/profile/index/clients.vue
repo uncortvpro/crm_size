@@ -1,35 +1,52 @@
 <script setup lang="ts">
-const router = useRouter();
-const isOpen = ref(false);
+const clientsStore = useClientsStore();
+const isModalRemoveClient = ref(false);
+const currentClientId = ref<string>("");
+const clients = computed(() => clientsStore.clients);
+const pageClients = computed(() => clientsStore.page);
+const endPage = computed(() => clientsStore.endPage);
 
-const fetchClients = () => {
-  useAuthFetch(`${useApiUrl()}/clients`, {
-    method: 'GET',
-    body: {
-      page: 1,
-      per_page: 10,
-      keyword: "",
-    },
-  }).then((res) => console.log(res));
+const getClients = () => clientsStore.fetchClients();
+const setPage = (page: number) => clientsStore.setPage(page);
+const searchClients = (keyWord: string) => clientsStore.searchClients(keyWord);
+
+const switchModalRemoveClient = (value: boolean) => {
+  isModalRemoveClient.value = value;
+};
+const changeCurrentClientId = (id: string) => {
+  currentClientId.value = id;
 };
 
-// fetchClients();
+const deleteClient = (id: string) => {
+  changeCurrentClientId(id);
+  switchModalRemoveClient(true);
+};
+
+getClients();
 </script>
 
 <template>
   <LayoutProfilePage title="Клієнти">
     <template #content>
       <div class="mt-[15px] xl:mt-[25px]">
-        <!-- <CommonModalRemoveClient v-model="isOpen"></CommonModalRemoveClient> -->
+        <CommonRemoveClient
+          v-model="isModalRemoveClient"
+          :clientId="currentClientId"
+          @switchModal="switchModalRemoveClient"
+        ></CommonRemoveClient>
         <div class="flex justify-between gap-[15px] items-center">
           <UiButtonOpacityBorderAddItem
             @click="navigateTo('new_client')"
             class="flex-shrink-0"
             >Додати клієнта</UiButtonOpacityBorderAddItem
           >
-          <CommonSearchBorder />
+          <CommonSearchBorder @search="searchClients" />
         </div>
-        <CommonTable>
+        <CommonTable
+          :pageTable="pageClients"
+          :endPage="endPage"
+          @setPage="setPage"
+        >
           <template #headers>
             <UiTableCellHeader>Ім’я</UiTableCellHeader>
             <UiTableCellHeader>Номер телефону</UiTableCellHeader>
@@ -45,18 +62,12 @@ const fetchClients = () => {
             <UiTableCellHeader>Статус</UiTableCellHeader>
           </template>
           <template #items>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
-            <CommonTableItemClients></CommonTableItemClients>
+            <CommonTableItemClients
+              v-for="client in clients"
+              :key="client._id.$oid"
+              :client="client"
+              @deleteAction="deleteClient(client._id.$oid)"
+            ></CommonTableItemClients>
           </template>
         </CommonTable>
       </div>

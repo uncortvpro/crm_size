@@ -3,6 +3,7 @@ const router = useRouter();
 const auth = useAuthStore();
 definePageMeta({
   layout: "without-header-footer",
+  middleware: ["guest"],
 });
 
 const credentials = reactive<RegisterCredentials>({

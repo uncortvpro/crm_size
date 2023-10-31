@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const router = useRouter();
 const isMobileMenu = ref<boolean>(false);
+const auth = useAuthStore();
+
+const isLoggedIn = computed(() => auth.isLoggedIn);
 
 const switchMenu = (value: boolean) => {
   isMobileMenu.value = value;
@@ -13,14 +16,26 @@ provide("switchMenu", switchMenu);
   <LayoutHeader>
     <template #header-items>
       <UiButtonTransparent
+        v-if="!isLoggedIn"
         class="hidden lg:block"
         @click="router.push('/register')"
         type="button"
       >
         РЕЄСТРАЦІЯ
       </UiButtonTransparent>
-      <UiButtonPrimary type="button" @click="router.push('/authorize')">
+      <UiButtonPrimary
+        v-if="!isLoggedIn"
+        type="button"
+        @click="router.push('/authorize')"
+      >
         УВІЙТИ
+      </UiButtonPrimary>
+      <UiButtonPrimary
+        v-if="isLoggedIn"
+        type="button"
+        @click="router.push('/profile')"
+      >
+        Профіль
       </UiButtonPrimary>
       <CommonButtonBurger
         class="self-center ml-[15px] lg:hidden"
@@ -43,7 +58,7 @@ provide("switchMenu", switchMenu);
             <li>
               <CommonMenuLink to="/">КОНТАКТИ</CommonMenuLink>
             </li>
-            <li>
+            <li v-if="!isLoggedIn">
               <UiButtonTransparent class="lg:hidden !px-[0px]"
                 >РЕЄСТРАЦІЯ</UiButtonTransparent
               >

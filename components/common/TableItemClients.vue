@@ -1,47 +1,65 @@
 <script setup lang="ts">
+defineProps<{
+  client: Client;
+}>();
+
+const emits = defineEmits(["deleteAction"]);
+
+const onDeleteClient = () => {
+  emits("deleteAction");
+};
+
 const router = useRouter();
 </script>
 
 <template>
   <UiTableItem>
-    <template #header> Максим </template>
+    <template #header>
+      <span class="max-w-[200px] w-full inline-block truncate">{{
+        client?.name
+      }}</span>
+    </template>
     <template #elements="{ active }">
       <UiTransitionTableCell :vIf="active">
-        <template #title>Дата покупки</template>
+        <template #title>Ім’я</template>
         <template #value
-          ><UiButtonText class="font-medium leading-[130%]"
-            >Максим</UiButtonText
-          ></template
+          ><UiButtonText class="font-medium leading-[130%]">
+            <span class="max-w-[200px] inline-block truncate">{{
+              client?.name
+            }}</span>
+          </UiButtonText></template
         >
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Номер телефону</template>
-        <template #value>+380956854219</template>
+        <template #value>
+          {{ client?.phone }}
+        </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Email</template>
-        <template #value>max@example.com</template>
+        <template #value>{{ client?.email }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Instagram</template>
-        <template #value>@max_the_adventurer</template>
+        <template #value>{{ client?.instagram }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Історія покупок </template>
-        <template #value>5 замовлень</template>
+        <template #value>Історія покупок</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Тотал сума покупок </template>
-        <template #value>12063₴</template>
+        <template #value>Тотал сума покупок</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Дата останньої покупки</template>
-        <template #value>23.10.2023</template>
+        <template #value>Дата останньої покупки</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Статус</template>
         <template #value>
-          <CommonStatusOutput>Постійний</CommonStatusOutput>
+          <CommonStatusOutput>{{ client?.status }}</CommonStatusOutput>
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active" class="3xl:hidden col-span-2">
@@ -52,9 +70,13 @@ const router = useRouter();
     </template>
     <template #additional-buttons>
       <UiButtonOpacityEdit
-        @click.stop="navigateTo('/profile/edit_client/client_id')"
+        class="flex-shrink-0"
+        @click.stop="navigateTo('/profile/edit_client/' + client._id.$oid)"
       />
-      <UiButtonOpacityDelete @click.stop="" />
+      <UiButtonOpacityDelete
+        class="flex-shrink-0"
+        @click.stop="onDeleteClient"
+      />
     </template>
   </UiTableItem>
 </template>

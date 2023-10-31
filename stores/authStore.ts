@@ -17,6 +17,8 @@ export const useAuthStore = defineStore("authStore", () => {
     }
 
     async function successAuth(token: string) {
+        console.log(token);
+        
         localStorage.setItem('token', token);
         await fetchUser().then(res => {
             router.push("/profile");
@@ -24,8 +26,11 @@ export const useAuthStore = defineStore("authStore", () => {
     }
 
     function failedToken() {
+        console.log('qwdqwwqwq');
+        
         localStorage.removeItem('token');
         user.value = null;
+        navigateTo('/authorize');
     }
 
     function login(credentials: LoginCredentials) {

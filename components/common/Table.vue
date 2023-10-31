@@ -4,7 +4,23 @@ defineProps({
     default: true,
     type: Boolean,
   },
+  pageTable: {
+    type: Number,
+    default: 1,
+    required: false,
+  },
+  endPage: {
+    type: Number,
+    default: 1,
+    required: false,
+  },
 });
+
+const emits = defineEmits(["setPage"]);
+
+const setPage = (page: number) => {
+  emits("setPage", page);
+};
 </script>
 
 <template>
@@ -25,8 +41,16 @@ defineProps({
       class="flex mt-[15px] items-center justify-between md:justify-end gap-[20px] xl:gap-[40px]"
       v-if="pagination"
     >
-      <UiButtonTextArrowLeft disabled>Попередня сторінка</UiButtonTextArrowLeft>
-      <UiButtonTextArrowRight>Наступна сторінка</UiButtonTextArrowRight>
+      <UiButtonTextArrowLeft
+        :disabled="pageTable === 1"
+        @click="setPage(pageTable - 1)"
+        >Попередня сторінка</UiButtonTextArrowLeft
+      >
+      <UiButtonTextArrowRight
+        :disabled="pageTable === endPage"
+        @click="setPage(pageTable + 1)"
+        >Наступна сторінка</UiButtonTextArrowRight
+      >
     </div>
   </div>
 </template>

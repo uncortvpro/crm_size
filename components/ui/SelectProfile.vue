@@ -1,26 +1,16 @@
 <script setup lang="ts">
 const props = defineProps<{
   options: any;
-  selected?: number;
-  typeSelect?: string
+  valueSelect: string;
 }>();
-
-const value = ref<any>("");
 const open = ref(false);
 const onSwitch = (value: boolean) => {
   open.value = value;
 };
-
-const emits = defineEmits(["updateValue"]);
-
-watch(value, () => {
-  emits("updateValue", value.value, props?.typeSelect);
-});
 </script>
 
 <template>
   <USelectMenu
-    v-model="value"
     :options="options"
     variant="none"
     @open="onSwitch(true)"
@@ -37,13 +27,13 @@ watch(value, () => {
       },
     }"
   >
-    <UiButtonIconProfile :value="value" :open="open">
-        <UIcon
-          name="i-heroicons-chevron-right-20-solid"
-          class="transition-transform rotate-90 w-[20px] h-[20px]"
-          :class="[open && 'transform rotate-[270deg]']"
-        />
-      </UiButtonIconProfile>
+    <UiButtonIconProfile :value="valueSelect" :open="open">
+      <UIcon
+        name="i-heroicons-chevron-right-20-solid"
+        class="transition-transform rotate-90 w-[20px] h-[20px]"
+        :class="[open && 'transform rotate-[270deg]']"
+      />
+    </UiButtonIconProfile>
   </USelectMenu>
 </template>
 

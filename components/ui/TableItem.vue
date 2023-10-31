@@ -27,12 +27,12 @@ const switchItem = (value: boolean) => {
 
 <template>
   <tr
-    class="grid relative grid-cols-auto-3 3xl:table-row border-b py-[5px] border-beige-1"
+    class="grid relative grid-cols-auto-2 sm:grid-cols-auto-3 3xl:table-row border-b py-[5px] border-beige-1"
   >
     <UiTableCellPadding
       v-if="$slots.header"
       @click="switchItem(!activeItem)"
-      class="col-span-2 3xl:hidden cursor-pointer font-medium -order-2"
+      class="col-span-1 sm:col-span-2 3xl:hidden cursor-pointer font-medium -order-2"
       ><slot name="header"></slot
     ></UiTableCellPadding>
     <slot name="elements" :active="active"></slot>

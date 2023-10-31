@@ -24,7 +24,7 @@
         <template #title>Оплата</template>
         <template #value>Картка</template>
       </UiTransitionTableCell>
-      <UiTransitionTableCell :vIf="active" class="w-[12%]">
+      <UiTransitionTableCell :vIf="active" class="3xl:w-[12%]">
         <template #title>Статус замовлення</template>
         <template #value>
           <CommonStatusOutput>Відправлено</CommonStatusOutput>

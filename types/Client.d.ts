@@ -1,14 +1,14 @@
 declare interface Client {
-    name: string;
-    phone: string;
-    secondPhone: string;
-    email: string;
-    gender: string;
-    dateBirth: string;
-    instagram: string;
-    telegram: string;
-    comment: string;
-    status: string;
-    photo: any;
-  }
-  
+  name: string;
+  phone: string;
+  additional_phone: string;
+  email: string;
+  gender: string;
+  birthday: any;
+  instagram: string;
+  telegram: string;
+  comment: string;
+  status: string;
+  userpic: any;
+  _id: { $oid: string };
+}
