@@ -26,7 +26,7 @@ definePageMeta({
           </template>
         </UiButtonOpacityUser>
       </div>
-      <div class="container relative py-[33px] lg:container-reset">
+      <div class="container relative  lg:container-reset">
         <NuxtPage></NuxtPage>
       </div>
     </div>

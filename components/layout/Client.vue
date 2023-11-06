@@ -5,55 +5,20 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits(["updateInputs"]);
-const gender = computed(() => props.inputs.gender);
-
-// const inputs = ref({
-//   name: props.inputs.name || "",
-//   phone: props.inputs.phone || "",
-//   additional_phone: props.inputs.additional_phone || "",
-//   email: props.inputs.email || "",
-//   gender: props.inputs.gender || "",
-//   birthday: props.inputs.birthday || "",
-//   instagram: props.inputs.instagram || "",
-//   telegram: props.inputs.telegram || "",
-//   comment: props.inputs.comment || "",
-//   status: props.inputs.status || "",
-//   userpic: props.inputs.userpic || null,
-// } as Client);
-
-// console.log(inputs.value.gender);
 
 const handlerChange = (value: any, type: keyof Client) => {
   emits("updateInputs", value, type);
 };
-
-// watch(
-//   inputs,
-//   () => {
-//     emits("updateInputs", inputs.value);
-//   },
-//   { deep: true }
-// );
-
-// watch(
-//   () => props.inputs,
-//   () => {
-//     inputs.value = props.inputs;
-//   },
-//   { deep: true }
-// );
 </script>
 
 <template>
   <div>
     <div
-      class="pt-[25px] md:pt-[35px] lg:pt-[45px] xl:pt-[59px] flex flex-col gap-[25px] xl:flex-row items-center justify-between xl:items-start"
+      class="flex flex-col gap-[25px] xl:flex-row items-center justify-between xl:items-start"
     >
       <UiDivBorderBg class="max-w-[830px]">
         <form>
-          <div
-            class="grid grid-cols-2 gap-x-[11px] gap-y-[15px] xl:gap-x-[40px] xl:gap-y-[20px]"
-          >
+          <UiDivGridForm>
             <UiHeader2 class="col-span-2"> Інформація </UiHeader2>
             <UiLabelProfile label="Ім'я">
               <UiInputProfile v-model="inputs.name"></UiInputProfile>
@@ -104,7 +69,7 @@ const handlerChange = (value: any, type: keyof Client) => {
                 class="min-h-[80px] md:min-h-[90px] xl:min-h-[105px]"
               ></UiTextareaProfile>
             </UiLabelProfile>
-          </div>
+          </UiDivGridForm>
         </form>
       </UiDivBorderBg>
       <UiDivBorderBg class="max-w-[527px] flex flex-col items-center">

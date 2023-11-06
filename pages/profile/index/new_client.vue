@@ -58,14 +58,6 @@ const createClient = () => {
       console.log(res);
     });
 };
-
-watch(
-  () => inputs.value,
-  () => {
-    console.log(inputs.value);
-  },
-  { deep: true }
-);
 </script>
 
 <template>

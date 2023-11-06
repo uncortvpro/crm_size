@@ -28,20 +28,18 @@ getClients();
 <template>
   <LayoutProfilePage title="Клієнти">
     <template #content>
-      <div class="mt-[15px] xl:mt-[25px]">
+      <div>
         <CommonRemoveClient
           v-model="isModalRemoveClient"
           :clientId="currentClientId"
           @switchModal="switchModalRemoveClient"
         ></CommonRemoveClient>
-        <div class="flex justify-between gap-[15px] items-center">
-          <UiButtonOpacityBorderAddItem
-            @click="navigateTo('new_client')"
-            class="flex-shrink-0"
-            >Додати клієнта</UiButtonOpacityBorderAddItem
-          >
-          <CommonSearchBorder @search="searchClients" />
-        </div>
+        <CommonNavigationPage
+          @add="navigateTo('new_client')"
+          @search="searchClients"
+        >
+          <template #add_name> Додати клієнта </template>
+        </CommonNavigationPage>
         <CommonTable
           :pageTable="pageClients"
           :endPage="endPage"
