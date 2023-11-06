@@ -13,7 +13,7 @@ const updateInputs = () => {
   data.append("additional_phone", inputs.value.additional_phone);
   data.append("email", inputs.value.email);
   data.append("gender", inputs.value.gender);
-  data.append("birthday", inputs.value.birthday);
+  data.append("birthday", useFormatDate(inputs.value.birthday));
   data.append("instagram", inputs.value.instagram);
   data.append("telegram", inputs.value.telegram);
   data.append("comment", inputs.value.comment);
@@ -39,6 +39,8 @@ const validateResponse = (message: string) => {
     messageToUser.value = "Клієнта успішно створено";
     inputs.value = {} as Client;
     return false;
+  } else {
+    error.value = "Щось не вийшло!";
   }
 };
 

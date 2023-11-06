@@ -1,4 +1,6 @@
-export function useDateToString(date: Date) {
-    return date.toDateString();
+export function useFormatDate(date: Date) {
+    console.log(typeof date);
+    
+  return typeof date === 'string' ? date : date.toDateString();
 }
   

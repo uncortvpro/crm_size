@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   typeInput?: string;
+  uploadedPhoto?: any;
 }>();
 
 const emits = defineEmits(["updateInput"]);
@@ -9,9 +10,11 @@ const file = ref(null);
 const handlerChange = (value: any) => {
   file.value = value;
 };
-const getImageUrl = computed(() =>
-  file.value ? URL.createObjectURL(file.value) : false
+const getImageUrl = computed<string>(() =>
+  file.value ? URL.createObjectURL(file.value) : ""
 );
+
+// computed
 
 watch(
   file,
@@ -27,15 +30,12 @@ watch(
     class="w-[37%] bg-beige pt-[37%] relative rounded-[50%] overflow-hidden mt-[15px] lg:mt-[25px]"
   >
     <label class="absolute w-full inline-block h-full z-20 top-0 left-0">
-      <UiInputFile
-        @updateInput="handlerChange"
-        class="hidden"
-      />
+      <UiInputFile @updateInput="handlerChange" class="hidden" />
     </label>
     <img
-      v-if="getImageUrl"
+      v-if="useBase64(uploadedPhoto) || getImageUrl"
       class="absolute block w-full h-full z-10 top-0 object-cover left-0"
-      :src="getImageUrl"
+      :src="useBase64(uploadedPhoto) || getImageUrl"
       alt=""
     />
     <span class="w-full pt-[22%] absolute bottom-0 left-0 bg-beige-2 block">

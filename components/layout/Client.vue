@@ -110,6 +110,7 @@ const handlerChange = (value: any, type: keyof Client) => {
       <UiDivBorderBg class="max-w-[527px] flex flex-col items-center">
         <UiHeader2 class="text-center">Фото</UiHeader2>
         <UiInputFilePhoto
+          :uploadedPhoto="inputs.userpic"
           typeInput="userpic"
           @updateInput="handlerChange"
         ></UiInputFilePhoto>
@@ -118,18 +119,12 @@ const handlerChange = (value: any, type: keyof Client) => {
           :label="labelStatus"
           class="self-stretch mt-[15px] lg:mt-[25px]"
         >
-          <!-- <CommonSelectClientStatus
+          <CommonSelectClientStatus
+            v-model="inputs.status"
+            :valueSelect="inputs.status"
             typeSelect="status"
             @updateValue="handlerChange"
-          ></CommonSelectClientStatus> -->
-          <UiSelectProfile
-            @updateValue="handlerChange"
-            :options="['Постійний', 'Постійний']"
-            :valueSelect="inputs.status"
-            v-model="inputs.status"
-            typeSelect="gender"
-          >
-          </UiSelectProfile>
+          ></CommonSelectClientStatus>
         </UiLabelProfile>
       </UiDivBorderBg>
     </div>

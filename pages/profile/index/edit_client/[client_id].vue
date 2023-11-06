@@ -8,6 +8,8 @@ const route = useRoute();
 const clientId = computed(() => route.params.client_id);
 const inputs = ref<Client>({} as Client);
 const formData = ref();
+const error = ref("");
+const messageToUser = ref("");
 const handlerChange = (value: Client, type: keyof Client) => {
   inputs.value[type] = value;
 };
@@ -19,7 +21,7 @@ const updateInputs = () => {
   data.append("additional_phone", inputs.value.additional_phone);
   data.append("email", inputs.value.email);
   data.append("gender", inputs.value.gender);
-  data.append("birthday", useDateToString(inputs.value.birthday));
+  data.append("birthday", useFormatDate(inputs.value.birthday));
   data.append("instagram", inputs.value.instagram);
   data.append("telegram", inputs.value.telegram);
   data.append("comment", inputs.value.comment);
@@ -38,16 +40,14 @@ const editClient = () => {
   useApiFetch(`${useApiUrl()}/update_client/${clientId.value}`, {
     method: "POST",
     body: formData.value,
+  }).then((res) => {
+    if (res.message === "Client updated successfully") {
+      messageToUser.value = "Клієнт успішно оновився!";
+    } else {
+      error.value = 'Щось не вийшло!'
+    }
   });
 };
-
-// watch(
-//   () => inputs.value,
-//   () => {
-//     console.log(inputs.value);
-//   },
-//   { deep: true }
-// );
 
 const getClient = () => {
   useAuthFetch(`${useApiUrl()}/client_info`, {
@@ -89,6 +89,8 @@ getClient();
       </div>
     </template>
     <template #content>
+      <UiAlertDanger v-if="error">{{ error }}</UiAlertDanger>
+      <UiAlertSuccess v-if="messageToUser">{{ messageToUser }}</UiAlertSuccess>
       <LayoutClient
         :labelStatus="'Змінити статус клієнта:'"
         :inputs="inputs"

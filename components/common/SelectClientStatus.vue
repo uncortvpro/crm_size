@@ -1,14 +1,22 @@
 <script setup lang="ts">
+const props = defineProps<{
+  valueSelect?: string;
+}>();
+
 const emits = defineEmits(["updateValue"]);
 
 const updateValue = (value: string) => {
   emits("updateValue", value);
 };
 
+const options = ref<string[]>([]);
+
 const getOptions = () => {
-  useAuthFetch(`${useApiUrl()}/get_statuses`)
-    .then((res) => res.json())
-    .then((res) => console.log(res));
+  useAuthFetch(`${useApiUrl()}/get_statuses`).then((res) => {
+    const response = res.statuses as StatusClient[];
+
+    options.value = response.map((status) => status.status);
+  });
 };
 
 getOptions();
@@ -16,9 +24,9 @@ getOptions();
 
 <template>
   <UiSelectProfile
-    typeSelect="status"
-    @updateValue="updateValue"
-    :options="['Постійний', 'Постійний']"
+    :valueSelect="valueSelect"
+    :options="options"
+    typeSelect="gender"
   />
 </template>
 

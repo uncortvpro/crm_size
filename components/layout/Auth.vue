@@ -1,4 +1,3 @@
-import type { _maxWidth } from '#tailwind-config/theme';
 <script setup lang="ts"></script>
 
 <template>

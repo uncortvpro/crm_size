@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = defineProps<{
   options: any;
-  valueSelect: string;
+  valueSelect?: string;
 }>();
 const open = ref(false);
 const onSwitch = (value: boolean) => {
@@ -27,7 +27,7 @@ const onSwitch = (value: boolean) => {
       },
     }"
   >
-    <UiButtonIconProfile :value="valueSelect" :open="open">
+    <UiButtonIconProfile :value="valueSelect || ''" :open="open">
       <UIcon
         name="i-heroicons-chevron-right-20-solid"
         class="transition-transform rotate-90 w-[20px] h-[20px]"
