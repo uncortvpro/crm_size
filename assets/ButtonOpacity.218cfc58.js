@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as n,n as c}from"./entry.b9692a03.js";const r={},s={class:"hover:opacity-hover duration-hover text-black"};function _(o,a){return t(),n("button",s,[c(o.$slots,"default")])}const d=e(r,[["render",_]]);export{d as _};
