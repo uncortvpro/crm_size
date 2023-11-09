@@ -1,1 +1,0 @@
-import{_ as e,j as _,w as n,o as a,b as c,ad as r}from"./entry.b22a8ab3.js";import{_ as s}from"./Base.da48fdd8.js";const u={};function m(p,f){const o=r,t=s;return a(),_(t,null,{default:n(()=>[c(o)]),_:1})}const i=e(u,[["render",m]]);export{i as default};
