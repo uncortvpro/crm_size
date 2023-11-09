@@ -1,0 +1,1 @@
+import{_ as e}from"./ProfilePage.vue.4b88ce31.js";import{_ as r,j as t,o as c}from"./entry.b22a8ab3.js";const _={};function n(s,a){const o=e;return c(),t(o,{title:"Мої замовлення"})}const i=r(_,[["render",n]]);export{i as default};

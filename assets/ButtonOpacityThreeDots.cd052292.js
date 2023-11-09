@@ -1,1 +1,0 @@
-import _ from"./ThreeDots.4c6db2db.js";import{_ as n}from"./ButtonOpacity.9a4547b2.js";import{_ as e,o as c,j as r,w as s,b as a}from"./entry.524c610c.js";const m={};function p(i,f){const o=_,t=n;return c(),r(t,null,{default:s(()=>[a(o,{class:"text-beige-1"})]),_:1})}const d=e(m,[["render",p]]);export{d as _};
