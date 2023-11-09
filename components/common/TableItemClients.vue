@@ -3,6 +3,8 @@ const props = defineProps<{
   client: Client;
 }>();
 
+console.log(props.client);
+
 const emits = defineEmits(["deleteAction"]);
 
 const onDeleteClient = () => {
@@ -46,20 +48,23 @@ const router = useRouter();
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Історія покупок </template>
-        <template #value>Історія покупок</template>
+        <template #value>{{ client.orders.length }} замовлень</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Тотал сума покупок </template>
-        <template #value>Тотал сума покупок</template>
+        <template #value>{{ client?.total_price_sum }}<CommonCurrencyText></CommonCurrencyText></template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Дата останньої покупки</template>
-        <template #value>Дата останньої покупки</template>
+        <template #value>{{ client?.latest_order_date }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Статус</template>
         <template #value>
-          <CommonStatusOutput>{{ client?.status }}</CommonStatusOutput>
+          <CommonStatusOutput
+          :color="client.status.colour"
+            >{{ client?.status?.status }}</CommonStatusOutput
+          >
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active" class="3xl:hidden col-span-2">
@@ -71,7 +76,7 @@ const router = useRouter();
     <template #additional-buttons>
       <UiButtonOpacityEdit
         class="flex-shrink-0"
-        @click.stop="navigateTo('/profile/edit_client/' + client._id.$oid)"
+        @click.stop="navigateTo('/profile/edit_client/' + client._id)"
       />
       <UiButtonOpacityDelete
         class="flex-shrink-0"

@@ -26,8 +26,6 @@ export const useAuthStore = defineStore("authStore", () => {
     }
 
     function failedToken() {
-        console.log('qwdqwwqwq');
-        
         localStorage.removeItem('token');
         user.value = null;
         navigateTo('/authorize');

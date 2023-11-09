@@ -1,33 +1,37 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  product: Product;
+}>();
+</script>
 
 <template>
   <UiTableItem
     :isMobileClose="false"
-    class="grid-cols-order-details-modal-xs md:grid-cols-order-details-modal-md"
+    class="grid-cols-order-details-modal-xs gap-x-[10px] md:grid-cols-order-details-modal-md"
   >
     <template #elements>
       <UiTableCellPadding class="!grid-cols-1 !col-span-1 row-span-5">
-        <img src="@img/jumper.jpg" alt="" />
+        <img class="max-w-[40px]" :src="useBase64(product.picture) || ''" alt="" />
       </UiTableCellPadding>
       <UiTableCell class="col-span-2">
         <template #title>Найменування</template>
-        <template #value>Светр чоловічий</template>
+        <template #value>{{ product?.name }}</template>
       </UiTableCell>
-      <UiTableCell class="col-span-2">
+      <!-- <UiTableCell class="col-span-2">
         <template #title>Артикул</template>
-        <template #value>#563892 </template>
-      </UiTableCell>
+        <template #value> {{ 'product.variant_id' }} </template>
+      </UiTableCell> -->
       <UiTableCell class="col-span-2">
         <template #title>Розмір</template>
-        <template #value>M </template>
+        <template #value>{{ product?.size }}</template>
       </UiTableCell>
       <UiTableCell class="col-span-2">
         <template #title>Кількість</template>
-        <template #value>1</template>
+        <template #value>{{ product?.amount }}</template>
       </UiTableCell>
       <UiTableCell class="col-span-2">
         <template #title>Ціна</template>
-        <template #value>1250₴</template>
+        <template #value>{{ product?.price }}<CommonCurrencyText /></template>
       </UiTableCell>
     </template>
   </UiTableItem>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
+  products: Product[];
   isOpen?: boolean;
   ui?: any;
   label: string;
@@ -11,14 +12,17 @@ defineProps<{
       <template #headers>
         <UiTableCellHeader></UiTableCellHeader>
         <UiTableCellHeader>Найменування</UiTableCellHeader>
-        <UiTableCellHeader>Артикул</UiTableCellHeader>
+        <!-- <UiTableCellHeader>Артикул</UiTableCellHeader> -->
         <UiTableCellHeader>Розмір</UiTableCellHeader>
         <UiTableCellHeader>Кількість</UiTableCellHeader>
         <UiTableCellHeader>Ціна</UiTableCellHeader>
       </template>
       <template #items>
-        <CommonTableItemOrderDetails></CommonTableItemOrderDetails>
-        <CommonTableItemOrderDetails></CommonTableItemOrderDetails>
+        <CommonTableItemOrderDetails
+          v-for="(product, index) in products"
+          :key="index"
+          :product="product"
+        ></CommonTableItemOrderDetails>
       </template>
     </CommonTable>
   </UiModalTitleClose>

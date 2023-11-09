@@ -12,7 +12,11 @@ const updateValue = (value: string) => {
 const options = ref<string[]>([]);
 
 const getOptions = () => {
-  useAuthFetch(`${useApiUrl()}/get_statuses`).then((res) => {
+  useAuthFetch(`${useApiUrl()}/get_statuses`, {
+    body: {
+      type: "client",
+    },
+  }).then((res) => {
     const response = res.statuses as StatusClient[];
 
     options.value = response.map((status) => status.status);

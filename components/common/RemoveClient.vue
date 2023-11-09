@@ -6,7 +6,11 @@ const emits = defineEmits(["switchModal"]);
 const clientsStore = useClientsStore();
 
 const deleteClient = (id: string) => {
-  clientsStore.deleteClient(id);
+  return clientsStore.deleteClient(id).then((res: any) => {
+    if (res === "Client deleted successfully") {
+      navigateTo("/profile/clients");
+    }
+  });
 };
 
 const switchModal = (value: boolean) => {

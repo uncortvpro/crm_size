@@ -7,7 +7,7 @@ defineProps<{
 <template>
   <UModal
     :ui="{
-      container: 'items-center',
+      container: 'items-center sm:p-4',
       rounded: 'rounded-[5px] md:rounded-[20px]',
       base: 'p-[20px] md:p-[30px]',
       ...ui,

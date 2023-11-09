@@ -24,6 +24,9 @@ const closeModal = () => {
         shadow: 'shadow-none',
         divide: 'divide-none',
         body: { base: 'hidden' },
+        header: {
+          padding: '!p-0'
+        }
       }"
     >
       <template #header>
@@ -32,7 +35,6 @@ const closeModal = () => {
           <UiButtonOpacityClose @click="closeModal"></UiButtonOpacityClose>
         </div>
       </template>
-      <!-- <Placeholder class="h-32" /> -->
     </UCard>
     <slot />
   </UiModal>

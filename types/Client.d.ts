@@ -8,7 +8,10 @@ declare interface Client {
   instagram: string;
   telegram: string;
   comment: string;
-  status: string;
+  latest_order_date: string;
+  total_price_sum: any;
+  orders: ShoppingHistoryItem[];
+  status: any;
   userpic: any;
-  _id: { $oid: string };
+  _id: string;
 }

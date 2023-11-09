@@ -5,6 +5,12 @@ export const useClientsStore = defineStore("clientsStore", () => {
     const page = ref<number>(1);
     const keyWord = ref("");
     const endPage = ref(1);
+    const sorting = ref<SortingClients>("");
+    const reverseSorting = ref<boolean>(false);
+
+    const setSorting = (value: string) => {
+        useSorting(value, reverseSorting, sorting, fetchClients)
+    }
 
     function searchClients(value: string) {
         keyWord.value = value;
@@ -12,9 +18,9 @@ export const useClientsStore = defineStore("clientsStore", () => {
     }
 
     function setPage(newPage: number) {
-        if(newPage === 0) return false;
+        if (newPage === 0) return false;
         page.value = newPage;
-        
+
         fetchClients();
     }
 
@@ -24,8 +30,12 @@ export const useClientsStore = defineStore("clientsStore", () => {
                 page: page.value,
                 per_page: 10,
                 keyword: keyWord.value,
+                sort_by: sorting.value,
+                reverse_sort: reverseSorting.value,
             },
         }).then((res) => {
+            console.log(res);
+
             clients.value = res.clients;
             endPage.value = res.total_pages;
         }).catch(res => {
@@ -34,14 +44,18 @@ export const useClientsStore = defineStore("clientsStore", () => {
     };
 
     function deleteClient(id: string) {
-        useAuthFetch(`${useApiUrl()}/delete_client`, {
+        console.log(id);
+
+        return useAuthFetch(`${useApiUrl()}/delete_client`, {
             body: {
                 client_id: id,
             },
-        }).then(res => {
+        }).then(async (res) => {
             if (res.message === 'Client deleted successfully') {
-                clients.value = clients.value.filter((element) => element._id.$oid !== id);
+                clients.value = clients.value.filter((element) => element._id !== id);
+                return res.message;
             }
+            return false;
         });
     }
 
@@ -54,6 +68,9 @@ export const useClientsStore = defineStore("clientsStore", () => {
         searchClients,
         page,
         keyWord,
-        endPage
+        endPage,
+        setSorting,
+        sorting,
+        reverseSorting
     }
 })

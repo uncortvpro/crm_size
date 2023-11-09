@@ -1,4 +1,28 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const objectivesStore = useObjectivesStore();
+
+const objectives = computed(() => objectivesStore.objectives);
+const fetchObjectives = () => objectivesStore.fetchObjectives();
+
+const isObjectivesDetails = ref(false);
+const currentObjectiveId = ref("");
+const currentObjective = computed(() =>
+  objectives.value.find(
+    (objective) => objective._id === currentObjectiveId.value
+  )
+);
+
+const switchObjectiveId = (id: string) => {
+  currentObjectiveId.value = id;
+};
+
+const showObjectivesDetails = (id: string) => {
+  switchObjectiveId(id);
+  isObjectivesDetails.value = true;
+};
+
+fetchObjectives();
+</script>
 
 <template>
   <LayoutProfilePage title="Задачі">
@@ -7,6 +31,11 @@
         <template #add_name> Додати завдання</template>
       </CommonNavigationPage>
 
+      <CommonModalObjectivesDetails
+        v-if="currentObjective"
+        v-model="isObjectivesDetails"
+        :objective="currentObjective"
+      ></CommonModalObjectivesDetails>
       <CommonTable>
         <template #headers>
           <UiTableCellHeader>Дата</UiTableCellHeader>
@@ -20,7 +49,10 @@
         </template>
         <template #items>
           <CommonTableItemObjectives
-            v-for="client in [1, 2, 3, 4, 5, 6]"
+            v-for="objective in objectives"
+            :key="objective._id"
+            :objective="objective"
+            @showDetails="showObjectivesDetails"
           ></CommonTableItemObjectives>
         </template>
       </CommonTable>
