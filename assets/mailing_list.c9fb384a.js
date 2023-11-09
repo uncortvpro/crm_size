@@ -1,0 +1,1 @@
+import{_ as t}from"./ProfilePage.vue.354d9a9a.js";import{_ as e,j as c,o as _}from"./entry.c361818e.js";const n={};function r(a,s){const o=t;return _(),c(o,{title:"Розсилка"})}const m=e(n,[["render",r]]);export{m as default};
