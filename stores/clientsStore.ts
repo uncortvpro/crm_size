@@ -9,7 +9,7 @@ export const useClientsStore = defineStore("clientsStore", () => {
     const reverseSorting = ref<boolean>(false);
 
     const setSorting = (value: string) => {
-        useSorting(value, reverseSorting, sorting, fetchClients)
+        useSorting(value, reverseSorting, sorting, fetchClients);
     }
 
     function searchClients(value: string) {
