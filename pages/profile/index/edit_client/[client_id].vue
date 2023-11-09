@@ -15,24 +15,6 @@ const reverseSorting = ref<boolean>(false);
 
 const setSorting = (value: SortingShoppingHistory) => {
   useSorting(value, reverseSorting, sorting, getClient)
-  // if (sorting.value !== value) {
-  //   reverseSorting.value = true;
-  //   sorting.value = value;
-  //   getClient();
-  //   return false;
-  // }
-
-  // if (reverseSorting.value) {
-  //   reverseSorting.value = false;
-  //   getClient();
-  //   return false;
-  // }
-
-  // if (!reverseSorting.value) {
-  //   reverseSorting.value = true;
-  //   getClient();
-  //   return false;
-  // }
 };
 
 const setPageShoppingHistory = (page: number) => {
