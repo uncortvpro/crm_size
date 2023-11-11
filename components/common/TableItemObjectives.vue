@@ -5,13 +5,17 @@ const props = defineProps<{
 
 const emits = defineEmits(["deleteAction", "showDetails"]);
 
-// const onDeleteClient = () => {
-//   emits("deleteAction");
-// };
+const onDeleteClient = () => {
+  emits("deleteAction");
+};
 
 const showDetails = () => {
   emits("showDetails", props.objective._id);
 };
+
+const outputParticipants = computed(() => props.objective.participants.filter((el, index) => index < 3) || []);  
+
+console.log(props.objective);
 
 const router = useRouter();
 </script>
@@ -26,17 +30,16 @@ const router = useRouter();
     <template #elements="{ active }">
       <UiTransitionTableCell :vIf="active">
         <template #title>Дата</template>
-        <template #value>Дата </template>
+        <template #value>{{ useDate(objective?.date.$date) }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Завдання</template>
-        <template #value
-          ><UiButtonText class="font-medium leading-[130%]">
-            <span class="max-w-[200px] inline-block truncate"
-              >{{ objective?.headline }}
-            </span>
-          </UiButtonText></template
-        >
+        <template #value>
+          <span
+            class="font-medium leading-[130%] max-w-[200px] inline-block truncate"
+            >{{ objective?.headline }}
+          </span>
+        </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Відповідальний</template>
@@ -48,16 +51,22 @@ const router = useRouter();
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Створив</template>
-        <template #value>Створив</template>
+        <template #value>{{ objective?.creator }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Учасники</template>
         <template #value>
           <div class="flex items-center gap-[5px]">
             <CommonParticipantItem
-              v-for="(participant, index) in objective.participants"
+              disabled
+              v-for="(participant, index) in outputParticipants"
               :key="index"
-              :letter="participant[0]"
+              :name="participant[0]"
+            ></CommonParticipantItem>
+            <CommonParticipantItem
+            v-if="objective.participants.length > 3"
+              :output="`+${objective.participants.length - 3}`"
+              disabled
             ></CommonParticipantItem>
           </div>
         </template>
@@ -65,7 +74,9 @@ const router = useRouter();
       <UiTransitionTableCell :vIf="active">
         <template #title>Статус</template>
         <template #value>
-          <CommonStatusOutput>Статус</CommonStatusOutput>
+          <CommonStatusOutput :color="objective.status.colour">{{
+            objective.status.status
+          }}</CommonStatusOutput>
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
@@ -84,9 +95,9 @@ const router = useRouter();
         ></UiButtonOpacityThreeDots>
         <UiButtonOpacityEdit
           class="flex-shrink-0"
-          @click.stop="navigateTo('/profile/edit_client/' + objective._id)"
+          @click.stop="navigateTo('/profile/edit_objective/' + objective._id)"
         />
-        <UiButtonOpacityDelete class="flex-shrink-0" @click.stop="" />
+        <UiButtonOpacityDelete class="flex-shrink-0" @click.stop="onDeleteClient" />
       </div>
     </template>
   </UiTableItem>

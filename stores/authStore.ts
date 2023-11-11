@@ -2,7 +2,7 @@ import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("authStore", () => {
     const router = useRouter();
-    const user = ref(null);
+    const user = ref<User | null>(null);
     const isLoggedIn = computed(() => !!user.value);
     const token = localStorage.getItem('token');
 
@@ -61,6 +61,7 @@ export const useAuthStore = defineStore("authStore", () => {
         login,
         successAuth,
         failedToken,
-        fetchUser
+        fetchUser,
+        user
     };
 });

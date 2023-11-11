@@ -6,6 +6,13 @@ export const useObjectivesStore = defineStore("objectivesStore", () => {
     const keyWord = ref("");
     const endPage = ref(1);
 
+    const sorting = ref<SortingObjective>("");
+    const reverseSorting = ref<boolean>(false);
+
+    const setSorting = (value: SortingObjective) => {
+        useSorting(value, reverseSorting, sorting, fetchObjectives);
+    }
+
     
     function searchObjectives(value: string) {
         keyWord.value = value;
@@ -24,13 +31,11 @@ export const useObjectivesStore = defineStore("objectivesStore", () => {
         
         useAuthFetch(`${useApiUrl()}/delete_task`, {
             body: {
-                client_id: id,
+                task_id: id,
             },
         }).then(res => {
-            console.log(res);
-            
-            if (res.message === 'Client deleted successfully') {
-                // objectives.value = objectives.value.filter((element) => element._id.$oid !== id);
+            if (res.message === true) {
+                fetchObjectives();
             }
         });
     }
@@ -41,6 +46,8 @@ export const useObjectivesStore = defineStore("objectivesStore", () => {
                 page: page.value,
                 per_page: 10,
                 keyword: keyWord.value,
+                sort_by: sorting.value,
+                reverse_sort: reverseSorting.value,
             },
         }).then((res) => {
             console.log(res);
@@ -54,6 +61,15 @@ export const useObjectivesStore = defineStore("objectivesStore", () => {
 
 return {
     fetchObjectives,
-    objectives
+    searchObjectives,
+    deleteObjectives,
+    setPage,
+    objectives,
+    endPage,
+    keyWord,
+    page,
+    setSorting,
+    sorting,
+    reverseSorting
 }
 })

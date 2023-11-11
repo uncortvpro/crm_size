@@ -3,8 +3,6 @@ const props = defineProps<{
   client: Client;
 }>();
 
-console.log(props.client);
-
 const emits = defineEmits(["deleteAction"]);
 
 const onDeleteClient = () => {
@@ -24,13 +22,12 @@ const router = useRouter();
     <template #elements="{ active }">
       <UiTransitionTableCell :vIf="active">
         <template #title>Ім’я</template>
-        <template #value
-          ><UiButtonText class="font-medium leading-[130%]">
-            <span class="max-w-[200px] inline-block truncate">{{
-              client?.name
-            }}</span>
-          </UiButtonText></template
-        >
+        <template #value>
+          <span
+            class="font-medium leading-[130%] max-w-[200px] inline-block truncate"
+            >{{ client?.name }}</span
+          >
+        </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Номер телефону</template>
@@ -52,7 +49,9 @@ const router = useRouter();
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Тотал сума покупок </template>
-        <template #value>{{ client?.total_price_sum }}<CommonCurrencyText></CommonCurrencyText></template>
+        <template #value
+          >{{ client?.total_price_sum }}<CommonCurrencyText></CommonCurrencyText
+        ></template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Дата останньої покупки</template>
@@ -61,10 +60,9 @@ const router = useRouter();
       <UiTransitionTableCell :vIf="active">
         <template #title>Статус</template>
         <template #value>
-          <CommonStatusOutput
-          :color="client.status.colour"
-            >{{ client?.status?.status }}</CommonStatusOutput
-          >
+          <CommonStatusOutput :color="client.status.colour">{{
+            client?.status?.status
+          }}</CommonStatusOutput>
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active" class="3xl:hidden col-span-2">

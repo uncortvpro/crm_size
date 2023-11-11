@@ -3,12 +3,6 @@ const props = defineProps<{
   valueSelect?: string;
 }>();
 
-const emits = defineEmits(["updateValue"]);
-
-const updateValue = (value: string) => {
-  emits("updateValue", value);
-};
-
 const options = ref<string[]>([]);
 
 const getOptions = () => {

@@ -77,7 +77,7 @@ const createClient = () => {
       >
       </LayoutClient>
       <div class="flex justify-center">
-        <UiButtonOpacityBorder disabled class="lg:hidden">
+        <UiButtonOpacityBorder @click="createClient" class="lg:hidden">
           Створити
         </UiButtonOpacityBorder>
       </div>

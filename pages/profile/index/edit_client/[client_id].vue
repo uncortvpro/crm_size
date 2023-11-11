@@ -78,7 +78,6 @@ const getClient = () => {
       reverse_sort: reverseSorting.value,
     },
   }).then((res) => {
-    console.log(res);
     endPageShoppingHistory.value = res.total_pages;
     client.value = res.client_info;
     inputs.value.additional_phone = res.client_info.additional_phone;
@@ -145,12 +144,12 @@ getClient();
         @setPage="setPageShoppingHistory"
         class="mt-[25px] xl:mt-[40px]"
       ></CommonClientShoppingHistory>
-      <div class="flex flex-col items-center lg:hidden mt-[25px]">
-        <UiButtonOpacityBorder disabled> Оновити </UiButtonOpacityBorder>
+      <div class="flex flex-col items-center pb-[50px] gap-[20px] lg:hidden mt-[25px]">
+        <UiButtonOpacityBorder @click="editClient"> Оновити </UiButtonOpacityBorder>
         <UiButtonIcon
           @click="deleteClient"
           :value="'Видалити'"
-          class="w-fit mt-[17px]"
+          class="w-fit"
         >
           <SvgoDelete class="-order-10"></SvgoDelete>
         </UiButtonIcon>

@@ -5,6 +5,10 @@ const props = defineProps<{
   ui?: any;
   label: string;
 }>();
+
+const fullCost = computed(() =>
+  props.products.reduce((acc, el) => (acc = acc + el.price * el.amount), 0)
+);
 </script>
 <template>
   <UiModalTitleClose :ui="{ width: '!max-w-[923px]' }" :label="label">
@@ -25,6 +29,9 @@ const props = defineProps<{
         ></CommonTableItemOrderDetails>
       </template>
     </CommonTable>
+    <p class="font-medium text-[15px] mt-[20px]">
+      Всього: {{ fullCost }} <CommonCurrencyText />
+    </p>
   </UiModalTitleClose>
 </template>
 

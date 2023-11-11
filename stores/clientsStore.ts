@@ -52,7 +52,7 @@ export const useClientsStore = defineStore("clientsStore", () => {
             },
         }).then(async (res) => {
             if (res.message === 'Client deleted successfully') {
-                clients.value = clients.value.filter((element) => element._id !== id);
+                await fetchClients()
                 return res.message;
             }
             return false;

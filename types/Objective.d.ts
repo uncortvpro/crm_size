@@ -4,7 +4,9 @@ declare interface Objective {
   deadline: any;
   description: string;
   headline: string;
-  participants: string[];
+  participants: any[];
   responsible:string;
   _id: string;
+  date: any;
+  creator:string;
 }

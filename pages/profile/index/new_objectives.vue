@@ -1,62 +1,78 @@
 <script setup lang="ts">
+const auth = useAuthStore();
+
+const creator = computed(() => auth.user?.name);
 const error = ref("");
 const messageToUser = ref("");
+
+const inputs = ref<any>({
+  participants: [],
+  headline: "",
+  description: "",
+  responsible: "",
+  deadline: "",
+  status: "",
+  comment: "",
+});
+
+const handlerChangeInputs = (value: any, type: keyof Objective) => {
+  inputs.value[type] = value;
+};
+
+const validateResponse = (message: any) => {
+  if (message === true) {
+    messageToUser.value = "Завдання успішно створено";
+    inputs.value = {} as Client;
+    return false;
+  } else {
+    error.value = "Щось не вийшло!";
+  }
+};
+
+const createObjective = () => {
+  useAuthFetch(`${useApiUrl()}/add_task`, {
+    body: {
+      creator: creator.value,
+      headline: inputs.value.headline,
+      description: inputs.value.description,
+      date: useFormatDate(inputs.value.deadline), //remove it
+      participants: inputs.value.participants,
+      responsible: inputs.value.responsible,
+      deadline: useFormatDate(inputs.value.deadline),
+      status: inputs.value.status,
+      comment: inputs.value.comment,
+    },
+  })
+    .then((res: any) => {
+      validateResponse(res.message);
+    })
+    .catch((res) => {
+      validateResponse(res);
+      console.log(res);
+    });
+};
 </script>
 
 <template>
   <LayoutProfilePage title="Додати завдання">
     <template #header>
-      <UiButtonOpacityBorder @click="" class="hidden lg:block">
+      <UiButtonOpacityBorder @click="createObjective" class="hidden lg:block">
         Створити
       </UiButtonOpacityBorder>
     </template>
     <template #content>
-      <UiAlertDanger v-if="error">{{ error }}</UiAlertDanger>
-      <UiAlertSuccess v-if="messageToUser">{{ messageToUser }}</UiAlertSuccess>
-      <form action="#">
-        <UiDivBorderBg class="w-full max-w-[1008px]">
-          <UiDivGridForm>
-            <UiHeader2 class="col-span-2"> Інформація про завдання </UiHeader2>
-            <UiLabelProfile class="col-span-2 md:col-span-1" label="Заголовок:">
-              <UiInputProfile></UiInputProfile>
-            </UiLabelProfile>
-            <UiLabelProfile
-              class="row-span-2 col-span-2 md:col-span-1"
-              label="Опис завдання:"
-            >
-              <UiTextareaProfile
-                class="min-h-[80px] md:min-h-[120px] xl:min-h-[270px]"
-              ></UiTextareaProfile>
-            </UiLabelProfile>
-            <UiLabelProfile label="Додайте учасників:">
-              <div>Додайте учасників</div>
-            </UiLabelProfile>
-            <UiHeader2 class="col-span-2"> Додаткова інформація </UiHeader2>
-            <UiLabelProfile
-              class="col-span-2 md:col-span-1"
-              label="Відповідальна особа:"
-            >
-              <UiSelectProfile></UiSelectProfile>
-            </UiLabelProfile>
-            <UiLabelProfile class="col-span-2 md:col-span-1" label="Дедлайн:">
-              <UiDatePicker></UiDatePicker>
-            </UiLabelProfile>
-            <UiLabelProfile
-              class="col-span-2 md:col-span-1"
-              label="Змінити статус завдання:"
-            >
-              <UiSelectProfile></UiSelectProfile>
-            </UiLabelProfile>
-            <UiLabelProfile class="col-span-2 md:col-span-1" label="Коментар:">
-              <UiTextareaProfile
-                class="min-h-[80px] md:min-h-[120px]"
-              ></UiTextareaProfile>
-            </UiLabelProfile>
-          </UiDivGridForm>
-        </UiDivBorderBg>
-      </form>
+      <LayoutObjective
+        :inputs="inputs"
+        :error="error"
+        :messageToUser="messageToUser"
+        labelStatus="Статус завдання:"
+        @updateInputs="handlerChangeInputs"
+      ></LayoutObjective>
       <div class="flex justify-center">
-        <UiButtonOpacityBorder disabled class="lg:hidden mt-[25px]">
+        <UiButtonOpacityBorder
+          @click="createObjective"
+          class="lg:hidden mt-[25px]"
+        >
           Створити
         </UiButtonOpacityBorder>
       </div>
