@@ -1,1 +1,0 @@
-import{_ as o,o as c,c as s,C as t}from"./entry.c361818e.js";const n={},_={class:"flex flex-col"};function r(e,a){return c(),s("div",_,[t(e.$slots,"default")])}const f=o(n,[["render",r]]);export{f as _};

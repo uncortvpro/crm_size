@@ -1,1 +1,0 @@
-import{_ as e}from"./useFormGroup.67b9e519.js";import{_,o as n,j as r,w as s,C as c}from"./entry.c361818e.js";const a={};function m(t,p){const o=e;return n(),r(o,{class:"!text-red-600 mt-[15px]"},{default:s(()=>[c(t.$slots,"default")]),_:3})}const i=_(a,[["render",m]]);export{i as _};
