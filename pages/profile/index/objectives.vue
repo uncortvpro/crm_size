@@ -42,6 +42,10 @@ const switchObjectiveId = (id: string) => {
   currentObjectiveId.value = id;
 };
 
+const switchObjectivesDetails = (value: boolean) => {
+  isObjectivesDetails.value = value;
+};
+
 const showObjectivesDetails = (id: string) => {
   switchObjectiveId(id);
   isObjectivesDetails.value = true;
@@ -71,6 +75,7 @@ fetchObjectives();
       <CommonModalObjectivesDetails
         v-if="currentObjective"
         v-model="isObjectivesDetails"
+        @closeModal="switchObjectivesDetails(false)"
         :objective="currentObjective"
       ></CommonModalObjectivesDetails>
       <CommonTable :pageTable="page" :endPage="endPage" @setPage="setPage">
@@ -94,9 +99,9 @@ fetchObjectives();
               @click="setSorting('deadline')"
               class="!font-normal"
             >
-            Дедлайн</CommonButtonSortingTable
+              Дедлайн</CommonButtonSortingTable
             >
-            </UiTableCellHeader>
+          </UiTableCellHeader>
           <UiTableCellHeader>Створив</UiTableCellHeader>
           <UiTableCellHeader>Учасники</UiTableCellHeader>
           <UiTableCellHeader>Статус</UiTableCellHeader>

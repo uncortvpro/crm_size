@@ -15,9 +15,13 @@ const switchOrderId = (id: string) => {
   currentOrderId.value = id;
 };
 
+const switchOrderDetails = (value: boolean) => {
+  isOrderDetails.value = value;
+};
+
 const showOrderDetails = (id: string) => {
   switchOrderId(id);
-  isOrderDetails.value = true;
+  switchOrderDetails(true);
 };
 
 fetchOrders();
@@ -36,6 +40,7 @@ fetchOrders();
       <CommonModalOrderDetails
         v-if="currentOrder"
         v-model="isOrderDetails"
+        @closeModal="switchOrderDetails(false)"
         label="Деталі замовлення"
         :products="currentOrder?.products"
       ></CommonModalOrderDetails>

@@ -20,13 +20,14 @@ const closeModal = () => {
   >
     <UCard
       :ui="{
+        base: 'overflow-visible',
         ring: 'ring-0',
         shadow: 'shadow-none',
         divide: 'divide-none',
         body: { base: 'hidden' },
         header: {
-          padding: '!p-0'
-        }
+          padding: '!p-0',
+        },
       }"
     >
       <template #header>
