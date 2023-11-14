@@ -1,0 +1,1 @@
+import{_ as e,o,c as n,N as s}from"./entry.ca0fa042.js";const c={},r={class:"font-semibold text-[9px] md:text-[12px] lg:text-[15px] duration-200 hover:opacity-hover disabled:opacity-40"};function _(t,a){return o(),n("button",r,[s(t.$slots,"default")])}const l=e(c,[["render",_]]);export{l as _};
