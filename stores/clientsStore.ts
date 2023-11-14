@@ -34,7 +34,6 @@ export const useClientsStore = defineStore("clientsStore", () => {
                 reverse_sort: reverseSorting.value,
             },
         }).then((res) => {
-            console.log(res);
 
             clients.value = res.clients;
             endPage.value = res.total_pages;

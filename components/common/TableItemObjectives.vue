@@ -15,7 +15,6 @@ const showDetails = () => {
 
 const outputParticipants = computed(() => props.objective.participants.filter((el, index) => index < 3) || []);  
 
-console.log(props.objective);
 
 const router = useRouter();
 </script>
@@ -30,7 +29,7 @@ const router = useRouter();
     <template #elements="{ active }">
       <UiTransitionTableCell :vIf="active">
         <template #title>Дата</template>
-        <template #value>{{ useDate(objective?.date.$date) }}</template>
+        <template #value>{{ useDate(objective?.date) }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Завдання</template>

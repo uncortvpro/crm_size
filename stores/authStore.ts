@@ -17,7 +17,6 @@ export const useAuthStore = defineStore("authStore", () => {
     }
 
     async function successAuth(token: string) {
-        console.log(token);
         
         localStorage.setItem('token', token);
         await fetchUser().then(res => {

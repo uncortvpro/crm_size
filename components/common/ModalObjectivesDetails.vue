@@ -24,7 +24,7 @@ const props = defineProps<{
       </CommonModalObjectivesDetailsItem>
       <CommonModalObjectivesDetailsItem>
         <template #header> Дедлайн: </template>
-        <template #content> {{ useDate(objective?.deadline.$date) }} </template>
+        <template #content> {{ useDate(objective?.deadline) }} </template>
       </CommonModalObjectivesDetailsItem>
       <CommonModalObjectivesDetailsItem>
         <template #header> Створив: </template>

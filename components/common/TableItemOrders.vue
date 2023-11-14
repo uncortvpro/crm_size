@@ -5,15 +5,11 @@ const props = defineProps<{
 
 const emits = defineEmits(["deleteAction", "showDetails"]);
 
-// const onDeleteClient = () => {
-//   emits("deleteAction");
-// };
 
 const showDetails = () => {
   emits("showDetails", props.order._id);
 };
 
-console.log(props.order);
 
 const router = useRouter();
 </script>
@@ -22,20 +18,20 @@ const router = useRouter();
   <UiTableItem>
     <template #header>
       <span class="max-w-[200px] w-full inline-block truncate"
-        >{{ useDate(order?.date.$date) }}
+        >{{ useDate(order?.date) }}
       </span>
     </template>
     <template #elements="{ active }">
-      <UiTransitionTableCell :vIf="active">
+      <!-- <UiTransitionTableCell :vIf="active">
         <template #title>№</template>
         <template #value>№</template>
-      </UiTransitionTableCell>
+      </UiTransitionTableCell> -->
       <UiTransitionTableCell :vIf="active">
         <template #title>Дата</template>
         <template #value>
           <span
             class="font-medium leading-[130%] max-w-[200px] inline-block truncate"
-            >{{ useDate(order?.date.$date) }}</span
+            >{{ useDate(order?.date) }}</span
           ></template
         >
       </UiTransitionTableCell>

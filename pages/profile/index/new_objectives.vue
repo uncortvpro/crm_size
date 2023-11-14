@@ -35,7 +35,6 @@ const createObjective = () => {
       creator: creator.value,
       headline: inputs.value.headline,
       description: inputs.value.description,
-      date: useFormatDate(inputs.value.deadline), //remove it
       participants: inputs.value.participants,
       responsible: inputs.value.responsible,
       deadline: useFormatDate(inputs.value.deadline),

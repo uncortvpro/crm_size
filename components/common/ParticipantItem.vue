@@ -4,7 +4,6 @@ const props = defineProps<{
   hover?: boolean;
   output?: string;
 }>();
-console.log(props.name);
 
 const getBackground = computed(() => {
   if (!props.name) return false;

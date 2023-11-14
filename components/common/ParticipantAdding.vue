@@ -50,7 +50,7 @@ const inputParticipant = ref({
 
 const fetchParticipants = () => {
   useAuthFetch(`${useApiUrl()}/users`).then((res) => {
-    console.log(res);
+
     participants.value = res.users;
   });
 };

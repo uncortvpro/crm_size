@@ -47,7 +47,7 @@ fetchOrders();
 
       <CommonTable>
         <template #headers>
-          <UiTableCellHeader>№ </UiTableCellHeader>
+          <!-- <UiTableCellHeader>№ </UiTableCellHeader> -->
           <UiTableCellHeader>Дата замовлення</UiTableCellHeader>
           <UiTableCellHeader>Клієнт</UiTableCellHeader>
           <UiTableCellHeader>Сума замовлення</UiTableCellHeader>
