@@ -12,7 +12,7 @@ const statusColor = ref("");
 const status = ref("");
 
 const isStatus = computed(() =>
-  statusColor.value && status.value ? false : true
+  statusColor.value && status.value ? true : false
 );
 
 const onCreateNewStatus = () => {
@@ -75,7 +75,7 @@ const onCreateNewStatus = () => {
     </UiLabelProfile>
 
     <UiButtonOpacityBorder
-      :disabled="isStatus"
+      :disabled="!isStatus"
       @click="onCreateNewStatus"
       class="self-center mt-[25px]"
       >Зберегти</UiButtonOpacityBorder

@@ -19,13 +19,13 @@ const onCreateNewStatus = () => {
 </script>
 
 <template>
-  <UiModalTitle title="Додати статус" :ui="{ width: '!max-w-[414px]' }">
-    <UiLabelProfile class="mt-[15px] md:mt-[20px]" label="Введіть статус:">
+  <UiModalTitle title="Додати варіант" :ui="{ width: '!max-w-[414px]' }">
+    <UiLabelProfile class="mt-[15px] md:mt-[20px]" label="Введіть варіант:">
       <UiInputProfile v-model="status"></UiInputProfile>
     </UiLabelProfile>
 
     <UiButtonOpacityBorder
-      :disabled="status"
+      :disabled="!status"
       @click="onCreateNewStatus"
       class="self-center mt-[25px]"
       >Зберегти</UiButtonOpacityBorder
