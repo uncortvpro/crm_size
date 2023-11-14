@@ -73,9 +73,7 @@ fetchParticipants();
       </template>
     </CommonParticipantItem>
   </div>
-  <UiModal v-model="isModalAdding" :ui="{ width: '!max-w-[414px]' }">
-    <div class="flex flex-col">
-      <UiHeader2 class="text-center">Додати учасників</UiHeader2>
+  <UiModalTitle v-model="isModalAdding" title="Додати учасників" :ui="{ width: '!max-w-[414px]' }">
       <UiLabelProfile label="Введіть ім’я:" class="mt-[20px]">
         <div class="flex items-center gap-[15px]">
           <UiInputProfile
@@ -126,8 +124,7 @@ fetchParticipants();
         class="self-center mt-[25px]"
         >Зберегти</UiButtonOpacityBorder
       >
-    </div>
-  </UiModal>
+  </UiModalTitle>
 </template>
 
 <style scoped></style>

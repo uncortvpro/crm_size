@@ -1,0 +1,1 @@
+declare type VariantType = "client" | "task" | "shipping" | "order" | "source" | "payment";

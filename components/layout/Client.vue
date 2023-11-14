@@ -10,6 +10,13 @@ const handlerChange = (value: any, type: keyof Client) => {
   emits("updateInputs", value, type);
 };
 
+watch(
+  () => props.inputs,
+  () => {
+    console.log(props.inputs);
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -85,12 +92,12 @@ const handlerChange = (value: any, type: keyof Client) => {
           :label="labelStatus"
           class="self-stretch mt-[15px] lg:mt-[25px]"
         >
-          <CommonSelectClientStatus
-            v-model="inputs.status"
+          <CommonSelectVariant
             :valueSelect="inputs.status"
             typeSelect="status"
+            typeVariant="client"
             @updateValue="handlerChange"
-          ></CommonSelectClientStatus>
+          ></CommonSelectVariant>
         </UiLabelProfile>
       </UiDivBorderBg>
     </div>

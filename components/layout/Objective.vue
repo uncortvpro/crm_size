@@ -55,12 +55,12 @@ const handlerChange = (value: any, type: keyof Client) => {
           ></UiDatePicker>
         </UiLabelProfile>
         <UiLabelProfile class="col-span-2 md:col-span-1" :label="labelStatus">
-          <CommonSelectObjectiveStatus
+          <CommonSelectVariant
             :valueSelect="inputs.status"
-            v-model="inputs.status"
             typeSelect="status"
+            typeVariant="task"
             @updateValue="handlerChange"
-          ></CommonSelectObjectiveStatus>
+          ></CommonSelectVariant>
         </UiLabelProfile>
         <UiLabelProfile class="col-span-2 md:col-span-1" label="Коментар:">
           <UiTextareaProfile
