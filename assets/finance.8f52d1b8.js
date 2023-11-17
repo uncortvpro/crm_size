@@ -1,1 +1,0 @@
-import{_ as e}from"./ProfilePage.vue.d9e990f1.js";import{_ as c,j as t,o as n}from"./entry.46bbb6e6.js";const r={};function _(a,s){const o=e;return n(),t(o,{title:"Фінанси"})}const m=c(r,[["render",_]]);export{m as default};
