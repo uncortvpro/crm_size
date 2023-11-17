@@ -1,0 +1,1 @@
+import{N as o}from"./nuxt-icon.bf069877.js";import{R as e,o as t,c as n,a as s}from"./entry.051a0c6d.js";const r={xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 10 6"},c=s("path",{stroke:"#111",d:"M9 5 5 1 1 5"},null,-1),a=[c];function _(i,l){return t(),n("svg",r,[...a])}const m={render(){return e(o,{icon:{render:_}})}};export{m as default,_ as render};
