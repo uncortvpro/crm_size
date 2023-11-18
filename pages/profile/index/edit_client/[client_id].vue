@@ -3,7 +3,19 @@ const clientStore = useClientsStore();
 
 const route = useRoute();
 const clientId = computed(() => route.params.client_id);
-const inputs = ref<Client>({} as Client);
+const inputs = ref<Client>({
+  additional_phone: "",
+  email: "",
+  gender: "",
+  birthday: "",
+  instagram: "",
+  telegram: "",
+  comment: "",
+  status: "",
+  userpic: "",
+  phone: "",
+  name: "",
+} as Client);
 const client = ref<Client>({} as Client);
 const formData = ref();
 const error = ref("");
@@ -14,7 +26,7 @@ const sorting = ref<SortingShoppingHistory>("");
 const reverseSorting = ref<boolean>(false);
 
 const setSorting = (value: SortingShoppingHistory) => {
-  useSorting(value, reverseSorting, sorting, getClient)
+  useSorting(value, reverseSorting, sorting, getClient);
 };
 
 const setPageShoppingHistory = (page: number) => {
@@ -144,13 +156,13 @@ getClient();
         @setPage="setPageShoppingHistory"
         class="mt-[25px] xl:mt-[40px]"
       ></CommonClientShoppingHistory>
-      <div class="flex flex-col items-center pb-[50px] gap-[20px] lg:hidden mt-[25px]">
-        <UiButtonOpacityBorder @click="editClient"> Оновити </UiButtonOpacityBorder>
-        <UiButtonIcon
-          @click="deleteClient"
-          :value="'Видалити'"
-          class="w-fit"
-        >
+      <div
+        class="flex flex-col items-center pb-[50px] gap-[20px] lg:hidden mt-[25px]"
+      >
+        <UiButtonOpacityBorder @click="editClient">
+          Оновити
+        </UiButtonOpacityBorder>
+        <UiButtonIcon @click="deleteClient" :value="'Видалити'" class="w-fit">
           <SvgoDelete class="-order-10"></SvgoDelete>
         </UiButtonIcon>
       </div>

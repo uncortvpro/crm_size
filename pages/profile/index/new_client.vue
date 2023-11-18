@@ -1,5 +1,17 @@
 <script setup lang="ts">
-const inputs = ref<Client>({} as Client);
+const inputs = ref<Client>({
+  additional_phone: "",
+  email: "",
+  gender: "",
+  birthday: "",
+  instagram: "",
+  telegram: "",
+  comment: "",
+  status: "",
+  userpic: "",
+  phone: "",
+  name: "",
+} as Client);
 const formData = ref();
 const auth = useAuthStore();
 const error = ref("");
@@ -13,7 +25,10 @@ const updateInputs = () => {
   data.append("additional_phone", inputs.value.additional_phone);
   data.append("email", inputs.value.email);
   data.append("gender", inputs.value.gender);
-  data.append("birthday", useFormatDate(inputs.value.birthday));
+  data.append(
+    "birthday",
+    inputs.value.birthday ? useFormatDate(inputs.value.birthday) : ""
+  );
   data.append("instagram", inputs.value.instagram);
   data.append("telegram", inputs.value.telegram);
   data.append("comment", inputs.value.comment);
@@ -55,6 +70,7 @@ const createClient = () => {
       validateResponse(res.message);
     })
     .catch((res) => {
+      validateResponse(res.message);
       console.log(res);
     });
 };

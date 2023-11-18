@@ -15,7 +15,11 @@ const add = () => {
     <UiButtonOpacityBorderAddItem @click="add" class="flex-shrink-0">
       <slot name="add_name"></slot>
     </UiButtonOpacityBorderAddItem>
-    <CommonSearchBorder @search="search" />
+    <CommonSearchBorder
+      theme="black"
+      class="max-w-[182px] xl:max-w-[312px]"
+      @search="search"
+    />
   </div>
 </template>
 

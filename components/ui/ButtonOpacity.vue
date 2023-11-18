@@ -1,9 +1,9 @@
 <script setup lang="ts"></script>
 
 <template>
-  <button class="hover:opacity-hover duration-hover text-black">
+  <UiButton class="hover:opacity-hover duration-hover text-black">
     <slot />
-  </button>
+  </UiButton>
 </template>
 
 <style scoped></style>

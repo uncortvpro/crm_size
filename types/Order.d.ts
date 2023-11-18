@@ -1,7 +1,7 @@
 declare interface Order { 
   client: string;
   comment: string;
-  date: DateType; 
+  date: any; 
   email: string;
   payment: string;
   products: Product[];

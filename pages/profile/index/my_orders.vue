@@ -4,9 +4,37 @@ const ordersStore = useOrdersStore();
 const orders = computed(() => ordersStore.orders);
 const fetchOrders = () => ordersStore.fetchOrders();
 const searchOrders = (keyword: string) => ordersStore.searchOrders(keyword);
+const currentOrderId = ref("");
+
+const sorting = computed(() => ordersStore.sorting);
+const reverseSorting = computed(() => ordersStore.reverseSorting);
+const setSorting = (sorting: SortingOrders) => {
+  ordersStore.setSorting(sorting);
+};
+
+const page = computed(() => ordersStore.page);
+const endPage = computed(() => ordersStore.endPage);
+const setPage = (page: number) => ordersStore.setPage(page);
+const deleteOrder = async () => {
+  ordersStore.deleteOrder(currentOrderId.value);
+  switchModalRemove(false);
+};
+
+const isModalRemove = ref(false);
+
+const deleteAction = (id: string) => {
+  console.log("qwdqwd");
+
+  switchOrderId(id);
+  switchModalRemove(true);
+};
+
+const switchModalRemove = (value: boolean) => {
+  isModalRemove.value = value;
+};
 
 const isOrderDetails = ref(false);
-const currentOrderId = ref("");
+
 const currentOrder = computed(() =>
   orders.value.find((order) => order._id === currentOrderId.value)
 );
@@ -30,6 +58,14 @@ fetchOrders();
 <template>
   <LayoutProfilePage title="Мої замовлення">
     <template #content>
+      <UiModalWarning
+        v-if="currentOrderId"
+        v-model="isModalRemove"
+        @closeModal="switchModalRemove(false)"
+        @confirm="deleteOrder"
+        >Ви впевнені, що хочете видалити завдання?</UiModalWarning
+      >
+
       <CommonNavigationPage
         @search="searchOrders"
         @add="navigateTo('new_order')"
@@ -45,12 +81,29 @@ fetchOrders();
         :products="currentOrder?.products"
       ></CommonModalOrderDetails>
 
-      <CommonTable>
+      <CommonTable :pageTable="page" :endPage="endPage" @setPage="setPage">
         <template #headers>
-          <!-- <UiTableCellHeader>№ </UiTableCellHeader> -->
-          <UiTableCellHeader>Дата замовлення</UiTableCellHeader>
+          <UiTableCellHeader>
+            <CommonButtonSortingTable
+              :sortingUp="sorting === 'date' && reverseSorting"
+              :sortingDown="sorting === 'date' && !reverseSorting"
+              @click="setSorting('date')"
+              class="!font-normal"
+            >
+              Дата замовлення</CommonButtonSortingTable
+            ></UiTableCellHeader
+          >
           <UiTableCellHeader>Клієнт</UiTableCellHeader>
-          <UiTableCellHeader>Сума замовлення</UiTableCellHeader>
+          <UiTableCellHeader>
+            <CommonButtonSortingTable
+              :sortingUp="sorting === 'total_sum' && reverseSorting"
+              :sortingDown="sorting === 'total_sum' && !reverseSorting"
+              @click="setSorting('total_sum')"
+              class="!font-normal"
+            >
+              Сума замовлення</CommonButtonSortingTable
+            >
+          </UiTableCellHeader>
           <UiTableCellHeader>Джерело замовлення</UiTableCellHeader>
           <UiTableCellHeader>Статус</UiTableCellHeader>
           <UiTableCellHeader>Оплата</UiTableCellHeader>
@@ -61,6 +114,7 @@ fetchOrders();
             :key="order._id"
             :order="order"
             @showDetails="showOrderDetails"
+            @deleteAction="deleteAction"
           />
         </template>
       </CommonTable>

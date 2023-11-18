@@ -6,9 +6,41 @@ export const useOrdersStore = defineStore("ordersStore", () => {
     const keyWord = ref("");
     const endPage = ref(1);
 
-    const sorting = ref<SortingClients>(""); // change sorting for orders
-    const reverseSorting = ref<boolean>(false);
+    const addingProducts = ref([]); 
+    const nameProduct = ref<string>("");
+    function searchProducts (name: string) {
+        nameProduct.value = name;
+        fetchProducts();
+    }
 
+
+    const sorting = ref<SortingOrders>(""); // change sorting for orders
+    const reverseSorting = ref<boolean>(false);
+    const setSorting = (value: SortingOrders) => {// change sorting for orders
+        useSorting(value, reverseSorting, sorting, fetchOrders);
+    }
+
+
+    function setPage(newPage: number) {
+        if(newPage === 0) return false;
+        page.value = newPage;
+        
+        fetchOrders();
+    }
+
+    function deleteOrder(id: string) {
+        console.log(id);
+        
+        useAuthFetch(`${useApiUrl()}/delete_order`, {
+            body: {
+                order_id: id,
+            },
+        }).then(res => {
+            if (res.message === true) {
+                fetchOrders();
+            }
+        });
+    }
 
     function searchOrders(value: string) {
         keyWord.value = value;
@@ -34,9 +66,29 @@ export const useOrdersStore = defineStore("ordersStore", () => {
         });
     };
 
+
+    async function fetchProducts () {
+        const response = await useAuthFetch(`${useApiUrl()}/variations`, {
+          body: {
+            name: nameProduct.value,
+          },
+        })
+          addingProducts.value = response.variations;
+          console.log(addingProducts.value);
+      };
+
     return {
         fetchOrders,
+        addingProducts,
+        searchProducts,
         orders,
-        searchOrders 
+        searchOrders,
+        setPage,
+        deleteOrder,
+        page,
+        endPage,
+        sorting,
+        reverseSorting,
+        setSorting
     }
 });

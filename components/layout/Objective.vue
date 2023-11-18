@@ -8,7 +8,7 @@ defineProps<{
 
 const emits = defineEmits(["updateInputs"]);
 
-const handlerChange = (value: any, type: keyof Client) => {
+const handlerChange = (value: any, type: keyof Objective) => {
   emits("updateInputs", value, type);
 };
 </script>

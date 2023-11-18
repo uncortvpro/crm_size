@@ -1,6 +1,10 @@
 <script setup lang="ts">
+const route = useRoute();
+
 const error = ref("");
 const messageToUser = ref("");
+const orderId = computed(() => route.params.order_id);
+const order = ref<Order>();
 
 const inputs = ref<any>({
   client: "",
@@ -17,19 +21,37 @@ const handlerChangeInputs = (value: any, type: keyof Order) => {
   inputs.value[type] = value;
 };
 
+const fetchOrderInfo = () => {
+  useAuthFetch(`${useApiUrl()}/order_info`, {
+    body: {
+      order_id: orderId.value,
+    },
+  }).then((res) => {
+    inputs.value.client = res.client;
+    inputs.value.email = res.email;
+    inputs.value.payment = res.payment;
+    inputs.value.shipping = res.shipping;
+    inputs.value.source = res.source;
+    inputs.value.status = res.status?.status;
+    inputs.value.comment = res.comment;
+
+    order.value = res;
+  });
+};
+
 const validateResponse = (message: any) => {
   if (message === true) {
-    messageToUser.value = "Замовлення успішно створено";
-    inputs.value = {} as Client;
+    messageToUser.value = "Замовлення успішно обновлено";
     return false;
   } else {
     error.value = "Щось не вийшло!";
   }
 };
 
-const onCreateOrder = () => {
-  useAuthFetch(`${useApiUrl()}/add_order`, {
+const updateOrder = () => {
+  useAuthFetch(`${useApiUrl()}/update_order`, {
     body: {
+      order_id: orderId.value,
       client: inputs.value.client,
       email: inputs.value.email,
       shipping: inputs.value.shipping,
@@ -49,20 +71,14 @@ const onCreateOrder = () => {
     });
 };
 
-watch(
-  inputs,
-  () => {
-    console.log(inputs.value);
-  },
-  { deep: true }
-);
+fetchOrderInfo();
 </script>
 
 <template>
-  <LayoutProfilePage title="Додати замовлення">
+  <LayoutProfilePage title="Редагувати замовлення">
     <template #header>
-      <UiButtonOpacityBorder @click="onCreateOrder" class="hidden lg:block">
-        Створити
+      <UiButtonOpacityBorder @click="updateOrder" class="hidden lg:block">
+        Оновити
       </UiButtonOpacityBorder>
     </template>
     <template #content>
@@ -70,14 +86,12 @@ watch(
         :inputs="inputs"
         :error="error"
         :messageToUser="messageToUser"
+        :orderProducts="order?.products"
         @updateInputs="handlerChangeInputs"
       ></LayoutOrder>
       <div class="flex justify-center">
-        <UiButtonOpacityBorder
-          @click="onCreateOrder"
-          class="lg:hidden mt-[25px]"
-        >
-          Створити
+        <UiButtonOpacityBorder @click="updateOrder" class="lg:hidden mt-[25px]">
+          Оновити
         </UiButtonOpacityBorder>
       </div>
     </template>

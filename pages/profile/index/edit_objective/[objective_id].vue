@@ -51,7 +51,7 @@ const editObjective = () => {
   })
     .then((res) => {
       if (res.message === true) {
-        messageToUser.value = "Клієнт успішно оновився!";
+        messageToUser.value = "Завдання успішно оновлено!";
       } else {
         error.value = "Щось не вийшло!";
       }
