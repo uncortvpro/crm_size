@@ -4,12 +4,19 @@ const props = defineProps<{
 }>();
 
 const warehousesStore = useWarehousesStore();
+const warehouseType = () => warehousesStore.warehouseType(props.warehouseId);
+const subwarehouse = ref("");
 
 const products = computed<GlobalProduct[]>(
-  () => warehousesStore.finishedWarehouse
+  () => warehousesStore.warehouseProducts[warehouseType()]
 );
+const setSubwarehouse = () =>
+  warehousesStore.setSubwarehouse(subwarehouse.value, props.warehouseId);
+
+
 const fetchProducts = () => warehousesStore.fetchProducts(props.warehouseId);
-// const searchOrders = (keyword: string) => warehousesStore.searchOrders(keyword);
+const searchOrders = (keyword: string) =>
+  warehousesStore.searchProducts(keyword, props.warehouseId);
 
 // const isOrderDetails = ref(false);
 // const currentOrderId = ref("");
@@ -34,7 +41,7 @@ fetchProducts();
 </script>
 <template>
   <div>
-    <CommonNavigationPage @search="" @add="navigateTo('new_order')">
+    <CommonNavigationPage @search="searchOrders" @add="navigateTo('new_order')">
       <template #add_name> Додати товар</template>
     </CommonNavigationPage>
     <!-- <CommonModalOrderDetails
@@ -45,7 +52,14 @@ fetchProducts();
       :products="currentOrder?.products"
     ></CommonModalOrderDetails> -->
 
-    <CommonTable>
+    <CommonTable class="bg-beige-light">
+      <template #additional_elements>
+        <CommonSelectSubwarehouse
+          v-model="subwarehouse"
+          @actionUpdate="setSubwarehouse"
+          class="max-w-[213px]"
+        ></CommonSelectSubwarehouse>
+      </template>
       <template #headers>
         <UiTableCellHeader></UiTableCellHeader>
         <UiTableCellHeader>Товар</UiTableCellHeader>

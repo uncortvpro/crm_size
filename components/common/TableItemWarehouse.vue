@@ -3,11 +3,8 @@ const props = defineProps<{
   product: GlobalProduct;
 }>();
 
-const emits = defineEmits(["deleteAction", "showDetails"]);
+const emits = defineEmits(["deleteAction"]);
 
-const showDetails = () => {
-  emits("showDetails", props.product._id);
-};
 
 const router = useRouter();
 </script>
@@ -16,14 +13,24 @@ const router = useRouter();
   <UiTableItem>
     <template #header>
       <span class="max-w-[200px] w-full inline-block truncate"
-        >{{ useDate(product?.name) }}
+        >{{ product?.name }}
       </span>
     </template>
     <template #elements="{ active }">
       <UiTransitionTableCell :vIf="active">
-        <template #title></template>
+        <template #title>
+          <img
+            class="w-[23px] h-[28px] 3xl:w-[30px] 3xl:h-[35px] object-cover"
+            :src="useBase64(product?.variations[0]?.photos[0])"
+            alt=""
+          />
+        </template>
         <template #value>
-          {{ useBase64(product?.variations[0].photos[0]) }}
+          <img
+            class="w-[23px] h-[28px] 3xl:w-[30px] 3xl:h-[35px] object-cover hidden 3xl:inline-block"
+            :src="useBase64(product?.variations[0]?.photos[0])"
+            alt=""
+          />
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
@@ -47,32 +54,25 @@ const router = useRouter();
 
       <UiTransitionTableCell :vIf="active">
         <template #title>Кількість</template>
-        <template #value
-          >{{ product?.pieces }}<CommonCurrencyText
-        /></template>
+        <template #value>{{ product?.pieces }}<CommonCurrencyText /></template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
-        <template #title>Джерело замовлення</template>
-        <template #value>{{ 'product?.source' }}</template>
+        <template #title>Склади</template>
+        <template #value>{{ "Склади" }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
-        <template #title>Статус</template>
+        <template #title>Категорія</template>
         <template #value>
-          <CommonStatusOutput :color="product.status.colour">{{
-            product.status.status
-          }}</CommonStatusOutput>
+          {{ product?.category }}
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
-        <template #title>Оплата</template>
-        <template #value>{{ 'product?.payment' }}</template>
+        <template #title>Коментар</template>
+        <template #value> {{ product.comment }}</template>
       </UiTransitionTableCell>
     </template>
     <template #additional-buttons>
       <div class="flex items-center gap-[5px] md:gap-[25px]">
-        <UiButtonOpacityThreeDots
-          @click.stop="showDetails"
-        ></UiButtonOpacityThreeDots>
         <UiButtonOpacityEdit
           class="flex-shrink-0"
           @click.stop="navigateTo('/profile/edit_product/' + product._id)"

@@ -25,7 +25,11 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
             secondName: 'warehouseMaterials'
         }
     ]
-
+    const subwarehouse = ref<any>({
+        finishedWarehouse: "",
+        distributorWarehouse: "",
+        warehouseMaterials: ""
+    });
 
     const warehouseProducts = ref<warehouseProducts>({
         finishedWarehouse: [],
@@ -48,6 +52,11 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         distributorWarehouse: 1,
         warehouseMaterials: 1
     });
+
+    const setSubwarehouse = (value: any, id: Warehouse['id']) => {
+        subwarehouse.value[warehouseType(id)] = value;
+        fetchProducts(id);
+    }
 
     const setWarehouseProducts = (value: any, id: Warehouse['id']) => {
         warehouseProducts.value[warehouseType(id)] = value;
@@ -88,18 +97,19 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
     // const reverseSorting = ref<boolean>(false);
 
 
-    function searchOrders(value: string, id: Warehouse['id']) {
-        keyWord.value = value;
+    function searchProducts(value: string, id: Warehouse['id']) {
+        keyWord.value[warehouseType(id)] = value;
         fetchProducts(id);
     }
 
-    function fetchProducts(id: Warehouse['id']) {
+    function fetchProducts(id: Warehouse['id'], ) {
         useAuthFetch(`${useApiUrl()}/products`, {
             body: {
                 page: page.value[warehouseType(id)],
                 per_page: 10,
                 keyword: keyWord.value[warehouseType(id)],
                 warehouse: warehouseName(id),
+                subwarehouse: subwarehouse.value[warehouseType(id)],
                 // sort_by: sorting.value.finishedWarehouse,
                 // reverse_sort: reverseSorting.value.finishedWarehouse,
             },
@@ -118,11 +128,11 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
 
 
     return {
-        finishedWarehouse: warehouseProducts.value.finishedWarehouse,
-        distributorWarehouse: warehouseProducts.value.distributorWarehouse,
-        warehouseMaterials: warehouseProducts.value.warehouseMaterials,
+        warehouseProducts,
         fetchProducts,
-        searchOrders,
-        warehouses
+        searchProducts,
+        warehouses,
+        warehouseType,
+        setSubwarehouse,
     }
 });

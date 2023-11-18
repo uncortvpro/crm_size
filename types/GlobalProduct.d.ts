@@ -12,5 +12,6 @@ declare interface GlobalProduct {
     pieces: number;
     description: string;
     category: string;
+    comment: string;
   }
   

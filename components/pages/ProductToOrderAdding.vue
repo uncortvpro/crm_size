@@ -57,8 +57,6 @@ onClickOutside(hiddenOutsideClickElement, (event) => onFocusOut());
 watchDeep(
   () => props.startProducts,
   () => {
-    console.log(props.startProducts);
-
     getStartProductsValue();
   }
 );
@@ -88,7 +86,7 @@ watchDeep(
               v-if="product.photos[0]"
               :src="useBase64(product.photos[0]) || undefined"
               alt=""
-              class="w-[23px]h-[28px] object-cover"
+              class="w-[23px] h-[28px] object-cover"
             />
             {{ product.name }}
           </UiButton>
