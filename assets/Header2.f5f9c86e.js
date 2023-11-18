@@ -1,1 +1,0 @@
-import{_ as t,o,c as n,K as s}from"./entry.051a0c6d.js";const c={},_={class:"font-medium text-[15px] lg:text-[20px]"};function r(e,a){return o(),n("h2",_,[s(e.$slots,"default")])}const f=t(c,[["render",r]]);export{f as _};
