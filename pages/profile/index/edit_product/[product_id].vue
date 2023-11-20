@@ -13,16 +13,16 @@ const inputs = ref<any>({
   products: [],
 });
 
-const handlerChangeInputs = (value: any, type: keyof Order) => {
+const handlerChangeInputs = (value: any, type: keyof GlobalProduct) => {
   inputs.value[type] = value;
 };
 </script>
 
 <template>
-  <LayoutProfilePage title="Додати товар">
+  <LayoutProfilePage title="Редагувати товар">
     <template #header>
       <UiButtonOpacityBorder @click="" class="hidden lg:block">
-        Створити
+        Редагувати
       </UiButtonOpacityBorder>
     </template>
     <template #content>
@@ -32,10 +32,28 @@ const handlerChangeInputs = (value: any, type: keyof Order) => {
         :messageToUser="messageToUser"
         @updateInputs="handlerChangeInputs"
       >
+        <template #table>
+          <CommonTable class="bg-beige-light">
+            <template #headers>
+              <UiTableCellHeader>Розмір</UiTableCellHeader>
+              <UiTableCellHeader>Колір</UiTableCellHeader>
+              <UiTableCellHeader>Ціна</UiTableCellHeader>
+              <UiTableCellHeader>Кількість на складі</UiTableCellHeader>
+            </template>
+            <template #items>
+              <CommonTableItemVariation></CommonTableItemVariation>
+              <CommonTableItemVariation></CommonTableItemVariation>
+              <CommonTableItemVariation></CommonTableItemVariation>
+              <CommonTableItemVariation></CommonTableItemVariation>
+              <CommonTableItemVariation></CommonTableItemVariation>
+              <CommonTableItemVariation></CommonTableItemVariation>
+            </template>
+          </CommonTable>
+        </template>
       </LayoutProduct>
       <div class="flex justify-center">
         <UiButtonOpacityBorder @click="" class="lg:hidden mt-[25px]">
-          Створити
+          Редагувати
         </UiButtonOpacityBorder>
       </div>
     </template>
