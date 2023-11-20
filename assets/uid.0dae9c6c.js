@@ -1,1 +1,0 @@
-import{_ as e,o as n,c as o,K as s}from"./entry.7e18eae5.js";const c={},_={class:"text-[9px] md:text-[12px] lg:text-[15px]"};function r(t,d){return n(),o("p",_,[s(t.$slots,"default")])}const p=e(c,[["render",r]]);let a=0;function u(){return`nuid-${a++}`}export{p as _,u};
