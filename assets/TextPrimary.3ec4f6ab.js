@@ -1,1 +1,0 @@
-import{_ as e,o,c as s,N as c}from"./entry.3b1b6b86.js";const n={},_={class:"text-[9px] md:text-[12px] lg:text-[15px]"};function r(t,a){return o(),s("p",_,[c(t.$slots,"default")])}const x=e(n,[["render",r]]);export{x as _};

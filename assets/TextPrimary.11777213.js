@@ -1,0 +1,1 @@
+import{_ as e,o,c as s,E as c}from"./entry.dfedda78.js";const n={},_={class:"text-[9px] md:text-[12px] lg:text-[15px]"};function r(t,a){return o(),s("p",_,[c(t.$slots,"default")])}const x=e(n,[["render",r]]);export{x as _};
