@@ -5,7 +5,6 @@ const props = defineProps<{
 
 const emits = defineEmits(["deleteAction"]);
 
-
 const router = useRouter();
 </script>
 
@@ -58,7 +57,8 @@ const router = useRouter();
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Склади</template>
-        <template #value>{{ "Склади" }}</template>
+        <template #value>
+          <CommonSelectSwitchWarehouse></CommonSelectSwitchWarehouse></template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Категорія</template>

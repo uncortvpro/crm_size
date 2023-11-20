@@ -1,1 +1,1 @@
-declare type VariantType = "client" | "task" | "shipping" | "order" | "source" | "payment";
+declare type VariantType = "client" | "task" | "shipping" | "order" | "source" | "payment" | "product";

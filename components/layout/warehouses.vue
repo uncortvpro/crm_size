@@ -13,7 +13,6 @@ const products = computed<GlobalProduct[]>(
 const setSubwarehouse = () =>
   warehousesStore.setSubwarehouse(subwarehouse.value, props.warehouseId);
 
-
 const fetchProducts = () => warehousesStore.fetchProducts(props.warehouseId);
 const searchOrders = (keyword: string) =>
   warehousesStore.searchProducts(keyword, props.warehouseId);
@@ -41,7 +40,10 @@ fetchProducts();
 </script>
 <template>
   <div>
-    <CommonNavigationPage @search="searchOrders" @add="navigateTo('new_order')">
+    <CommonNavigationPage
+      @search="searchOrders"
+      @add="navigateTo('new_product')"
+    >
       <template #add_name> Додати товар</template>
     </CommonNavigationPage>
     <!-- <CommonModalOrderDetails
@@ -55,9 +57,10 @@ fetchProducts();
     <CommonTable class="bg-beige-light">
       <template #additional_elements>
         <CommonSelectSubwarehouse
+          placeholder
           v-model="subwarehouse"
           @actionUpdate="setSubwarehouse"
-          class="max-w-[213px]"
+          class="max-w-[213px] mb-[15px] 3xl:mb-[5px]"
         ></CommonSelectSubwarehouse>
       </template>
       <template #headers>

@@ -45,7 +45,7 @@ const deleteAction = () => {
         <template #value>{{ product?.price }}<CommonCurrencyText /></template>
       </UiTableCell>
       <UiTableCell class="col-span-2">
-        <template #title>Ціна</template>
+        <template #title></template>
         <template #value>
           <UiButtonOpacityDelete
             class="flex-shrink-0 absolute right-0 top-0 3xl:relative"
