@@ -73,10 +73,13 @@ const handlerChange = (value: any, type: keyof Objective) => {
           </UiDivGridForm>
         </UiDivBorderBg>
       </form>
-      <div>
+    </div>
+    <div>
+      <slot name=""></slot> 
+    </div>
+    <div class="col-span-12 2xl:col-span-7">
         <slot name="table"></slot>
       </div>
-    </div>
   </div>
 </template>
 

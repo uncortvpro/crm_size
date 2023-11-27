@@ -14,7 +14,20 @@ export default defineNuxtConfig({
   build: {
     transpile: ['@vuepic/vue-datepicker']
   },
-  modules: ['@nuxt/ui', "nuxt-svgo", '@pinia/nuxt', "@nuxt/image", '@vueuse/nuxt'],
+  modules: ['@nuxt/ui', "nuxt-svgo", '@pinia/nuxt', "@nuxt/image", '@vueuse/nuxt', 'nuxt-swiper'],
+  swiper: {
+    modules: [
+      'navigation',
+      'pagination',
+      'thumbs',
+      'free-mode',
+      'controller',
+      'autoplay',
+      'effect-creative',
+      'scrollbar',
+      'grid',
+    ],
+  },
   pinia: {
     storesDirs: ['./stores/**'],
   },

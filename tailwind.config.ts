@@ -47,6 +47,7 @@ export default <Partial<Config>> {
       },
       backgroundImage: {
         'auth-bg': "linear-gradient(to bottom, #EDEDE4 40%, #ffffff 40%)",
+        'radial-gradient-el-fixed': 'radial-gradient(circle, rgba(200,200,190,1) 0%, rgba(200,200,190,0) 70%)',
       },
       boxShadow: {
         'auth-shadow': '0px 0px 15px #DCDCDC',
