@@ -1,1 +1,0 @@
-import{_ as o}from"./entry.cc5e7feb.js";import{F as e,Q as n,_ as r}from"./swiper-vue.76d67008.js";const s={},c={class:"font-semibold text-[9px] md:text-[12px] lg:text-[15px] duration-200 hover:opacity-hover disabled:opacity-40"};function _(t,a){return e(),n("button",c,[r(t.$slots,"default")])}const i=o(s,[["render",_]]);export{i as _};

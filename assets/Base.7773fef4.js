@@ -1,0 +1,1 @@
+import{_ as o}from"./entry.feb97b71.js";import{F as t,Q as s,_}from"./swiper-vue.7e3bf109.js";const c={},n={class:"flex flex-col"};function r(e,a){return t(),s("div",n,[_(e.$slots,"default")])}const m=o(c,[["render",r]]);export{m as _};
