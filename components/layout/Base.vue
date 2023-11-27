@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex flex-col overflow-hidden">
+  <div class="flex flex-col">
     <slot />
   </div>
 </template>
