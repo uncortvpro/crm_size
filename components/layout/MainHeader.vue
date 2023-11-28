@@ -50,13 +50,13 @@ provide("switchMenu", switchMenu);
             class="flex bg-white flex-col pt-[67px] rounded-b-[3px] text-center mx-[-15px] gap-[26px] relative z-[15] py-4 lg:py-0 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
           >
             <li>
-              <CommonMenuLink to="/">МОЖЛИВОСТІ</CommonMenuLink>
+              <CommonMenuLink to="/">ГОЛОВНА</CommonMenuLink>
             </li>
             <li>
-              <CommonMenuLink to="/">БЛОГ</CommonMenuLink>
+              <CommonMenuLink to="/opportunities">МОЖЛИВОСТІ</CommonMenuLink>
             </li>
             <li>
-              <CommonMenuLink to="/">КОНТАКТИ</CommonMenuLink>
+              <CommonMenuLink to="/contacts">КОНТАКТИ</CommonMenuLink>
             </li>
             <li v-if="!isLoggedIn">
               <UiButtonTransparent class="lg:hidden !px-[0px]"
@@ -70,13 +70,13 @@ provide("switchMenu", switchMenu);
             class="flex bg-white flex-col rounded-b-[3px] text-center mx-[-15px] gap-[26px] relative z-[15] py-4 lg:py-0 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
           >
             <li>
-              <CommonMenuLink to="/">МОЖЛИВОСТІ</CommonMenuLink>
+              <CommonMenuLink to="/">ГОЛОВНА</CommonMenuLink>
             </li>
             <li>
-              <CommonMenuLink to="/">БЛОГ</CommonMenuLink>
+              <CommonMenuLink to="/opportunities">МОЖЛИВОСТІ</CommonMenuLink>
             </li>
             <li>
-              <CommonMenuLink to="/">КОНТАКТИ</CommonMenuLink>
+              <CommonMenuLink to="/contacts">КОНТАКТИ</CommonMenuLink>
             </li>
           </ul>
         </template>

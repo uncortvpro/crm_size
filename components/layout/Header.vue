@@ -2,8 +2,8 @@
 </script>
 
 <template>
-  <header class="container sticky top-0 z-30 bg-white">
-    <nav class="bg-white dark:bg-gray-900 w-full z-20">
+  <header class=" sticky top-0 z-30 bg-white">
+    <nav class="container bg-white dark:bg-gray-900 w-full z-20">
       <div class="flex flex-wrap items-center justify-between mx-auto py-4">
         <CommonLogo
           href="https://flowbite.com/"

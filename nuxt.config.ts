@@ -17,15 +17,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui', "nuxt-svgo", '@pinia/nuxt', "@nuxt/image", '@vueuse/nuxt', 'nuxt-swiper'],
   swiper: {
     modules: [
-      'navigation',
-      'pagination',
-      'thumbs',
       'free-mode',
-      'controller',
-      'autoplay',
-      'effect-creative',
-      'scrollbar',
-      'grid',
     ],
   },
   pinia: {

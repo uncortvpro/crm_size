@@ -48,14 +48,6 @@ const onCreateOrder = () => {
       console.log(res);
     });
 };
-
-watch(
-  inputs,
-  () => {
-    console.log(inputs.value);
-  },
-  { deep: true }
-);
 </script>
 
 <template>
