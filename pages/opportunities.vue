@@ -15,7 +15,7 @@
           alt=""
         />
         <UiRadialGradientAbsolute
-          class="bottom-[10%] left-0 right-0 m-auto xl:bottom-[0%] xl:left-auto"
+          class="bottom-[20%] md:bottom-[10%] left-0 right-0 m-auto xl:bottom-[0%] xl:left-auto"
         ></UiRadialGradientAbsolute>
       </template>
     </CommonSectionMain>
