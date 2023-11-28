@@ -26,10 +26,16 @@ defineProps<{
     <div class="mt-[12px] xl:mt-[15px] grid grid-cols-2 gap-y-[5px]">
       <p class="text-[7px] md:text-[10px]">Доходи</p>
       <p class="text-[7px] md:text-[10px]">Витрати</p>
-      <p class="text-[7px] md:text-[10px]">
+      <p class="text-[7px] md:text-[10px] flex items-center gap-[5px]">
+        <span
+          class="w-[4px] inline-block h-[4px] rounded-[50%] bg-[#8ED400]"
+        ></span>
         {{ cashier?.incomes }} <CommonCurrencyText />
       </p>
-      <p class="text-[7px] md:text-[10px]">
+      <p class="text-[7px] md:text-[10px] flex items-center gap-[5px]">
+        <span
+          class="w-[4px] inline-block h-[4px] rounded-[50%] bg-[#E33629]"
+        ></span>
         {{ cashier?.expenses }} <CommonCurrencyText />
       </p>
     </div>

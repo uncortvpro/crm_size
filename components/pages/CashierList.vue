@@ -4,10 +4,19 @@ const totalBalance = ref<Cashier["balance"]>(0);
 const totalExpenses = ref<Cashier["expenses"]>(0);
 const totalIncomes = ref<Cashier["incomes"]>(0);
 
+const isAddCashierModal = ref(false);
+
+const switchModalAddCashier = (value: boolean) => {
+  isAddCashierModal.value = value;
+};
+
 const fetchCashiers = () => {
   useAuthFetch(`${useApiUrl()}/cashiers`).then((res) => {
     console.log(res);
     cashiers.value = res.cashiers;
+    totalBalance.value = res.totalBalance;
+    totalExpenses.value = res.total_expenses;
+    totalIncomes.value = res.total_incomes;
   });
 };
 
@@ -16,6 +25,7 @@ fetchCashiers();
 
 <template>
   <div class="mb-[25px] xl:mb-[31px]">
+    <PagesModalAddCashier v-model="isAddCashierModal"></PagesModalAddCashier>
     <Swiper
       class="swiper_cashiers w-full"
       :modules="[SwiperFreeMode]"
@@ -74,48 +84,13 @@ fetchCashiers();
       </SwiperSlide>
 
       <SwiperSlide class="!h-auto">
-        <PagesButtonAddCashier class="h-full"></PagesButtonAddCashier>
+        <PagesButtonAddCashier
+          @click="switchModalAddCashier(true)"
+          class="h-full"
+        ></PagesButtonAddCashier>
       </SwiperSlide>
     </Swiper>
-
-    <!-- <div
-      class=" flex items-center gap-[10px] md:gap-[20px] xl:gap-[30px]"
-    >
-      <PagesCashierItem
-        class="border-beige-1 border-[2px] !opacity-100"
-        allCashiers
-        :cashier="{
-          type: 'Г',
-          balance: totalBalance,
-          expenses: totalExpenses,
-          incomes: totalIncomes,
-          name: 'Всі каси',
-        }"
-      ></PagesCashierItem>
-
-      <PagesCashierItem
-        v-for="cashier in cashiers"
-        :key="cashier._id"
-        :cashier="cashier"
-      ></PagesCashierItem>
-      <button
-        class="bg-beige rounded-[10px] px-[42px] xl:px-[59px] flex flex-col items-center justify-center gap-[5px] p-[15px] self-stretch pr-[40px] opacity-60 xl:pr-[52px] lg:px-[20px] text-black w-fit"
-      >
-        <SvgoCross
-          class="!w-[21px] !h-[21px] xl:!w-[31px] xl:!h-[31px] stroke-beige-2"
-        ></SvgoCross>
-        <p
-          class="text-[11px] text-black font-medium md:text-[12px] xl:text-[15px]"
-        >
-          Додати касу
-        </p>
-      </button>
-    </div> -->
   </div>
 </template>
 
-<style>
-.swiper_cashiers .swiper-slide {
-  /* @apply !w-[160px] md:!w-[200px] xl:!w-[250px]; */
-}
-</style>
+<style></style>

@@ -2,7 +2,7 @@
 
 <template>
   <button
-    class="bg-beige w-full rounded-[10px] px-[42px] xl:px-[59px] flex flex-col items-center justify-center gap-[5px] p-[15px] self-stretch pr-[40px] opacity-60 xl:pr-[52px] lg:px-[20px] text-black w-fit"
+    class="bg-beige w-full rounded-[10px] flex flex-col items-center justify-center gap-[5px]  self-stretch  opacity-60  text-black"
   >
     <SvgoCross
       class="!w-[21px] !h-[21px] xl:!w-[31px] xl:!h-[31px] stroke-beige-2"
