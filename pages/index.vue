@@ -6,8 +6,8 @@
       bgBeige
       paddingContainer
       button="СПРОБУВАТИ"
-      header="ІННОВАЦІЙНА CRM-СИСТЕМА ДЛЯ УПРАВЛІННЯ БІЗНЕСОМ"
-      description="Управляти бізнесом стало ще простіше!"
+      header="CRM-СИСТЕМА ДЛЯ РОБОТИ У СФЕРІ ОДЯГУ"
+      description="Ще не втомились від EXCEL?"
     >
       <template #main_image>
         <img
