@@ -85,21 +85,21 @@
       <div class="grid grid-cols-10 grid-rows-6 xl:mt-[60px] mt-[30px]">
         <div class="col-span-3 row-span-5">
           <img
-            class="w-full h-full object-cover rounded-[20px] mt-[4%] blur-[2px] shadow-md"
+            class="w-full h-full object-cover rounded-[10px] xl:rounded-[20px] mt-[4%] blur-[2px] shadow-md"
             src="@img/tasks_section.png"
             alt=""
           />
         </div>
         <div class="col-span-4 row-span-6">
           <img
-            class="w-full relative z-10 h-full object-cover rounded-[20px] object-left shadow-2xl"
+            class="w-full relative z-10 h-full object-cover rounded-[10px] xl:rounded-[20px] object-left shadow-2xl"
             src="@img/clients_section.png"
             alt=""
           />
         </div>
         <div class="col-span-3 row-span-5">
           <img
-            class="w-full h-full object-cover mt-[10%] rounded-[20px] shadow-md"
+            class="w-full h-full object-cover mt-[10%] rounded-[10px] xl:rounded-[20px] shadow-md"
             src="@img/products_section.png"
             alt=""
           />
