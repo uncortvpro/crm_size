@@ -68,7 +68,7 @@
     </CommonSectionMain>
     <div class="relative">
       <UiRadialGradientAbsolute
-        class="right-[-10%] bottom-[-48%] hidden 2xl:block"
+        class="right-[-10%] bottom-[-48%] -z-10 hidden 2xl:block"
       ></UiRadialGradientAbsolute>
       <div class="container mt-[70px] md:mt-[100px] xl:mt-[120px]">
         <div class="max-w-[1385px] m-auto">
@@ -85,21 +85,21 @@
       <div class="grid grid-cols-10 grid-rows-6 xl:mt-[60px] mt-[30px]">
         <div class="col-span-3 row-span-5">
           <img
-            class="w-full h-full object-cover mt-[4%] blur-[2px] drop-shadow-md"
+            class="w-full h-full object-cover rounded-[20px] mt-[4%] blur-[2px] shadow-md"
             src="@img/tasks_section.png"
             alt=""
           />
         </div>
         <div class="col-span-4 row-span-6">
           <img
-            class="w-full relative z-10 h-full object-cover object-left drop-shadow-2xl"
+            class="w-full relative z-10 h-full object-cover rounded-[20px] object-left shadow-2xl"
             src="@img/clients_section.png"
             alt=""
           />
         </div>
         <div class="col-span-3 row-span-5">
           <img
-            class="w-full h-full object-cover mt-[10%] drop-shadow-md"
+            class="w-full h-full object-cover mt-[10%] rounded-[20px] shadow-md"
             src="@img/products_section.png"
             alt=""
           />
