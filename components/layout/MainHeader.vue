@@ -59,7 +59,9 @@ provide("switchMenu", switchMenu);
               <CommonMenuLink to="/contacts">КОНТАКТИ</CommonMenuLink>
             </li>
             <li v-if="!isLoggedIn">
-              <UiButtonTransparent class="lg:hidden !px-[0px]"
+              <UiButtonTransparent
+                @click="navigateTo('/register')"
+                class="lg:hidden !px-[0px]"
                 >РЕЄСТРАЦІЯ</UiButtonTransparent
               >
             </li>
