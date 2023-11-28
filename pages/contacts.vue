@@ -3,7 +3,7 @@
 <template>
   <main class="mt-[20px]">
     <UiRadialGradientAbsolute
-      class="bottom-[10%] !fixed w-[300px] h-[300px] md:w-[500px] md:h-[500px] xl:h-[800px] xl:w-[800px] !pt-0 left-[-10%] top-[5%] z-[-1]"
+      class="bottom-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] xl:h-[800px] xl:w-[800px] !pt-0 left-[-10%] top-[5%] z-[-1]"
     ></UiRadialGradientAbsolute>
     <div class="container">
       <div :class="cn(' rounded-[20px]')">
