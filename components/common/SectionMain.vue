@@ -6,6 +6,7 @@ defineProps<{
   button: string;
   paddingY?: boolean;
   paddingContainer?: boolean;
+  bgContainerOverflowHidden?: boolean;
 }>();
 </script>
 
@@ -14,9 +15,10 @@ defineProps<{
     <div class="container">
       <div
         :class="
-          cn(' overflow-hidden rounded-[20px]', {
+          cn('rounded-[20px]', {
             'bg-beige': bgBeige,
             'xl:py-[50px]': paddingY,
+            'overflow-hidden': bgContainerOverflowHidden,
           })
         "
       >

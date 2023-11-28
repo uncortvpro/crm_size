@@ -5,6 +5,7 @@
     <CommonSectionMain
       bgBeige
       paddingContainer
+      bgContainerOverflowHidden
       button="СПРОБУВАТИ"
       header="CRM-СИСТЕМА ДЛЯ РОБОТИ У СФЕРІ ОДЯГУ"
       description="Ще не втомились від EXCEL?"
