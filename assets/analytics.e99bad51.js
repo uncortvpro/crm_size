@@ -1,1 +1,0 @@
-import{_ as t}from"./ProfilePage.vue.8983e0d2.js";import{_ as c}from"./entry.feb97b71.js";import{G as e,F as r}from"./swiper-vue.7e3bf109.js";const a={};function n(_,s){const o=t;return r(),e(o,{title:"Аналітика"})}const p=c(a,[["render",n]]);export{p as default};
