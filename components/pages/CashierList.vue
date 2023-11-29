@@ -14,7 +14,7 @@ const fetchCashiers = () => {
   useAuthFetch(`${useApiUrl()}/cashiers`).then((res) => {
     console.log(res);
     cashiers.value = res.cashiers;
-    totalBalance.value = res.totalBalance;
+    totalBalance.value = res.total_balance;
     totalExpenses.value = res.total_expenses;
     totalIncomes.value = res.total_incomes;
   });
