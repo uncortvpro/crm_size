@@ -6,10 +6,10 @@ export const useFinanceStore = defineStore("financeStore", () => {
     const keyWord = ref("");
     const endPage = ref(1);
 
-    const sorting = ref<SortingObjective>("");////
+    const sorting = ref<SortingTransaction>("");////
     const reverseSorting = ref<boolean>(false);
 
-    const setSorting = (value: SortingObjective) => {
+    const setSorting = (value: SortingTransaction) => {
         useSorting(value, reverseSorting, sorting, fetchTransactions);
     }
 
@@ -29,7 +29,7 @@ export const useFinanceStore = defineStore("financeStore", () => {
     function deleteTransactions(id: string) {
         console.log(id);
         
-        useAuthFetch(`${useApiUrl()}/transactions`, {
+        useAuthFetch(`${useApiUrl()}/delete_transaction`, {
             body: {
                 transaction_id: id,
             },

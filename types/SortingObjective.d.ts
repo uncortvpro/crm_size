@@ -1,2 +1,2 @@
-declare type SortingObjective = "" | "date" | "deadline";
+declare type SortingTransaction = "" | "date" | "sum" | "total_left";
   

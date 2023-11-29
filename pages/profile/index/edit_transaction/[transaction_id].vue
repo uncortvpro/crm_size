@@ -22,7 +22,7 @@ const handlerChangeInputs = (value: any, type: any) => {
   <LayoutProfilePage title="Редагувати транзакцію">
     <template #header>
       <UiButtonOpacityBorder @click="" class="hidden lg:block">
-        Створити
+        Редагувати
       </UiButtonOpacityBorder>
     </template>
     <template #content>
@@ -32,6 +32,14 @@ const handlerChangeInputs = (value: any, type: any) => {
         :messageToUser="messageToUser"
         @updateInputs="handlerChangeInputs"
       ></LayoutTransaction>
+      <div class="flex justify-center">
+        <UiButtonOpacityBorder
+          @click=""
+          class="lg:hidden mt-[25px]"
+        >
+        Редагувати
+        </UiButtonOpacityBorder>
+      </div>
     </template>
   </LayoutProfilePage>
 </template>

@@ -1,17 +1,30 @@
 <script setup lang="ts">
-const test = useTestStore();
 const financeStore = useFinanceStore();
 
 const transactions = computed(() => financeStore.transactions);
 
+const page = computed(() => financeStore.page);
+const endPage = computed(() => financeStore.endPage);
+const setPage = (page: number) => financeStore.setPage(page);
+
+const sorting = computed(() => financeStore.sorting);
+const reverseSorting = computed(() => financeStore.reverseSorting);
+const setSorting = (sorting: SortingTransaction) => {
+  financeStore.setSorting(sorting);
+};
+
 const fetchTransactions = () => {
   financeStore.fetchTransactions();
+};
+const currentTransactionId = ref("");
+const deleteTransactions = async () => {
+  financeStore.deleteTransactions(currentTransactionId.value);
+  switchModalRemove(false);
 };
 
 const searchTransactions = (keyword: string) =>
   financeStore.searchTransactions(keyword);
 
-const currentTransactionId = ref("");
 const isModalRemove = ref(false);
 
 const deleteAction = (id: string) => {
@@ -37,6 +50,7 @@ fetchTransactions();
         v-if="currentTransactionId"
         v-model="isModalRemove"
         @closeModal="switchModalRemove(false)"
+        @confirm="deleteTransactions"
         >Ви впевнені, що хочете видалити транзакцію?</UiModalWarning
       >
 
@@ -49,12 +63,39 @@ fetchTransactions();
         <template #add_name> Додати транзакцію</template>
       </CommonNavigationPage>
 
-      <CommonTable>
+      <CommonTable :pageTable="page" :endPage="endPage" @setPage="setPage">
         <template #headers>
-          <UiTableCellHeader> Дата </UiTableCellHeader>
-          <UiTableCellHeader>Сума</UiTableCellHeader>
+          <UiTableCellHeader>
+            <CommonButtonSortingTable
+              :sortingUp="sorting === 'date' && reverseSorting"
+              :sortingDown="sorting === 'date' && !reverseSorting"
+              @click="setSorting('date')"
+              class="!font-normal"
+            >
+              Дата</CommonButtonSortingTable
+            >
+          </UiTableCellHeader>
+          <UiTableCellHeader>
+            <CommonButtonSortingTable
+              :sortingUp="sorting === 'sum' && reverseSorting"
+              :sortingDown="sorting === 'sum' && !reverseSorting"
+              @click="setSorting('sum')"
+              class="!font-normal"
+            >
+              Сума</CommonButtonSortingTable
+            >
+          </UiTableCellHeader>
           <UiTableCellHeader> Контрагент </UiTableCellHeader>
-          <UiTableCellHeader>Залишок у касі</UiTableCellHeader>
+          <UiTableCellHeader>
+            <CommonButtonSortingTable
+              :sortingUp="sorting === 'total_left' && reverseSorting"
+              :sortingDown="sorting === 'total_left' && !reverseSorting"
+              @click="setSorting('total_left')"
+              class="!font-normal"
+            >
+              Залишок у касі</CommonButtonSortingTable
+            >
+          </UiTableCellHeader>
           <UiTableCellHeader>Каса</UiTableCellHeader>
           <UiTableCellHeader>Коментар</UiTableCellHeader>
         </template>
