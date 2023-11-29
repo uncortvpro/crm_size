@@ -93,6 +93,10 @@ const onRegistration = () => {
             class="md:col-span-2"
             >Введіть email:</UiInputLabel
           >
+          <UiInputLabel type="text" class="md:col-span-1"
+            >Назва Бренду:</UiInputLabel
+          >
+          <UiInputLabel type="text" class="md:col-span-1">Посада:</UiInputLabel>
           <UiInputLabel
             inputType="password"
             @changeValue="changeCredentials"

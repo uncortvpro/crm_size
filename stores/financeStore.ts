@@ -1,47 +1,47 @@
 import { defineStore } from "pinia";
 
 export const useFinanceStore = defineStore("financeStore", () => {
-    const objectives = ref<Objective[]>([]);
+    const transactions = ref<Transaction[]>([]);
     const page = ref<number>(1);
     const keyWord = ref("");
     const endPage = ref(1);
 
-    const sorting = ref<SortingObjective>("");
+    const sorting = ref<SortingObjective>("");////
     const reverseSorting = ref<boolean>(false);
 
     const setSorting = (value: SortingObjective) => {
-        useSorting(value, reverseSorting, sorting, fetchObjectives);
+        useSorting(value, reverseSorting, sorting, fetchTransactions);
     }
 
     
-    function searchObjectives(value: string) {
+    function searchTransactions(value: string) {
         keyWord.value = value;
-        fetchObjectives();
+        fetchTransactions();
     }
 
     function setPage(newPage: number) {
         if(newPage === 0) return false;
         page.value = newPage;
         
-        fetchObjectives();
+        fetchTransactions();
     }
 
-    function deleteObjectives(id: string) {
+    function deleteTransactions(id: string) {
         console.log(id);
         
-        useAuthFetch(`${useApiUrl()}/delete_task`, {
+        useAuthFetch(`${useApiUrl()}/transactions`, {
             body: {
-                task_id: id,
+                transaction_id: id,
             },
         }).then(res => {
             if (res.message === true) {
-                fetchObjectives();
+                fetchTransactions();
             }
         });
     }
 
-    function fetchObjectives() {
-        useAuthFetch(`${useApiUrl()}/tasks`, {
+    function fetchTransactions() {
+        useAuthFetch(`${useApiUrl()}/transactions`, {
             body: {
                 page: page.value,
                 per_page: 10,
@@ -52,7 +52,7 @@ export const useFinanceStore = defineStore("financeStore", () => {
         }).then((res) => {
             console.log(res);
             
-            objectives.value = res.tasks;
+            transactions.value = res.transactions;
             endPage.value = res.total_pages;
         }).catch(res => {
             console.error(res);
@@ -60,11 +60,11 @@ export const useFinanceStore = defineStore("financeStore", () => {
     };
 
 return {
-    fetchObjectives,
-    searchObjectives,
-    deleteObjectives,
+    fetchTransactions,
+    searchTransactions,
+    deleteTransactions,
     setPage,
-    objectives,
+    transactions,
     endPage,
     keyWord,
     page,

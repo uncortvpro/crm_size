@@ -1,7 +1,16 @@
 <script setup lang="ts">
 const test = useTestStore();
+const financeStore = useFinanceStore();
 
-const financeList = computed(() => test.finance);
+const transactions = computed(() => financeStore.transactions);
+
+const fetchTransactions = () => {
+  financeStore.fetchTransactions();
+};
+
+const searchTransactions = (keyword: string) =>
+  financeStore.searchTransactions(keyword);
+
 const currentTransactionId = ref("");
 const isModalRemove = ref(false);
 
@@ -17,6 +26,8 @@ const switchModalRemove = (value: boolean) => {
 const switchTransactionId = (id: string) => {
   currentTransactionId.value = id;
 };
+
+fetchTransactions();
 </script>
 
 <template>
@@ -31,7 +42,10 @@ const switchTransactionId = (id: string) => {
 
       <PagesCashierList></PagesCashierList>
 
-      <CommonNavigationPage @search="" @add="navigateTo('new_transaction')">
+      <CommonNavigationPage
+        @search="searchTransactions"
+        @add="navigateTo('new_transaction')"
+      >
         <template #add_name> Додати транзакцію</template>
       </CommonNavigationPage>
 
@@ -46,10 +60,10 @@ const switchTransactionId = (id: string) => {
         </template>
         <template #items>
           <CommonTableItemTransaction
-            v-for="transaction in financeList"
-            :key="transaction.id"
+            v-for="transaction in transactions"
+            :key="transaction._id"
             :transaction="transaction"
-            @deleteAction="deleteAction(transaction.id)"
+            @deleteAction="deleteAction(transaction._id)"
           />
         </template>
       </CommonTable>

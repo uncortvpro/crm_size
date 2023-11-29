@@ -3,6 +3,6 @@ declare interface Cashier {
     balance: number;
     incomes: number;
     name: string;
-    type: string;
+    type?: 'Готівкова' | 'Безготівкова' | '';
     _id?: string;
 }

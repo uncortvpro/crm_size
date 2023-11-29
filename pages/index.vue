@@ -144,7 +144,7 @@
           >
             <div class="text-black">
               <p class="text-[35px] md:text-[55px] xl:text-[70px] font-bold">
-                1000₴/<span
+                1500₴/<span
                   class="font-normal text-[10px] md:text-[20px] xl:text-[30px]"
                   >міс</span
                 >

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const props = defineProps<{
-  transaction: any;
+  transaction: Transaction;
 }>();
 
 const emits = defineEmits(["deleteAction"]);
@@ -35,26 +35,26 @@ const router = useRouter();
           <span
             :class="
               cn('text-[12px] md:text-[15px] font-medium', {
-                'text-[#8ED400]': transaction.amount[0] === '+',
-                'text-[#E33629]': transaction.amount[0] === '-',
+                'text-[#8ED400]': String(transaction.sum)[0] !== '-',
+                'text-[#E33629]': String(transaction.sum)[0] === '-',
               })
             "
           >
-            {{ transaction.amount }}
+            {{ transaction?.sum }}<CommonCurrencyText />
           </span>
         </template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Контрагент</template>
-        <template #value>{{ transaction.counterparty }}</template>
+        <template #value>{{ transaction?.counterpartie }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Залишок у касі</template>
-        <template #value>{{ transaction.cash_balance }}</template>
+        <template #value>{{ transaction?.total_left }}</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Каса</template>
-        <template #value>{{ transaction.cash_desk }} замовлень</template>
+        <template #value>{{ transaction?.cashier }} замовлень</template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Коментар </template>

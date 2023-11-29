@@ -20,12 +20,20 @@ const fetchCashiers = () => {
   });
 };
 
+const successAddCashier = () => {
+  switchModalAddCashier(false);
+  fetchCashiers();
+};
+
 fetchCashiers();
 </script>
 
 <template>
   <div class="mb-[25px] xl:mb-[31px]">
-    <PagesModalAddCashier v-model="isAddCashierModal"></PagesModalAddCashier>
+    <PagesModalAddCashier
+      @successAction="successAddCashier"
+      v-model="isAddCashierModal"
+    ></PagesModalAddCashier>
     <Swiper
       class="swiper_cashiers w-full"
       :modules="[SwiperFreeMode]"
@@ -63,11 +71,11 @@ fetchCashiers();
           class="border-beige-1 border-[2px] h-full !opacity-100"
           allCashiers
           :cashier="{
-            type: 'Г',
             balance: totalBalance,
             expenses: totalExpenses,
             incomes: totalIncomes,
             name: 'Всі каси',
+            type: 'Готівкова',
           }"
         ></PagesCashierItem>
       </SwiperSlide>
