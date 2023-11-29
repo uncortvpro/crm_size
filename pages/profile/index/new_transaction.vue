@@ -31,7 +31,7 @@ const onCreateTransaction = () => {
       type: inputs.value.type,
       cashier: inputs.value.cashier,
       sum: +inputs.value.sum,
-      counterparte: inputs.value.counterpartie,
+      counterpartie: inputs.value.counterpartie,
       date: useFormatDate(inputs.value.date),
       category: inputs.value.category,
       comment: inputs.value.comment,

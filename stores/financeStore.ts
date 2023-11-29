@@ -6,11 +6,15 @@ export const useFinanceStore = defineStore("financeStore", () => {
     const keyWord = ref("");
     const endPage = ref(1);
 
-    const sorting = ref<SortingTransaction>("");////
+    const sorting = ref<SortingTransaction>("");
     const reverseSorting = ref<boolean>(false);
 
     const setSorting = (value: SortingTransaction) => {
         useSorting(value, reverseSorting, sorting, fetchTransactions);
+    }
+
+    function getTransactionById (id: Transaction['_id'])  {
+        return transactions.value.find(el => el._id === id);
     }
 
     
@@ -70,6 +74,7 @@ return {
     page,
     setSorting,
     sorting,
-    reverseSorting
+    reverseSorting,
+    getTransactionById
 }
 })
