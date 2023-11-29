@@ -1,4 +1,31 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const itemsHowItWork = [
+  {
+    number: 1,
+    title: "Робота з клієнтами",
+    leftImage: true,
+    image: "./img/clients_img.png",
+    description:
+      "Створюйте унікальні пропозиції для кожного клієнта на основі їхніх попередніх покупок та переглядів.Додавайте нових клієнтів, редагуйте інформацію та відстежуйте історію їхніх покупок – все це в одному місці. Інтуїтивний інтерфейс дозволяє вашому персоналу швидко освоїти всі функції, щоб вони могли зосередитися на наданні високоякісного обслуговування клієнтів.",
+  },
+  {
+    number: 2,
+    title: "Робота з працівниками",
+    leftImage: false,
+    image: "./img/tasks_table.png",
+    description:
+      "Забезпечте чітке розподілення завдань та відстеження їх виконання. Наша CRM-система допомагає управляти робочим процесом, забезпечуючи прозорість та високу ефективність. Система дозволяє створювати індивідуальні та командні завдання, роблячи роботу захопливою та стимулюючою.",
+  },
+  {
+    number: 3,
+    title: "Робота зі складами",
+    leftImage: true,
+    image: "./img/products_table.png",
+    description:
+      "Забудьте про невпорядковані склади та втрату товарів. Система дозволяє точно відстежувати рух кожної одиниці товару, гарантуючи, що ви завжди знаєте, скільки товару у вас є, і де він знаходиться. Це ключ до оптимального управління вашими запасами та логістикою. Від зручного ведення інвентарю до автоматизованого контролю за поставками.",
+  },
+];
+</script>
 
 <template>
   <div class="">
@@ -25,10 +52,12 @@
         <div
           class="mt-[51px] xl:[60px] flex flex-col gap-[35px] md:gap-[40px] xl:gap-[50px]"
         >
-          <PagesItemHowThisWork leftImage></PagesItemHowThisWork>
-          <PagesItemHowThisWork></PagesItemHowThisWork>
-          <PagesItemHowThisWork leftImage></PagesItemHowThisWork>
-          <PagesItemHowThisWork></PagesItemHowThisWork>
+          <PagesItemHowThisWork
+            v-for="item in itemsHowItWork"
+            :leftImage="item.leftImage"
+            :key="item.number"
+            :item="item"
+          ></PagesItemHowThisWork>
         </div>
         <UiButtonPrimary class="mt-[40px] self-center md:mt-[60px] xl:mt-[80px]"
           >СПРОБУВАТИ</UiButtonPrimary
