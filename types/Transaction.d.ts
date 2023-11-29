@@ -1,5 +1,5 @@
 declare interface Transaction {
-    type: string;
+    type: 'З рахунку' | 'На рахунок' | '';
     total_left: number;
     sum: number;
     date: any;

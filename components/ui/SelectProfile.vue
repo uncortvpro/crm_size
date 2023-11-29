@@ -18,7 +18,7 @@ const onSwitch = (value: boolean) => {
     @close="onSwitch(false)"
     class="!bg-red"
     :uiMenu="{
-      base: 'bg-beige !p-0 shadow-none !rounded-[3px]',
+      base: 'bg-beige !p-0 !relative !z-90 shadow-none !rounded-[3px]',
       option: {
         base: 'bg-beige rounded-none hover:bg-beige-1 py-[7px] md:py-[10px] text-[9px] md:text-[12px]',
         active: 'bg-beige-1',

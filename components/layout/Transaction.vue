@@ -2,43 +2,121 @@
 defineProps<{
   error: string;
   messageToUser: string;
-  inputs: any;
+  inputs: InputsTransaction;
 }>();
 
 const emits = defineEmits(["updateInputs"]);
 
-const handlerChange = (value: any, type: keyof Objective) => {
+const handlerChange = (value: any, type: keyof InputsTransaction) => {
   emits("updateInputs", value, type);
 };
+
+const cashiers = ref<string[]>([]);
+const addVariantOption = "+ Додати касу";
+const cashiersOptions = computed(() => [...cashiers.value, addVariantOption]);
+
+const isAddCashierModal = ref(false);
+
+const switchModalAddCashier = (value: boolean) => {
+  isAddCashierModal.value = value;
+};
+
+const isAddCounterpartiesModal = ref(false);
+
+const switchModalAddCounterparties = (value: boolean) => {
+  isAddCounterpartiesModal.value = value;
+};
+
+const onChangeSelectCashiers = (value: string) => {
+  if (value === addVariantOption) {
+    switchModalAddCashier(true);
+    handlerChange("", "cashier");
+  }
+};
+
+const fetchCashier = () => {
+  useAuthFetch(`${useApiUrl()}/cashiers`).then((res) => {
+    cashiers.value = res.cashiers.map((el: Cashier) => el.name);
+  });
+};
+
+const fetchCounterparties = () => {
+  useAuthFetch(`${useApiUrl()}/counterparties`).then((res) => {
+    console.log(res);
+  });
+};
+
+const successActionAddCashier = () => {
+  switchModalAddCashier(false);
+  fetchCashier();
+};
+
+fetchCounterparties();
+fetchCashier();
 </script>
 
 <template>
   <UiAlertDanger v-if="error">{{ error }}</UiAlertDanger>
   <UiAlertSuccess v-if="messageToUser">{{ messageToUser }}</UiAlertSuccess>
+  <CommonModalAddCashier
+    @successAction="successActionAddCashier"
+    v-model="isAddCashierModal"
+  ></CommonModalAddCashier>
+  <CommonModalAddCounterpartie
+    v-model="isAddCounterpartiesModal"
+    @closeModal="switchModalAddCounterparties(false)"
+  ></CommonModalAddCounterpartie>
   <form action="#">
     <UiDivBorderBg class="w-full max-w-[1008px]">
       <UiDivGridForm>
         <UiHeader2 class="col-span-2"> Інформація </UiHeader2>
-        <UiDivGridForm class="!grid-cols-none col-span-2 md:col-span-1">
-          <UiLabelProfile
-            class="col-span-2 md:col-span-1"
-            label="Оберіть касу:"
+        <div class="col-span-2 flex items-center gap-[10px]">
+          <UiRadioText v-model="inputs.type" value="На рахунок"
+            >На рахунок</UiRadioText
           >
-            <UiSelectProfile :options="['Каса безготівкова']"></UiSelectProfile>
-          </UiLabelProfile>
-        </UiDivGridForm>
+          <p>
+            <SvgoChangeTransaction color="transparent"></SvgoChangeTransaction>
+          </p>
+          <UiRadioText v-model="inputs.type" value="З рахунку"
+            >З рахунку</UiRadioText
+          >
+        </div>
+        <!-- <UiDivGridForm class="!grid-cols-none col-span-2 md:col-span-1"> -->
         <UiLabelProfile
-          class="row-span-2 col-span-2 md:col-span-1"
+          class="col-span-2 relative z-90 md:col-span-1"
+          label="Оберіть касу:"
+        >
+          <UiSelectProfile
+            class="relative z-90"
+            @change="onChangeSelectCashiers"
+            v-model="inputs.cashier"
+            :valueSelect="inputs.cashier"
+            :options="cashiersOptions"
+          ></UiSelectProfile>
+        </UiLabelProfile>
+        <!-- </UiDivGridForm> -->
+        <UiLabelProfile
+          class="col-span-2 md:col-span-1"
           label="Введіть суму транзакції:"
         >
-          <UiInputProfile></UiInputProfile>
+          <UiInputProfile v-model="inputs.sum" type="number"></UiInputProfile>
         </UiLabelProfile>
         <UiLabelProfile
-          class="row-span-2 col-span-2 md:col-span-1"
+          class="col-span-2 md:col-span-1"
           label="Оберіть контрагента:"
         >
-          <UiSelectProfile :options="['Кузьменко А.']"></UiSelectProfile>
+          <CommonSearchCounterparties
+            v-model:counterpartie="inputs.counterpartie"
+          ></CommonSearchCounterparties>
         </UiLabelProfile>
+        <div class="self-end flex items-center gap-[15px]">
+          <span class="text-[9px] md:text-[10px] xl:text-[12px]">або</span>
+          <UiButtonOpacityBorderAddItem
+            @click="switchModalAddCounterparties(true)"
+            type="button"
+            >Додати контрагента</UiButtonOpacityBorderAddItem
+          >
+        </div>
         <UiHeader2 class="col-span-2 mt-[30px] xl:mt-[55px]">
           Додаткова інформація
         </UiHeader2>
@@ -46,13 +124,22 @@ const handlerChange = (value: any, type: keyof Objective) => {
           class="col-span-2 md:col-span-1"
           label="Дата транзакції:"
         >
-          <UiDatePicker></UiDatePicker>
+          <UiDatePicker
+            v-model="inputs.date"
+            :valueData="inputs.date"
+          ></UiDatePicker>
         </UiLabelProfile>
         <UiLabelProfile class="col-span-2 md:col-span-1" label="Категорія:">
-          <UiSelectProfile :options="['Замовлення']"></UiSelectProfile>
+          <CommonSelectVariant
+            :valueSelect="inputs.category"
+            typeSelect="category"
+            typeVariant="category_transaction"
+            @updateValue="handlerChange"
+          ></CommonSelectVariant>
         </UiLabelProfile>
         <UiLabelProfile label="Коментар:" class="col-span-2 md:col-span-1">
           <UiTextareaProfile
+            v-model="inputs.comment"
             class="min-h-[80px] xl:min-h-[105px]"
           ></UiTextareaProfile>
         </UiLabelProfile>

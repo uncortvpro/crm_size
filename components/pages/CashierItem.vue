@@ -1,14 +1,51 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   allCashiers?: boolean;
   cashier: Cashier;
 }>();
+
+const emits = defineEmits(["successDelete"]);
+
+const successDelete = () => {
+  emits("successDelete");
+};
+
+const deleteCashier = () => {
+  useAuthFetch(`${useApiUrl()}/delete_cashier`, {
+    body: {
+      cashier_id: props.cashier._id,
+    },
+  }).then((res) => {
+    if (res.message) {
+      successDelete();
+    }
+  });
+};
 </script>
 
 <template>
   <div
-    class="bg-beige rounded-[10px] w-full p-[15px] pr-[40px] opacity-60 xl:pr-[52px] lg:px-[20px] text-black"
+    :class="
+      cn(
+        'bg-beige relative group rounded-[10px] w-full p-[15px] hover:opacity-100 duration-hover pr-[40px] opacity-60 xl:pr-[52px] lg:px-[20px] text-black',
+        {
+          'opacity-60': !allCashiers,
+        }
+      )
+    "
   >
+    <UiButtonOpacity
+      @click="deleteCashier"
+      v-if="!allCashiers"
+      class="absolute is-hover:opacity-0 group-hover:opacity-100 duration-hover w-[14px] h-[14px] right-[10%]"
+    >
+      <span
+        class="w-full h-[1px] md:h-[2px] bg-beige-2 block rotate-[45deg] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
+      ></span>
+      <span
+        class="w-full h-[1px] md:h-[2px] bg-beige-2 block rotate-[-45deg] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
+      ></span>
+    </UiButtonOpacity>
     <p class="text-[11px] text-black font-medium md:text-[12px] xl:text-[15px]">
       {{ cashier?.name }}
     </p>

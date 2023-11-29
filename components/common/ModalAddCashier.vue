@@ -17,7 +17,7 @@ const onCreateCashier = () => {
       type: inputs.value.type,
     },
   }).then((res) => {
-    if (res.message) {
+    if(res.message) {
       successAction();
     }
   });
@@ -50,9 +50,7 @@ const onCreateCashier = () => {
           </div>
         </UiLabelProfile>
 
-        <UiButtonOpacityBorder
-          type="submit"
-          class="mt-[20px] xl:mt-[30px] self-center w-fit"
+        <UiButtonOpacityBorder type="submit" class="mt-[20px] xl:mt-[30px] self-center w-fit"
           >Зберегти</UiButtonOpacityBorder
         >
       </div>

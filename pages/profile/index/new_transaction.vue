@@ -2,26 +2,57 @@
 const error = ref("");
 const messageToUser = ref("");
 
-const inputs = ref<any>({
-  client: "",
-  email: "",
+const inputs = ref<InputsTransaction>({
+  cashier: "",
+  counterpartie: "",
+  sum: "",
+  date: "",
+  category: "",
   comment: "",
-  payment: "",
-  shipping: "",
-  source: "",
-  status: "",
-  products: [],
+  type: "На рахунок",
 });
 
-const handlerChangeInputs = (value: any, type: keyof Order) => {
+const handlerChangeInputs = (value: any, type: keyof InputsTransaction) => {
   inputs.value[type] = value;
+};
+
+const validateResponse = (message: any) => {
+  if (message === true) {
+    messageToUser.value = "Транзакцію успішно створено";
+    return false;
+  } else {
+    error.value = "Щось не вийшло!";
+  }
+};
+
+const onCreateTransaction = () => {
+  useAuthFetch(`${useApiUrl()}/add_transaction`, {
+    body: {
+      type: inputs.value.type,
+      cashier: inputs.value.cashier,
+      sum: +inputs.value.sum,
+      counterparte: inputs.value.counterpartie,
+      date: useFormatDate(inputs.value.date),
+      category: inputs.value.category,
+      comment: inputs.value.comment,
+    },
+  })
+    .then((res) => {
+      validateResponse(res.message);
+    })
+    .catch((res) => {
+      validateResponse(false);
+    });
 };
 </script>
 
 <template>
   <LayoutProfilePage title="Додати транзакцію">
     <template #header>
-      <UiButtonOpacityBorder @click="" class="hidden lg:block">
+      <UiButtonOpacityBorder
+        @click="onCreateTransaction"
+        class="hidden lg:block"
+      >
         Створити
       </UiButtonOpacityBorder>
     </template>
@@ -32,6 +63,14 @@ const handlerChangeInputs = (value: any, type: keyof Order) => {
         :messageToUser="messageToUser"
         @updateInputs="handlerChangeInputs"
       ></LayoutTransaction>
+      <div class="flex justify-center">
+        <UiButtonOpacityBorder
+          @click="onCreateTransaction"
+          class="lg:hidden mt-[25px]"
+        >
+          Створити
+        </UiButtonOpacityBorder>
+      </div>
     </template>
   </LayoutProfilePage>
 </template>

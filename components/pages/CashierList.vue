@@ -30,10 +30,10 @@ fetchCashiers();
 
 <template>
   <div class="mb-[25px] xl:mb-[31px]">
-    <PagesModalAddCashier
+    <CommonModalAddCashier
       @successAction="successAddCashier"
       v-model="isAddCashierModal"
-    ></PagesModalAddCashier>
+    ></CommonModalAddCashier>
     <Swiper
       class="swiper_cashiers w-full"
       :modules="[SwiperFreeMode]"
@@ -86,7 +86,8 @@ fetchCashiers();
         class="!h-auto"
       >
         <PagesCashierItem
-          class="border-beige-1 h-full border-[2px] !opacity-100"
+          @successDelete="fetchCashiers"
+          class="h-full"
           :cashier="cashier"
         ></PagesCashierItem>
       </SwiperSlide>
