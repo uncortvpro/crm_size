@@ -51,9 +51,9 @@
         <div
           class="mt-[85px] xl:mt-[53px] col-span-2 flex justify-between sm:justify-end sm:gap-[50px] xl:gap-[80px]"
         >
-          <PagesFooterMenuItem>ГОЛОВНА</PagesFooterMenuItem>
-          <PagesFooterMenuItem>МОЖЛИВОСТІ</PagesFooterMenuItem>
-          <PagesFooterMenuItem>КОНТАКТИ</PagesFooterMenuItem>
+          <PagesFooterMenuItem to="/">ГОЛОВНА</PagesFooterMenuItem>
+          <PagesFooterMenuItem to="/opportunities">МОЖЛИВОСТІ</PagesFooterMenuItem>
+          <PagesFooterMenuItem to="/contacts">КОНТАКТИ</PagesFooterMenuItem>
         </div>
       </div>
     </div>

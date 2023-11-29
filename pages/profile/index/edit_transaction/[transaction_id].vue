@@ -2,18 +2,17 @@
 const error = ref("");
 const messageToUser = ref("");
 
-const inputs = ref<any>({
-  client: "",
-  email: "",
+const inputs = ref<InputsTransaction>({
+  cashier: "",
+  counterpartie: "",
+  sum: "",
+  date: "",
+  category: "",
   comment: "",
-  payment: "",
-  shipping: "",
-  source: "",
-  status: "",
-  products: [],
+  type: "На рахунок",
 });
 
-const handlerChangeInputs = (value: any, type: any) => {
+const handlerChangeInputs = (value: any, type: keyof InputsTransaction) => {
   inputs.value[type] = value;
 };
 </script>
@@ -33,11 +32,8 @@ const handlerChangeInputs = (value: any, type: any) => {
         @updateInputs="handlerChangeInputs"
       ></LayoutTransaction>
       <div class="flex justify-center">
-        <UiButtonOpacityBorder
-          @click=""
-          class="lg:hidden mt-[25px]"
-        >
-        Редагувати
+        <UiButtonOpacityBorder @click="" class="lg:hidden mt-[25px]">
+          Редагувати
         </UiButtonOpacityBorder>
       </div>
     </template>
