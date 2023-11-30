@@ -21,45 +21,46 @@
         <div class="py-[20px] md:py-[25px] xl:py-[30px] bg-beige-light">
           <Swiper
             class="swiper_main w-full max-w-[1419px]"
-            :slides-per-view="4"
+            :slides-per-view="'auto'"
+            :centered-slides="true"
+            :centered-slides-bounds="true"
+            :spaceBetween="30"
             :breakpoints="{
               375: {
-                slidesPerView: 4,
+                spaceBetween: 50,
+              },
+              992: {
+                spaceBetween: 100,
               },
               1500: {
-                slidesPerView: 6,
+                spaceBetween: 100,
               },
             }"
-            :spaceBetween="30"
+
           >
-            <SwiperSlide class="!h-auto">
-              <div class="h-full flex items-center">
+            <SwiperSlide class="!h-auto !w-fit">
+              <div class="h-full flex justify-center items-center">
+                <img src="@img/alnest.png" alt="" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide class="!h-auto !w-fit">
+              <div class="h-full flex justify-center items-center">
+                <img src="@img/novitska.png" alt="" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide class="!h-auto !w-fit">
+              <div class="h-full flex justify-center items-center">
+                <img src="@img/brend_comission.png" alt="" />
+              </div>
+            </SwiperSlide>
+            <SwiperSlide class="!h-auto !w-fit">
+              <div class="h-full flex justify-center items-center">
                 <img src="@img/image_1.png" alt="" />
               </div>
             </SwiperSlide>
-            <SwiperSlide class="!h-auto">
-              <div class="h-full flex items-center">
-                <img src="@img/image_2.png" alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide class="!h-auto">
-              <div class="h-full flex items-center">
-                <img src="@img/image_3.png" alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide class="!h-auto">
-              <div class="h-full flex items-center">
-                <img src="@img/image_4.png" alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide class="!h-auto">
-              <div class="h-full flex items-center">
-                <img src="@img/image_5.png" alt="" />
-              </div>
-            </SwiperSlide>
-            <SwiperSlide class="!h-auto">
-              <div class="h-full flex items-center">
-                <img src="@img/image_6.png" alt="" />
+            <SwiperSlide class="!h-auto !w-fit">
+              <div class="h-full flex justify-center items-center">
+                <img src="@img/di_forte.png" alt="" />
               </div>
             </SwiperSlide>
           </Swiper>
