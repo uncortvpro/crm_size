@@ -44,7 +44,10 @@ defineProps<{
             >
               {{ description }}
             </UiTextMainPrimary>
-            <UiButtonPrimary class="mt-[25px] md:mt-[35px] xl:mt-[65px]">
+            <UiButtonPrimary
+              @click="navigateTo('/register')"
+              class="mt-[25px] md:mt-[35px] xl:mt-[65px]"
+            >
               {{ button }}
             </UiButtonPrimary>
           </div>

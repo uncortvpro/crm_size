@@ -59,7 +59,9 @@ const itemsHowItWork = [
             :item="item"
           ></PagesItemHowThisWork>
         </div>
-        <UiButtonPrimary class="mt-[40px] self-center md:mt-[60px] xl:mt-[80px]"
+        <UiButtonPrimary
+          @click="navigateTo('/register')"
+          class="mt-[40px] self-center md:mt-[60px] xl:mt-[80px]"
           >СПРОБУВАТИ</UiButtonPrimary
         >
       </div>

@@ -33,9 +33,9 @@ watch(image, () => {
           <UiInputFile class="hidden" @updateInput="updateInput" />
         </label>
         <img
-          v-if="image"
+          v-if="modelValue"
           class="absolute block w-full h-full z-10 top-0 object-cover left-0"
-          :src="image"
+          :src="useBase64(modelValue)"
           alt=""
         />
         <div

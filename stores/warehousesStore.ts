@@ -64,9 +64,6 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
     const setPage = (value: any, id: Warehouse['id']) => {
         page.value[warehouseType(id)] = value;
     }
-    const setKeyWord = (value: any, id: Warehouse['id']) => {
-        keyWord.value[warehouseType(id)] = value;
-    }
     const setEndPage = (value: any, id: Warehouse['id']) => {
         endPage.value[warehouseType(id)] = value;
     }
