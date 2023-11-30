@@ -32,24 +32,6 @@ const handlerChangeInputs = (value: any, type: keyof GlobalProduct) => {
         :messageToUser="messageToUser"
         @updateInputs="handlerChangeInputs"
       >
-        <template #table>
-          <CommonTable class="bg-beige-light">
-            <template #headers>
-              <UiTableCellHeader>Розмір</UiTableCellHeader>
-              <UiTableCellHeader>Колір</UiTableCellHeader>
-              <UiTableCellHeader>Ціна</UiTableCellHeader>
-              <UiTableCellHeader>Кількість на складі</UiTableCellHeader>
-            </template>
-            <template #items>
-              <CommonTableItemVariation></CommonTableItemVariation>
-              <CommonTableItemVariation></CommonTableItemVariation>
-              <CommonTableItemVariation></CommonTableItemVariation>
-              <CommonTableItemVariation></CommonTableItemVariation>
-              <CommonTableItemVariation></CommonTableItemVariation>
-              <CommonTableItemVariation></CommonTableItemVariation>
-            </template>
-          </CommonTable>
-        </template>
       </LayoutProduct>
       <div class="flex justify-center">
         <UiButtonOpacityBorder @click="" class="lg:hidden mt-[25px]">

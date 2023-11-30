@@ -20,14 +20,20 @@ const router = useRouter();
         <template #title>
           <img
             class="w-[23px] h-[28px] 3xl:w-[30px] 3xl:h-[35px] object-cover"
-            :src="useBase64(product?.variations[0]?.photos[0])"
+            :src="
+              useBase64(product?.photo) ||
+              useBase64(product?.variations[0]?.photos[0])
+            "
             alt=""
           />
         </template>
         <template #value>
           <img
             class="w-[23px] h-[28px] 3xl:w-[30px] 3xl:h-[35px] object-cover hidden 3xl:inline-block"
-            :src="useBase64(product?.variations[0]?.photos[0])"
+            :src="
+              useBase64(product?.photo) ||
+              useBase64(product?.variations[0]?.photos[0])
+            "
             alt=""
           />
         </template>
@@ -58,7 +64,8 @@ const router = useRouter();
       <UiTransitionTableCell :vIf="active">
         <template #title>Склади</template>
         <template #value>
-          <CommonSelectSwitchWarehouse></CommonSelectSwitchWarehouse></template>
+          <CommonSelectSwitchWarehouse></CommonSelectSwitchWarehouse
+        ></template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Категорія</template>

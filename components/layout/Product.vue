@@ -2,7 +2,7 @@
 defineProps<{
   error: string;
   messageToUser: string;
-  inputs: any;
+  inputs: InputsCreateProduct;
 }>();
 
 const emits = defineEmits(["updateInputs"]);
@@ -15,7 +15,9 @@ const handlerChange = (value: any, type: keyof Objective) => {
 <template>
   <UiAlertDanger v-if="error">{{ error }}</UiAlertDanger>
   <UiAlertSuccess v-if="messageToUser">{{ messageToUser }}</UiAlertSuccess>
-  <div class="grid grid-cols-12">
+  <div
+    class="flex flex-col 2xl:grid grid-cols-12 2xl:grid-rows-product-page-grid gap-[25px] lg:gap-[30px] 2xl:gap-y-[50px] 2xl:gap-x-[100px]"
+  >
     <div class="col-span-12 2xl:col-span-7">
       <form action="#">
         <UiDivBorderBg class="w-full">
@@ -26,7 +28,7 @@ const handlerChange = (value: any, type: keyof Objective) => {
                 class="col-span-2 md:col-span-1"
                 label="Назва товару:"
               >
-                <UiInputProfile v-model="inputs.headline"></UiInputProfile>
+                <UiInputProfile v-model="inputs.name"></UiInputProfile>
               </UiLabelProfile>
             </UiDivGridForm>
             <UiLabelProfile
@@ -44,6 +46,7 @@ const handlerChange = (value: any, type: keyof Objective) => {
               label="Обрати статус товару:"
             >
               <CommonSelectVariant
+                v-model="inputs.status"
                 :valueSelect="inputs.status"
                 typeSelect="status"
                 typeVariant="product"
@@ -51,11 +54,14 @@ const handlerChange = (value: any, type: keyof Objective) => {
               ></CommonSelectVariant>
             </UiLabelProfile>
             <UiLabelProfile class="col-span-2 md:col-span-1" label="Склад:">
-              <CommonSelectWarehouse></CommonSelectWarehouse>
+              <CommonSelectWarehouse
+                v-model="inputs.warehouse"
+                :valueSelect="inputs.warehouse"
+              ></CommonSelectWarehouse>
             </UiLabelProfile>
             <UiLabelProfile label="Підсклад:" class="col-span-2 md:col-span-1">
               <CommonSelectSubwarehouse
-                v-model="inputs.status"
+                v-model="inputs.subwarehouse"
               ></CommonSelectSubwarehouse>
             </UiLabelProfile>
             <UiLabelProfile
@@ -68,18 +74,56 @@ const handlerChange = (value: any, type: keyof Objective) => {
               ></UiTextareaProfile>
             </UiLabelProfile>
             <UiLabelProfile label="Категорія:" class="col-span-2 md:col-span-1">
-              <UiInputProfile v-model="inputs.responsible"></UiInputProfile>
+              <CommonSelectVariant
+                v-model="inputs.category"
+                :valueSelect="inputs.category"
+                typeSelect="category"
+                typeVariant="product_category"
+                @updateValue="handlerChange"
+              ></CommonSelectVariant>
             </UiLabelProfile>
           </UiDivGridForm>
         </UiDivBorderBg>
       </form>
     </div>
-    <div>
-      <slot name=""></slot> 
+    <div
+      class="col-span-12 2xl:col-span-5 2xl:row-span-6 flex flex-col gap-[25px] lg:gap-[30px]"
+    >
+      <UiDivBorderBg class="flex flex-col items-center">
+        <UiHeader2 class="text-center mb-[15px] block xl:mb-[20px]"
+          >Фото</UiHeader2
+        >
+        <PagesAddingPhotoProduct
+          v-model="inputs.photo"
+        ></PagesAddingPhotoProduct>
+      </UiDivBorderBg>
+      <PagesAddProductVariations
+        v-model="inputs.variations"
+      ></PagesAddProductVariations>
     </div>
     <div class="col-span-12 2xl:col-span-7">
-        <slot name="table"></slot>
-      </div>
+      <CommonTable
+        v-if="inputs.variations.length > 0"
+        :pagination="false"
+        class="bg-beige-light !m-0"
+      >
+        <template #headers>
+          <UiTableCellHeader></UiTableCellHeader>
+          <UiTableCellHeader>Розмір</UiTableCellHeader>
+          <UiTableCellHeader>Колір</UiTableCellHeader>
+          <UiTableCellHeader>Собівартість товару</UiTableCellHeader>
+          <UiTableCellHeader>Ціна</UiTableCellHeader>
+          <UiTableCellHeader>Кількість на складі</UiTableCellHeader>
+        </template>
+        <template #items>
+          <CommonTableItemVariation
+            v-for="(variation, index) in inputs.variations"
+            :key="index"
+            :variation="variation"
+          ></CommonTableItemVariation>
+        </template>
+      </CommonTable>
+    </div>
   </div>
 </template>
 

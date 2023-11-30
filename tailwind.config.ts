@@ -39,6 +39,9 @@ export default <Partial<Config>> {
         'order-details-modal-md': '60px auto auto',
         'order-details-modal-xs': '40px auto auto'
       },
+      gridTemplateRows: {
+        'product-page-grid': 'auto auto',
+      },
       transitionDuration: {
         'hover': '200ms',
       },

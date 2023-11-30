@@ -13,5 +13,6 @@ declare interface GlobalProduct {
     description: string;
     category: string;
     comment: string;
+    photo: string;
   }
   

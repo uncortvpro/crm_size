@@ -1,7 +1,4 @@
 <script setup lang="ts">
-// defineProps<{
-//   modelValue: string;
-// }>();
 
 const warehousesStore = useWarehousesStore();
 
