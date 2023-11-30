@@ -103,7 +103,7 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         useAuthFetch(`${useApiUrl()}/products`, {
             body: {
                 page: page.value[warehouseType(id)],
-                per_page: 10,
+                per_page: 1,
                 keyword: keyWord.value[warehouseType(id)],
                 warehouse: warehouseName(id),
                 subwarehouse: subwarehouse.value[warehouseType(id)],
@@ -114,7 +114,7 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
             setWarehouseProducts(res.products, id);
             setEndPage(res.total_pages, id)
 
-            console.log(warehouseProducts.value);
+            // console.log(warehouseProducts.value);
             
         }).catch(res => {
             console.error(res);

@@ -6,6 +6,8 @@ definePageMeta({
   middleware: ["guest"],
 });
 
+const successRegister = ref(false);
+
 const credentials = reactive<RegisterCredentials>({
   name: "",
   telephone: "",
@@ -41,7 +43,7 @@ const onRegistration = () => {
     .register(credentials)
     .then((res: any) => {
       if ((res.message = "User created successfully")) {
-        message.value = "Користувача успішно створено.";
+        successRegister.value = true;
       } else {
         error.value = "Не вдалося створити користувача. Спробуйте ще раз.";
       }
@@ -53,7 +55,7 @@ const onRegistration = () => {
 </script>
 
 <template>
-  <LayoutAuth maxWidth="715px">
+  <LayoutAuth v-if="!successRegister" maxWidth="715px">
     <div
       class="rounded-[5px] bg-white max-w-[715px] w-full shadow-auth-shadow mx-[15px] my-[50px] shadow-gray-300 pt-[35px] px-[20px] pb-[15px] lg:pt-[55px] lg:px-[40px] lg:pb-[30px]"
     >
@@ -138,6 +140,31 @@ const onRegistration = () => {
           >
         </div>
       </form>
+    </div>
+  </LayoutAuth>
+  <LayoutAuth v-else maxWidth="715px">
+    <div
+      class="rounded-[5px] bg-white flex flex-col items-center max-w-[450px] md:max-w-[550px] xl:max-w-[715px] w-full shadow-auth-shadow mx-[15px] my-[50px] shadow-gray-300 pt-[35px] px-[20px] pb-[15px] lg:pt-[80px] lg:px-[40px] lg:pb-[48px]"
+    >
+      <SvgoCheckMarkRounded
+        class="!text-transparent !w-[24%] !h-[100px] stroke-beige-1"
+      ></SvgoCheckMarkRounded>
+
+      <p
+        class="font-semibold text-center mt-[35px] md:mt-[45px] xl:mt-[60px] text-[18px] md:text-[24px] xl:text-[30px]"
+      >
+        Дякуємо за реєстрацію!
+      </p>
+      <p
+        class="text-[9px] text-center md:text-[12px] mt-[10px] md:mt-[15px] xl:mt-[20px] xl:text-[15px]"
+      >
+        Наш менеджер скоро з вами звʼяжеться
+      </p>
+      <UiButtonOpacityBorder
+        @click="navigateTo('/')"
+        class="!border-beige-1 mt-[42px] md:mt-[60px] xl:mt-[79px] !text-beige-1"
+        >На головну</UiButtonOpacityBorder
+      >
     </div>
   </LayoutAuth>
 </template>

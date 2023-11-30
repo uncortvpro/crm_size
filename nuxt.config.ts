@@ -31,7 +31,7 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
-      title: 'Size SRM',
+      title: 'Size CRM',
     },
     buildAssetsDir: 'assets',
   },
