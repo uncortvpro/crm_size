@@ -27,6 +27,9 @@
             :spaceBetween="30"
             :breakpoints="{
               375: {
+                spaceBetween: 30,
+              },
+              768: {
                 spaceBetween: 50,
               },
               992: {
@@ -36,29 +39,28 @@
                 spaceBetween: 100,
               },
             }"
-
           >
-            <SwiperSlide class="!h-auto !w-fit">
+            <SwiperSlide class="!h-auto !w-[20%] lg:!w-fit">
               <div class="h-full flex justify-center items-center">
                 <img src="@img/alnest.png" alt="" />
               </div>
             </SwiperSlide>
-            <SwiperSlide class="!h-auto !w-fit">
+            <SwiperSlide class="!h-auto !w-[20%] lg:!w-fit">
               <div class="h-full flex justify-center items-center">
                 <img src="@img/novitska.png" alt="" />
               </div>
             </SwiperSlide>
-            <SwiperSlide class="!h-auto !w-fit">
+            <SwiperSlide class="!h-auto !w-[20%] lg:!w-fit">
               <div class="h-full flex justify-center items-center">
                 <img src="@img/brend_comission.png" alt="" />
               </div>
             </SwiperSlide>
-            <SwiperSlide class="!h-auto !w-fit">
+            <SwiperSlide class="!h-auto !w-[10%] lg:!w-fit">
               <div class="h-full flex justify-center items-center">
                 <img src="@img/image_1.png" alt="" />
               </div>
             </SwiperSlide>
-            <SwiperSlide class="!h-auto !w-fit">
+            <SwiperSlide class="!h-auto !w-[20%] lg:!w-fit">
               <div class="h-full flex justify-center items-center">
                 <img src="@img/di_forte.png" alt="" />
               </div>
