@@ -46,7 +46,7 @@ const itemsHowItWork = [
         ></UiRadialGradientAbsolute>
       </template>
     </CommonSectionMain>
-    <div class="">
+    <div class="mt-[100px] md:mt-[110px]">
       <div class="container flex flex-col">
         <UiTitleSection class="text-center">Як це працює</UiTitleSection>
         <div

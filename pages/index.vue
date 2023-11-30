@@ -13,7 +13,7 @@
       <template #main_image>
         <img
           src="@img/main_phone.png"
-          class="w-full mt-[50px] self-center xl:mt-0 xl:max-w-full col-span-4 3xl:col-span-2 3xl:ml-[-300px] 3xl:mt-[-100px] 3xl:w-[600px] 4xl:max-w-[700px] 3xl:max-w-[700px] max-w-[400px]"
+          class="w-full mt-[50px] self-center xl:mt-0 xl:max-w-full col-span-4 3xl:col-span-2 3xl:ml-[-300px] 3xl:mt-[-100px] 3xl:w-[600px] 4xl:max-w-[500px] 3xl:max-w-[500px] max-w-[400px]"
           alt=""
         />
       </template>

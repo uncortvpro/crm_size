@@ -25,7 +25,7 @@ defineProps<{
         <div
           :class="
             cn(
-              'relative flex xl:grid grid-cols-12 flex-col xl:pt-[110px] 3xl:pt-[200px] pb-[100px] md:pb-[110px]',
+              'relative flex xl:grid grid-cols-12 flex-col xl:pt-[110px] 3xl:pt-[200px] ',
               {
                 'px-[19px] md:px-[40px] xl:px-[70px] pt-[60px]  md:pt-[90px] xl:pt-[110px] 3xl:pt-[200px]':
                   paddingContainer,
