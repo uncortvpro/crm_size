@@ -1,0 +1,1 @@
+import{_ as e}from"./Button.vue.dae32332.js";import{_ as r}from"./entry.a6c15489.js";import{F as n,G as _,H as a,a4 as c}from"./swiper-vue.36f73e51.js";const s={};function f(o,i){const t=e;return n(),_(t,{class:"hover:opacity-hover duration-hover text-black"},{default:a(()=>[c(o.$slots,"default")]),_:3})}const u=r(s,[["render",f]]);export{u as _};
