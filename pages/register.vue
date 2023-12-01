@@ -12,8 +12,8 @@ const credentials = reactive<RegisterCredentials>({
   name: "",
   telephone: "",
   email: "",
-  password: "",
-  cPassword: "",
+  brand: "",
+  position: "",
 });
 const error = ref("");
 const message = ref("");
@@ -22,27 +22,11 @@ const changeCredentials = (type: keyof RegisterCredentials, value: string) => {
   credentials[type] = value;
 };
 
-const validate = () => {
-  const valid = usePasswordValidation(
-    credentials.password,
-    credentials.cPassword
-  );
-  if (!valid) {
-    error.value = "";
-    return true;
-  }
-  error.value = valid;
-  return false;
-};
-
 const onRegistration = () => {
-  if (!validate()) {
-    return false;
-  }
   auth
     .register(credentials)
     .then((res: any) => {
-      if ((res.message = "User created successfully")) {
+      if ((res = "Email sent successfully!")) {
         successRegister.value = true;
       } else {
         error.value = "Не вдалося створити користувача. Спробуйте ще раз.";
@@ -65,9 +49,9 @@ const onRegistration = () => {
         >
           РЕЄСТРАЦІЯ
         </h5>
-        <UiButtonGoogle class="w-full mt-[20px] lg:mt-[30px] xl:mt-[40px]"
+        <!-- <UiButtonGoogle class="w-full mt-[20px] lg:mt-[30px] xl:mt-[40px]"
           >Зареєструватися через Google</UiButtonGoogle
-        >
+        > -->
         <p class="text-center text-[9px] lg:text-[15px] mt-[12px] lg:mt-[20px]">
           або
         </p>
@@ -95,23 +79,19 @@ const onRegistration = () => {
             class="md:col-span-2"
             >Введіть email:</UiInputLabel
           >
-          <UiInputLabel type="text" class="md:col-span-1"
+          <UiInputLabel
+            inputType="brand"
+            @changeValue="changeCredentials"
+            type="text"
+            class="md:col-span-1"
             >Назва Бренду:</UiInputLabel
           >
-          <UiInputLabel type="text" class="md:col-span-1">Посада:</UiInputLabel>
           <UiInputLabel
-            inputType="password"
+            inputType="position"
             @changeValue="changeCredentials"
-            type="password"
+            type="text"
             class="md:col-span-1"
-            >Введіть пароль:</UiInputLabel
-          >
-          <UiInputLabel
-            inputType="cPassword"
-            @changeValue="changeCredentials"
-            type="password"
-            class="md:col-span-1"
-            >Повторіть пароль:</UiInputLabel
+            >Посада:</UiInputLabel
           >
         </div>
         <div class="mt-[12px] grid grid-cols-1 lg:grid-cols-2 gap-[12px]">

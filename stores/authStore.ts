@@ -41,14 +41,14 @@ export const useAuthStore = defineStore("authStore", () => {
     }
 
     function register(credentials: RegisterCredentials) {
-        return useApiFetch(`${useApiUrl()}/register`, {
+        return useApiFetch(`${useApiUrl()}/demo_register`, {
             method: 'POST',
             body: {
                 name: credentials.name,
                 phone: credentials.telephone,
                 email: credentials.email,
-                password: credentials.password,
-                password2: credentials.cPassword,
+                brand: credentials.brand,
+                position: credentials.position,
             }
         })
     }

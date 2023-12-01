@@ -73,9 +73,9 @@ const login = () => {
           class="!rounded-[5px] mt-[15px] md:mt-[30px] lg:mt-[40px] w-full"
           >Увійти</UiButtonPrimary
         >
-        <UiButtonGoogle type="button" class="w-full mt-[9px] lg:mt-[15px]"
+        <!-- <UiButtonGoogle type="button" class="w-full mt-[9px] lg:mt-[15px]"
           >Увійти з Google</UiButtonGoogle
-        >
+        > -->
         <div
           class="flex gap-[7px] items-center justify-center mt-[12px] lg:mt-[25px]"
         >
