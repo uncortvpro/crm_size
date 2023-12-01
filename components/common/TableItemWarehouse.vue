@@ -5,6 +5,10 @@ const props = defineProps<{
 
 const emits = defineEmits(["deleteAction"]);
 
+const deleteAction = () => {
+  emits("deleteAction");
+};
+
 const router = useRouter();
 </script>
 
@@ -84,7 +88,10 @@ const router = useRouter();
           class="flex-shrink-0"
           @click.stop="navigateTo('/profile/edit_product/' + product._id)"
         />
-        <UiButtonOpacityDelete class="flex-shrink-0" @click.stop="" />
+        <UiButtonOpacityDelete
+          class="flex-shrink-0"
+          @click.stop="deleteAction"
+        />
       </div>
     </template>
   </UiTableItem>

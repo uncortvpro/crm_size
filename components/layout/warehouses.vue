@@ -7,6 +7,30 @@ const warehousesStore = useWarehousesStore();
 const warehouseType = () => warehousesStore.warehouseType(props.warehouseId);
 const subwarehouse = ref("");
 
+const currentIdProduct = ref("");
+const isModalRemove = ref(false);
+const switchModalRemove = (value: boolean) => {
+  isModalRemove.value = value;
+};
+
+const deleteAction = (id: string) => {
+  currentIdProduct.value = id;
+  switchModalRemove(true);
+};
+
+const sorting = computed(() => warehousesStore.sorting[warehouseType()]);
+const reverseSorting = computed(
+  () => warehousesStore.reverseSorting[warehouseType()]
+);
+const setSorting = (sorting: SortingProducts) => {
+  warehousesStore.setSorting(sorting, props.warehouseId);
+};
+
+const page = computed(() => warehousesStore.page[warehouseType()]);
+const endPage = computed(() => warehousesStore.endPage[warehouseType()]);
+const setPage = (page: number) =>
+  warehousesStore.setPage(page, props.warehouseId);
+
 const products = computed<GlobalProduct[]>(
   () => warehousesStore.warehouseProducts[warehouseType()]
 );
@@ -17,7 +41,10 @@ const fetchProducts = () => warehousesStore.fetchProducts(props.warehouseId);
 const searchProducts = (keyword: string) =>
   warehousesStore.searchProducts(keyword, props.warehouseId);
 
-
+const deleteProducts = () => {
+  warehousesStore.deleteProducts(currentIdProduct.value, props.warehouseId);
+  switchModalRemove(false);
+};
 
 fetchProducts();
 </script>
@@ -30,7 +57,20 @@ fetchProducts();
       <template #add_name> Додати товар</template>
     </CommonNavigationPage>
 
-    <CommonTable class="bg-beige-light">
+    <UiModalWarning
+      v-if="currentIdProduct"
+      v-model="isModalRemove"
+      @closeModal="switchModalRemove(false)"
+      @confirm="deleteProducts"
+      >Ви впевнені, що хочете видалити транзакцію?</UiModalWarning
+    >
+
+    <CommonTable
+      :endPage="endPage"
+      :pageTable="page"
+      @setPage="setPage"
+      class="bg-beige-light"
+    >
       <template #additional_elements>
         <CommonSelectSubwarehouse
           placeholder
@@ -43,7 +83,16 @@ fetchProducts();
         <UiTableCellHeader></UiTableCellHeader>
         <UiTableCellHeader>Товар</UiTableCellHeader>
         <UiTableCellHeader>Статус</UiTableCellHeader>
-        <UiTableCellHeader>Кількість</UiTableCellHeader>
+        <UiTableCellHeader>
+          <CommonButtonSortingTable
+            :sortingUp="sorting === 'pieces' && reverseSorting"
+            :sortingDown="sorting === 'pieces' && !reverseSorting"
+            @click="setSorting('pieces')"
+            class="!font-normal"
+          >
+            Кількість</CommonButtonSortingTable
+          ></UiTableCellHeader
+        >
         <UiTableCellHeader>Склади</UiTableCellHeader>
         <UiTableCellHeader>Категорія</UiTableCellHeader>
         <UiTableCellHeader>Коментар</UiTableCellHeader>
@@ -53,6 +102,7 @@ fetchProducts();
           v-for="product in products"
           :key="product._id"
           :product="product"
+          @deleteAction="deleteAction(product._id)"
         />
       </template>
     </CommonTable>

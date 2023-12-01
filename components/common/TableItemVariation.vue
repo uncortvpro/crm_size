@@ -3,10 +3,10 @@ const props = defineProps<{
   variation: VariationProduct;
 }>();
 
-const emits = defineEmits(["showOrderDetails"]);
+const emits = defineEmits(["deleteAction"]);
 
-const showOrderDetails = () => {
-  // emits("showOrderDetails", props.variation._id);
+const deleteAction = () => {
+  emits("deleteAction");
 };
 </script>
 
@@ -63,6 +63,14 @@ const showOrderDetails = () => {
           ></UiInputProfileTable>
         </template>
       </UiTransitionTableCell>
+    </template>
+    <template #additional-buttons>
+      <div class="flex items-center gap-[5px] md:gap-[25px]">
+        <UiButtonOpacityDelete
+          class="flex-shrink-0"
+          @click.stop="deleteAction"
+        />
+      </div>
     </template>
   </UiTableItem>
 </template>

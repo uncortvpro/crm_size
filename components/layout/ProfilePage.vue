@@ -5,9 +5,9 @@ defineProps<{
 </script>
 
 <template>
-  <div>
+  <div class="mb-[15px] xl:mb-[25px]">
     <div
-      class="flex items-center justify-between mt-[20px] lg:mt-[36px] mb-[15px] xl:mb-[25px]"
+      class="flex items-center justify-between mt-[20px] mb-[15px] xl:mb-[25px] lg:mt-[36px]"
     >
       <UiHeader1>{{ title }}</UiHeader1>
       <slot name="header" />

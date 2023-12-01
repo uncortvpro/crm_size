@@ -62,7 +62,10 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         warehouseProducts.value[warehouseType(id)] = value;
     }
     const setPage = (value: any, id: Warehouse['id']) => {
+        if(value === 0) return false;
         page.value[warehouseType(id)] = value;
+
+        fetchProducts(id)
     }
     const setEndPage = (value: any, id: Warehouse['id']) => {
         endPage.value[warehouseType(id)] = value;
@@ -79,20 +82,38 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         return warehouse?.name || warehouses[0].name;
     }
 
-    // const sorting = ref<any>({
-    //     finishedWarehouse: "",
-    //     distributorWarehouse: "",
-    //     warehouseMaterials: ""
-    // });
-    // const reverseSorting = ref<any>({
-    //     finishedWarehouse: false,
-    //     distributorWarehouse: false,
-    //     warehouseMaterials: false
-    // });
+    type Sorting = {
+        finishedWarehouse: SortingProducts
+        distributorWarehouse: SortingProducts
+        warehouseMaterials: SortingProducts  
+    }
 
-    // const sorting = ref<SortingClients>(""); // change sorting for orders
-    // const reverseSorting = ref<boolean>(false);
+    const sorting = ref<Sorting>({
+        finishedWarehouse: "",
+        distributorWarehouse: "",
+        warehouseMaterials: ""
+    });
+    const reverseSorting = ref<any>({
+        finishedWarehouse: false,
+        distributorWarehouse: false,
+        warehouseMaterials: false
+    });
 
+    const setSorting = (value: SortingProducts, idWarehouse: Warehouse['id']) => {
+        useSorting(value, reverseSorting, sorting, fetchProducts, idWarehouse, warehouseType);
+    }
+
+    function deleteProducts(id: string, idWarehouse: Warehouse['id']) {
+        useAuthFetch(`${useApiUrl()}/delete_product`, {
+            body: {
+                product_id: id,
+            },
+        }).then(res => {
+            if (res.message === true) {
+                fetchProducts(idWarehouse);
+            }
+        });
+    }
 
     function searchProducts(value: string, id: Warehouse['id']) {
         keyWord.value[warehouseType(id)] = value;
@@ -103,19 +124,16 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         useAuthFetch(`${useApiUrl()}/products`, {
             body: {
                 page: page.value[warehouseType(id)],
-                per_page: 1,
+                per_page: 10,
                 keyword: keyWord.value[warehouseType(id)],
                 warehouse: warehouseName(id),
                 subwarehouse: subwarehouse.value[warehouseType(id)],
-                // sort_by: sorting.value.finishedWarehouse,
-                // reverse_sort: reverseSorting.value.finishedWarehouse,
+                sort_by: sorting.value[warehouseType(id)],
+                reverse_sort: reverseSorting.value[warehouseType(id)],
             },
         }).then((res) => {
             setWarehouseProducts(res.products, id);
             setEndPage(res.total_pages, id)
-
-            // console.log(warehouseProducts.value);
-            
         }).catch(res => {
             console.error(res);
         });
@@ -131,5 +149,12 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         warehouses,
         warehouseType,
         setSubwarehouse,
+        deleteProducts,
+        page,
+        endPage,
+        setPage,
+        setSorting,
+        sorting,
+        reverseSorting
     }
 });
