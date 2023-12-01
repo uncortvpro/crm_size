@@ -1,1 +1,0 @@
-import{_ as e,j as _}from"./entry.a6c15489.js";import{_ as n}from"./Base.1412d035.js";import{G as c,H as a,F as r,I as s}from"./swiper-vue.36f73e51.js";const m={};function p(u,f){const o=_,t=n;return r(),c(t,null,{default:a(()=>[s(o)]),_:1})}const l=e(m,[["render",p]]);export{l as default};
