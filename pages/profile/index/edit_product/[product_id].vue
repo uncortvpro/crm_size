@@ -37,22 +37,22 @@ const fetchProduct = () => {
       product_id: productId.value,
     },
   }).then((res) => {
-    inputs.value.name = res.product_info.name;
-    inputs.value.description = res.product_info.description;
-    inputs.value.status = res.product_info.status.status;
-    inputs.value.category = res.product_info.category;
-    inputs.value.warehouse = res.product_info.warehouse;
-    inputs.value.subwarehouse = res.product_info.subwarehouse;
-    inputs.value.comment = res.product_info.comment;
-    inputs.value.photo = res.product_info.photo;
-    inputs.value.variations = res.product_info.variations.map((el: any) => {
+    inputs.value.name = res?.product_info?.name;
+    inputs.value.description = res?.product_info?.description;
+    inputs.value.status = res?.product_info?.status?.status;
+    inputs.value.category = res?.product_info?.category;
+    inputs.value.warehouse = res?.product_info?.warehouse;
+    inputs.value.subwarehouse = res?.product_info?.subwarehouse;
+    inputs.value.comment = res?.product_info?.comment;
+    inputs.value.photo = res?.product_info?.photo;
+    inputs.value.variations = res?.product_info?.variations?.map((el: any) => {
       return {
         size: el.size,
         colour: el.colour,
         price: String(el.price),
         in_stock: String(el.in_stock),
         photos: el.photos[0],
-        // cost_price: el.cost_price,
+        cost_price: el.cost_price,
       };
     });
   });
@@ -77,8 +77,8 @@ const onEditProduct = () => {
           colour: el.colour,
           price: +el.price,
           in_stock: +el.in_stock,
-          photos: [el.photos],
-          // cost_price: el.cost_price,
+          photos: el.photos ? [el.photos] : [],
+          cost_price: +el.cost_price,
         };
       }),
     },

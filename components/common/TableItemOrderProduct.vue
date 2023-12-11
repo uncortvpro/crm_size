@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const props = defineProps<{
-  product: any;
+  product: VariationProduct;
 }>();
 
 const emits = defineEmits(["deleteAction"]);
 
 const deleteAction = () => {
-  emits("deleteAction", props.product._id);
+  emits("deleteAction");
 };
 </script>
 
@@ -26,7 +26,7 @@ const deleteAction = () => {
       </UiTableCellPadding>
       <UiTableCell class="col-span-2">
         <template #title>Найменування</template>
-        <template #value>{{ product?.name }}</template>
+        <template #value>{{ product.name }}</template>
       </UiTableCell>
       <!-- <UiTableCell class="col-span-2">
         <template #title>Артикул</template>
@@ -38,7 +38,17 @@ const deleteAction = () => {
       </UiTableCell>
       <UiTableCell class="col-span-2">
         <template #title>Кількість</template>
-        <template #value>{{ product?.in_stock }}</template>
+        <template #value>
+          <UiInputProfileTable
+            class="bg-beige-1"
+            type="number"
+            v-model="product.amount"
+          ></UiInputProfileTable
+        ></template>
+      </UiTableCell>
+      <UiTableCell class="col-span-2">
+        <template #title>На складі</template>
+        <template #value> {{ product?.in_stock }}</template>
       </UiTableCell>
       <UiTableCell class="col-span-2">
         <template #title>Ціна</template>

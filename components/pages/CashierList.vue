@@ -12,7 +12,6 @@ const switchModalAddCashier = (value: boolean) => {
 
 const fetchCashiers = () => {
   useAuthFetch(`${useApiUrl()}/cashiers`).then((res) => {
-    console.log(res);
     cashiers.value = res.cashiers;
     totalBalance.value = res.total_balance;
     totalExpenses.value = res.total_expenses;

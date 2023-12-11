@@ -46,7 +46,7 @@ const onCreateProduct = () => {
           price: +el.price,
           in_stock: +el.in_stock,
           photos: [el.photos],
-          // cost_price: el.cost_price, 
+          cost_price: el.cost_price, 
         };
       }),
     },

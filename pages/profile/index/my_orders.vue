@@ -23,8 +23,6 @@ const deleteOrder = async () => {
 const isModalRemove = ref(false);
 
 const deleteAction = (id: string) => {
-  console.log("qwdqwd");
-
   switchOrderId(id);
   switchModalRemove(true);
 };
@@ -78,7 +76,7 @@ fetchOrders();
         v-model="isOrderDetails"
         @closeModal="switchOrderDetails(false)"
         label="Деталі замовлення"
-        :products="currentOrder?.products"
+        :products="currentOrder?.variations"
       ></CommonModalOrderDetails>
 
       <CommonTable :pageTable="page" :endPage="endPage" @setPage="setPage">

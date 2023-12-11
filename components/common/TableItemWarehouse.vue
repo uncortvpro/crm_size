@@ -3,11 +3,22 @@ const props = defineProps<{
   product: GlobalProduct;
 }>();
 
-const emits = defineEmits(["deleteAction"]);
+const emits = defineEmits(["deleteAction", "changeWarehousesAction"]);
 
 const deleteAction = () => {
   emits("deleteAction");
 };
+
+const changeWarehousesAction = (warehouse: string) => {
+  emits("changeWarehousesAction", props.product._id, warehouse);
+};
+
+const subwarehouse = computed(() => {
+  return {
+    warehouse: props.product?.warehouse,
+    subwarehouse: props.product?.subwarehouse,
+  } as Subwarehouses;
+});
 
 const router = useRouter();
 </script>
@@ -55,8 +66,8 @@ const router = useRouter();
       <UiTransitionTableCell :vIf="active">
         <template #title>Статус</template>
         <template #value>
-          <CommonStatusOutput :color="product.status.colour">{{
-            product.status.status
+          <CommonStatusOutput :color="product?.status?.colour">{{
+            product?.status?.status
           }}</CommonStatusOutput>
         </template>
       </UiTransitionTableCell>
@@ -68,7 +79,10 @@ const router = useRouter();
       <UiTransitionTableCell :vIf="active">
         <template #title>Склади</template>
         <template #value>
-          <CommonSelectSwitchWarehouse></CommonSelectSwitchWarehouse
+          <CommonSelectSwitchWarehouse
+            :currentSubwarehouses="subwarehouse"
+            @actionChangeSubwarehouses="changeWarehousesAction"
+          ></CommonSelectSwitchWarehouse
         ></template>
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
@@ -79,7 +93,7 @@ const router = useRouter();
       </UiTransitionTableCell>
       <UiTransitionTableCell :vIf="active">
         <template #title>Коментар</template>
-        <template #value> {{ product.comment }}</template>
+        <template #value> {{ product?.comment }}</template>
       </UiTransitionTableCell>
     </template>
     <template #additional-buttons>

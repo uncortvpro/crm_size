@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps<{
-  product: Product;
+  product: VariationProduct;
 }>();
 </script>
 
@@ -11,7 +11,11 @@ defineProps<{
   >
     <template #elements>
       <UiTableCellPadding class="!grid-cols-1 !col-span-1 row-span-5">
-        <img class="max-w-[40px]" :src="useBase64(product.picture) || ''" alt="" />
+        <img
+          class="max-w-[40px]"
+          :src="useBase64(product.photos[0]) || ''"
+          alt=""
+        />
       </UiTableCellPadding>
       <UiTableCell class="col-span-2">
         <template #title>Найменування</template>

@@ -2,6 +2,7 @@
 defineProps<{
   required?: boolean;
   name?: string;
+  ui?: any;
 }>();
 </script>
 
@@ -11,7 +12,8 @@ defineProps<{
     :ui="{
       base: 'w-[11px] text-black h-[11px] lg:w-[14px] lg:h-[14px]',
       label: 'flex py-[5px] lg:py-[2px] lg:inline-block',
-      required: 'hidden'
+      required: 'hidden',
+      ...ui,
     }"
     class="gap-[3px] ms-0 items-start"
     style="color: #111111"

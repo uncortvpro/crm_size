@@ -2,8 +2,7 @@
 const props = defineProps<{
   error: string;
   messageToUser: string;
-  inputs: Order;
-  orderProducts?: any[];
+  inputs: InputsCreateOrder;
 }>();
 
 const emits = defineEmits(["updateInputs"]);
@@ -11,6 +10,7 @@ const emits = defineEmits(["updateInputs"]);
 const handlerChange = (value: any, type: keyof Order) => {
   emits("updateInputs", value, type);
 };
+
 </script>
 
 <template>
@@ -89,7 +89,6 @@ const handlerChange = (value: any, type: keyof Order) => {
       </UiDivBorderBg>
       <PagesProductToOrderAdding
         v-model="inputs.products"
-        :startProducts="orderProducts"
         class="3xl:basis-[40%]"
       ></PagesProductToOrderAdding>
     </div>

@@ -32,7 +32,13 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Size CRM',
+      meta: [
+        {
+          name: 'viewport',
+          content: 'width=device-width, initial-scale=1, maximum-scale=1',
+        },
+      ],
     },
     buildAssetsDir: 'assets',
-  },
+  }
 })

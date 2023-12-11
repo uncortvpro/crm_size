@@ -9,14 +9,6 @@ const emits = defineEmits(["updateInputs"]);
 const handlerChange = (value: any, type: keyof Client) => {
   emits("updateInputs", value, type);
 };
-
-watch(
-  () => props.inputs,
-  () => {
-    console.log(props.inputs);
-  },
-  { deep: true }
-);
 </script>
 
 <template>

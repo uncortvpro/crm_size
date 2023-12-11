@@ -4,11 +4,11 @@ const messageToUser = ref("");
 
 const route = useRoute();
 const transactionId: any = route.params.transaction_id;
-const financeStore = useFinanceStore();
+// const financeStore = useFinanceStore();
 
-const transaction = computed(
-  () => financeStore.getTransactionById(transactionId) as Transaction
-);
+// const transaction = computed(
+//   () => financeStore.getTransactionById(transactionId) as Transaction
+// );
 
 const inputs = ref<InputsTransaction>({
   cashier: "",
@@ -18,17 +18,21 @@ const inputs = ref<InputsTransaction>({
   category: "",
   comment: "",
   type: "На рахунок",
+  recuring: false,
+  periodicity: 7,
 });
 
-onBeforeMount(() => {
-  inputs.value.cashier = transaction.value.cashier;
-  inputs.value.counterpartie = transaction.value.counterpartie;
-  inputs.value.sum = String(transaction.value.sum);
-  inputs.value.date = transaction.value.date;
-  inputs.value.category = transaction.value.category;
-  inputs.value.comment = transaction.value.comment;
-  inputs.value.type = transaction.value.type;
-});
+// onBeforeMount(() => {
+//   inputs.value.cashier = transaction.value?.cashier;
+//   inputs.value.counterpartie = transaction.value?.counterpartie;
+//   inputs.value.sum = String(transaction.value?.sum);
+//   inputs.value.date = transaction.value?.date;
+//   inputs.value.category = transaction.value?.category;
+//   inputs.value.comment = transaction.value?.comment;
+//   inputs.value.type = transaction.value?.type;
+//   inputs.value.recuring = transaction.value?.periodicity ? true : false;
+//   inputs.value.periodicity = transaction.value?.periodicity || 7;
+// });
 
 const handlerChangeInputs = (value: any, type: keyof InputsTransaction) => {
   inputs.value[type] = value;
@@ -43,6 +47,25 @@ const validateResponse = (message: any) => {
   }
 };
 
+const fetchTransaction = () => {
+  useAuthFetch(`${useApiUrl()}/transaction_info`, {
+    body: {
+      transaction_id: transactionId,
+    },
+  }).then((res) => {
+    
+    inputs.value.cashier = res?.cashier;
+    inputs.value.counterpartie = res?.counterpartie;
+    inputs.value.sum = String(res?.sum);
+    inputs.value.date = res?.date;
+    inputs.value.category = res?.category;
+    inputs.value.comment = res?.comment;
+    inputs.value.type = res?.type;
+    inputs.value.recuring = res?.periodicity ? true : false;
+    inputs.value.periodicity = res?.periodicity || 7;
+  });
+};
+
 const onEditTransaction = () => {
   useAuthFetch(`${useApiUrl()}/update_transaction`, {
     body: {
@@ -54,6 +77,9 @@ const onEditTransaction = () => {
       date: useFormatDate(inputs.value.date),
       category: inputs.value.category,
       comment: inputs.value.comment,
+
+      recuring: inputs.value.recuring,
+      periodicity: inputs.value.periodicity,
     },
   })
     .then((res) => {
@@ -63,6 +89,8 @@ const onEditTransaction = () => {
       validateResponse(false);
     });
 };
+
+fetchTransaction();
 </script>
 
 <template>

@@ -4,14 +4,22 @@ const props = defineProps<{
 }>();
 
 const warehousesStore = useWarehousesStore();
-const warehouseType = () => warehousesStore.warehouseType(props.warehouseId);
-const subwarehouse = ref("");
 
+const subwarehouse = ref("");
 const currentIdProduct = ref("");
 const isModalRemove = ref(false);
+const isModalChangeWarehouses = ref(false);
+const newWarehouses = ref<Subwarehouses | null>(null);
+
 const switchModalRemove = (value: boolean) => {
   isModalRemove.value = value;
 };
+
+const switchChangeWarehouses = (value: boolean) => {
+  isModalChangeWarehouses.value = value;
+};
+
+const warehouseType = () => warehousesStore.warehouseType(props.warehouseId);
 
 const deleteAction = (id: string) => {
   currentIdProduct.value = id;
@@ -46,6 +54,31 @@ const deleteProducts = () => {
   switchModalRemove(false);
 };
 
+const changeWarehouses = () => {
+  const currentProduct: GlobalProduct = products.value?.find(
+    (el) => el._id === currentIdProduct.value
+  ) as GlobalProduct;
+
+  useAuthFetch(`${useApiUrl()}/change_product_warehouse`, {
+    body: {
+      product_id: currentIdProduct.value,
+      warehouse: newWarehouses.value?.warehouse,
+      subwarehouse: newWarehouses.value?.subwarehouse,
+    },
+  }).then((res) => {
+    if (res.message === true) {
+      fetchProducts();
+      switchChangeWarehouses(false);
+    }
+  });
+};
+
+const changeWarehousesAction = (id: string, warehouse: Subwarehouses) => {
+  currentIdProduct.value = id;
+  newWarehouses.value = warehouse;
+  switchChangeWarehouses(true);
+};
+
 fetchProducts();
 </script>
 <template>
@@ -62,7 +95,15 @@ fetchProducts();
       v-model="isModalRemove"
       @closeModal="switchModalRemove(false)"
       @confirm="deleteProducts"
-      >Ви впевнені, що хочете видалити транзакцію?</UiModalWarning
+      >Ви впевнені, що хочете видалити товар?</UiModalWarning
+    >
+
+    <UiModalWarning
+      v-if="currentIdProduct"
+      v-model="isModalChangeWarehouses"
+      @closeModal="switchChangeWarehouses(false)"
+      @confirm="changeWarehouses"
+      >Ви впевнені, що хочете перемістити товар?</UiModalWarning
     >
 
     <CommonTable
@@ -103,6 +144,7 @@ fetchProducts();
           :key="product._id"
           :product="product"
           @deleteAction="deleteAction(product._id)"
+          @changeWarehousesAction="changeWarehousesAction"
         />
       </template>
     </CommonTable>

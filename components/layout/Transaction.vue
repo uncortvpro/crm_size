@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{
+const props = defineProps<{
   error: string;
   messageToUser: string;
   inputs: InputsTransaction;
@@ -40,18 +40,12 @@ const fetchCashier = () => {
   });
 };
 
-const fetchCounterparties = () => {
-  useAuthFetch(`${useApiUrl()}/counterparties`).then((res) => {
-    console.log(res);
-  });
-};
-
 const successActionAddCashier = () => {
   switchModalAddCashier(false);
   fetchCashier();
 };
 
-fetchCounterparties();
+
 fetchCashier();
 </script>
 
@@ -81,7 +75,6 @@ fetchCashier();
             >З рахунку</UiRadioText
           >
         </div>
-        <!-- <UiDivGridForm class="!grid-cols-none col-span-2 md:col-span-1"> -->
         <UiLabelProfile
           class="col-span-2 relative z-90 md:col-span-1"
           label="Оберіть касу:"
@@ -94,7 +87,6 @@ fetchCashier();
             :options="cashiersOptions"
           ></UiSelectProfile>
         </UiLabelProfile>
-        <!-- </UiDivGridForm> -->
         <UiLabelProfile
           class="col-span-2 md:col-span-1"
           label="Введіть суму транзакції:"
@@ -142,6 +134,27 @@ fetchCashier();
             v-model="inputs.comment"
             class="min-h-[80px] xl:min-h-[105px]"
           ></UiTextareaProfile>
+        </UiLabelProfile>
+        <div class="col-span-2">
+          <UiCheckbox v-model="inputs.recuring">Створити автоплатіж</UiCheckbox>
+        </div>
+        <UiLabelProfile
+          v-if="inputs.recuring"
+          label="Зазначте періодичність:"
+          class="col-span-2"
+        >
+          <div class="flex items-center mt-[5px] gap-[30px]">
+            <UiRadio
+              v-model="inputs.periodicity"
+              value="7"
+              label="Раз на тиждень"
+            ></UiRadio>
+            <UiRadio
+              v-model="inputs.periodicity"
+              value="30"
+              label="Раз на місяць"
+            ></UiRadio>
+          </div>
         </UiLabelProfile>
       </UiDivGridForm>
     </UiDivBorderBg>

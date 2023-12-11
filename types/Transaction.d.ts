@@ -8,4 +8,6 @@ declare interface Transaction {
     category: string;
     _id: string;
     cashier: string;
+    recuring?: InputsTransaction['recuring'],
+    periodicity?: InputsTransaction['periodicity'],
 }

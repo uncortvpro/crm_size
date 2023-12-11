@@ -10,6 +10,8 @@ const inputs = ref<InputsTransaction>({
   category: "",
   comment: "",
   type: "На рахунок",
+  recuring: false,
+  periodicity: 7,
 });
 
 const handlerChangeInputs = (value: any, type: keyof InputsTransaction) => {
@@ -35,6 +37,9 @@ const onCreateTransaction = () => {
       date: useFormatDate(inputs.value.date),
       category: inputs.value.category,
       comment: inputs.value.comment,
+
+      recuring: inputs.value.recuring,
+      periodicity: +inputs.value?.periodicity || false,
     },
   })
     .then((res) => {

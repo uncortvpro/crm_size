@@ -25,6 +25,9 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
             secondName: 'warehouseMaterials'
         }
     ]
+
+    const allSubwarehouses = ref<Subwarehouses[]>([]);
+
     const subwarehouse = ref<any>({
         finishedWarehouse: "",
         distributorWarehouse: "",
@@ -103,6 +106,12 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         useSorting(value, reverseSorting, sorting, fetchProducts, idWarehouse, warehouseType);
     }
 
+    function fetchSubwarehouses ()  {
+        useAuthFetch(`${useApiUrl()}/subwarehouses`).then((res) => {
+            allSubwarehouses.value = res.subwarehouses;
+        });
+      };
+
     function deleteProducts(id: string, idWarehouse: Warehouse['id']) {
         useAuthFetch(`${useApiUrl()}/delete_product`, {
             body: {
@@ -155,6 +164,8 @@ export const useWarehousesStore = defineStore("warehousesStore", () => {
         setPage,
         setSorting,
         sorting,
-        reverseSorting
+        reverseSorting,
+        fetchSubwarehouses,
+        allSubwarehouses
     }
 });

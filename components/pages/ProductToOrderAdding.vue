@@ -2,28 +2,50 @@
 import { onClickOutside } from "@vueuse/core";
 
 const props = defineProps<{
-  modelValue: any[];
-  startProducts?: any[];
+  modelValue: VariationProduct[];
 }>();
-const emits = defineEmits(["update:modelValue"]);
 
-const handleInput = (value: string[]) => {
+const emits = defineEmits(["update:modelValue"]);
+const handleInput = (value: VariationProduct[]) => {
   emits("update:modelValue", value);
 };
-const hiddenOutsideClickElement = ref(null);
-
 const ordersStore = useOrdersStore();
 
+const isModalVariations = ref(false);
+const hiddenOutsideClickElement = ref(null);
+const addedProducts = ref<VariationProduct[]>([]);
+const currentProductId = ref("");
+const isShowResult = ref(false);
+
 const productsSearch = computed<any>(() => ordersStore.addingProducts);
-const addedProducts = ref<any>([]);
+
+const getCurrentProduct = computed(() => {
+  const currentProduct: GlobalProduct = productsSearch.value.find(
+    (el: GlobalProduct) => el._id === currentProductId.value
+  );
+
+  return currentProduct;
+});
+
+const getCurrentVariations = computed(() => {
+  return getCurrentProduct.value.variations;
+});
+
+const switchModalVariations = (value: boolean) => {
+  isModalVariations.value = value;
+};
+
+const setCurrentProductId = (id: string) => {
+  currentProductId.value = id;
+};
+
+const actionClickCurrentProduct = (id: string) => {
+  setCurrentProductId(id);
+  switchModalVariations(true);
+};
 
 const getStartProductsValue = () => {
-  if (!props.startProducts) return false;
-
-  props.startProducts.forEach(el => {
-    handleInput([...props.modelValue, el._id]);
-  })
-  addedProducts.value = props.startProducts || [];
+  addedProducts.value = props.modelValue;
 };
 
 const searchProducts = async (value: string) => {
@@ -31,19 +53,14 @@ const searchProducts = async (value: string) => {
   isShowResult.value = true;
 };
 
-const isShowResult = ref(false);
-
-const onFocusOut = () => {
-  isShowResult.value = false;
-};
-
-const addProduct = (product: any) => {
-  handleInput([...props.modelValue, product._id]);
-  addedProducts.value = [...addedProducts.value, product];
-};
+// const addProduct = (product: any) => {
+//   ////////////////////////////////////////////////
+//   handleInput([...props.modelValue, product._id]);
+//   // addedProducts.value = [...addedProducts.value, product];
+// };
 
 const deleteProduct = (id: string) => {
-  const newArrayId = props.modelValue.filter((el) => el !== id);
+  const newArrayId = props.modelValue.filter((el) => el._id !== id);
   const newArrayProducts = addedProducts.value.filter(
     (el: any) => el._id !== id
   );
@@ -52,19 +69,35 @@ const deleteProduct = (id: string) => {
   addedProducts.value = newArrayProducts;
 };
 
+const onFocusOut = () => {
+  isShowResult.value = false;
+};
 onClickOutside(hiddenOutsideClickElement, (event) => onFocusOut());
 
+watchDeep(addedProducts, () => {
+  handleInput(addedProducts.value);
+});
+
 watchDeep(
-  () => props.startProducts,
+  () => props.modelValue,
   () => {
     getStartProductsValue();
   }
 );
+
+getStartProductsValue();
 </script>
 
 <template>
   <UiDivBorderBg class="w-full flex flex-col">
     <UiHeader2 class="text-center"> Додати товари </UiHeader2>
+    <PagesModalAddVariationToOrder
+      v-if="currentProductId"
+      v-model="isModalVariations"
+      v-model:selectedVariations="addedProducts"
+      :variations="getCurrentVariations"
+      @closeModal="switchModalVariations(false)"
+    ></PagesModalAddVariationToOrder>
     <div class="relative" ref="hiddenOutsideClickElement">
       <CommonSearchBorder
         theme="beige"
@@ -79,12 +112,12 @@ watchDeep(
           <UiButton
             v-for="product in productsSearch"
             :key="product._id"
-            @click="addProduct(product)"
+            @click="actionClickCurrentProduct(product._id)"
             class="text-[9px] md:text-[12px] flex gap-[10px] items-center truncate px-[7px] py-[10px] md:px-[10px] md:pt-[15px] duration-hover hover:bg-beige-1 w-full text-left"
           >
             <img
-              v-if="product.photos[0]"
-              :src="useBase64(product.photos[0]) || undefined"
+              v-if="product.photo"
+              :src="useBase64(product.photo) || undefined"
               alt=""
               class="w-[23px] h-[28px] object-cover"
             />
@@ -110,6 +143,7 @@ watchDeep(
           <UiTableCellHeader>Найменування</UiTableCellHeader>
           <UiTableCellHeader>Розмір</UiTableCellHeader>
           <UiTableCellHeader>Кількість</UiTableCellHeader>
+          <UiTableCellHeader>На складі</UiTableCellHeader>
           <UiTableCellHeader>Ціна</UiTableCellHeader>
         </template>
         <template #items>
@@ -117,7 +151,7 @@ watchDeep(
             v-for="(product, index) in addedProducts"
             :key="index"
             :product="product"
-            @deleteAction="deleteProduct"
+            @deleteAction="deleteProduct(product._id || '')"
           ></CommonTableItemOrderProduct>
         </template>
       </CommonTable>

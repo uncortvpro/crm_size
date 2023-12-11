@@ -8,6 +8,12 @@ const warehousesItems = warehousesStore.warehouses.map((item: Warehouse) => {
     slot: "warehousesSlot",
   };
 });
+
+const fetchSubwarehouses = () => {
+  warehousesStore.fetchSubwarehouses();
+};
+
+fetchSubwarehouses();
 </script>
 
 <template>

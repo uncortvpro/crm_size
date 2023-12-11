@@ -2,7 +2,7 @@
 const error = ref("");
 const messageToUser = ref("");
 
-const inputs = ref<any>({
+const inputs = ref<InputsCreateOrder>({
   client: "",
   email: "",
   comment: "",
@@ -13,14 +13,14 @@ const inputs = ref<any>({
   products: [],
 });
 
-const handlerChangeInputs = (value: any, type: keyof Order) => {
+const handlerChangeInputs = (value: any, type: keyof InputsCreateOrder) => {
   inputs.value[type] = value;
 };
 
 const validateResponse = (message: any) => {
   if (message === true) {
     messageToUser.value = "Замовлення успішно створено";
-    inputs.value = {} as Client;
+    inputs.value = {} as InputsCreateOrder;
     return false;
   } else {
     error.value = "Щось не вийшло!";
@@ -28,6 +28,15 @@ const validateResponse = (message: any) => {
 };
 
 const onCreateOrder = () => {
+  //make a number for the amount of variation
+  const variations = inputs.value.products.map((el) => {
+    return {
+      ...el,
+      amount: el.amount ? +el.amount : 0,
+    };
+  });
+  //end
+
   useAuthFetch(`${useApiUrl()}/add_order`, {
     body: {
       client: inputs.value.client,
@@ -37,7 +46,7 @@ const onCreateOrder = () => {
       source: inputs.value.source,
       payment: inputs.value.payment,
       comment: inputs.value.comment,
-      products: inputs.value.products,
+      variations: variations,
     },
   })
     .then((res: any) => {

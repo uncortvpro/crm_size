@@ -12,7 +12,7 @@ const deleteAction = () => {
 
 <template>
   <UiTableItem :isMobileClose="true">
-    <template #header> S </template>
+    <template #header> {{ variation.size }}, {{ variation.colour }} </template>
     <template #elements="{ active }">
       <UiTransitionTableCell class="3xl:w-[10%]" :vIf="active">
         <template #title>

@@ -27,13 +27,16 @@ const fetchOrderInfo = () => {
       order_id: orderId.value,
     },
   }).then((res) => {
-    inputs.value.client = res.client;
-    inputs.value.email = res.email;
-    inputs.value.payment = res.payment;
-    inputs.value.shipping = res.shipping;
-    inputs.value.source = res.source;
-    inputs.value.status = res.status?.status;
-    inputs.value.comment = res.comment;
+    inputs.value.client = res?.client;
+    inputs.value.email = res?.email;
+    inputs.value.payment = res?.payment;
+    inputs.value.shipping = res?.shipping;
+    inputs.value.source = res?.source;
+    inputs.value.status = res?.status?.status;
+    inputs.value.comment = res?.comment;
+
+
+    inputs.value.products = res?.variations;
 
     order.value = res;
   });
@@ -49,6 +52,15 @@ const validateResponse = (message: any) => {
 };
 
 const updateOrder = () => {
+  //make a number for the amount of variation
+  const variations = inputs.value.products.map((el: VariationProduct) => {
+    return {
+      ...el,
+      amount: el.amount ? +el.amount : 0,
+    };
+  });
+  //end
+
   useAuthFetch(`${useApiUrl()}/update_order`, {
     body: {
       order_id: orderId.value,
@@ -59,7 +71,7 @@ const updateOrder = () => {
       source: inputs.value.source,
       payment: inputs.value.payment,
       comment: inputs.value.comment,
-      products: inputs.value.products,
+      variations: variations,
     },
   })
     .then((res: any) => {
@@ -86,7 +98,6 @@ fetchOrderInfo();
         :inputs="inputs"
         :error="error"
         :messageToUser="messageToUser"
-        :orderProducts="order?.products"
         @updateInputs="handlerChangeInputs"
       ></LayoutOrder>
       <div class="flex justify-center">

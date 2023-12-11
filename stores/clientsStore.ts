@@ -43,7 +43,6 @@ export const useClientsStore = defineStore("clientsStore", () => {
     };
 
     function deleteClient(id: string) {
-        console.log(id);
 
         return useAuthFetch(`${useApiUrl()}/delete_client`, {
             body: {

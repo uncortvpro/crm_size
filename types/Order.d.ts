@@ -4,7 +4,7 @@ declare interface Order {
   date: any; 
   email: string;
   payment: string;
-  products: Product[];
+  variations: VariationProduct[];
   shipping: string;
   source: string;
   status: Status | any;

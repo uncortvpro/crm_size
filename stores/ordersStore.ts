@@ -1,3 +1,4 @@
+import { log } from "console";
 import { defineStore } from "pinia";
 
 export const useOrdersStore = defineStore("ordersStore", () => {
@@ -14,9 +15,9 @@ export const useOrdersStore = defineStore("ordersStore", () => {
     }
 
 
-    const sorting = ref<SortingOrders>(""); // change sorting for orders
+    const sorting = ref<SortingOrders>(""); 
     const reverseSorting = ref<boolean>(false);
-    const setSorting = (value: SortingOrders) => {// change sorting for orders
+    const setSorting = (value: SortingOrders) => {
         useSorting(value, reverseSorting, sorting, fetchOrders);
     }
 
@@ -29,7 +30,6 @@ export const useOrdersStore = defineStore("ordersStore", () => {
     }
 
     function deleteOrder(id: string) {
-        console.log(id);
         
         useAuthFetch(`${useApiUrl()}/delete_order`, {
             body: {
@@ -57,8 +57,6 @@ export const useOrdersStore = defineStore("ordersStore", () => {
                 reverse_sort: reverseSorting.value,
             },
         }).then((res) => {
-            console.log(res);
-
             orders.value = res.orders;
             endPage.value = res.total_pages;
         }).catch(res => {
@@ -68,13 +66,12 @@ export const useOrdersStore = defineStore("ordersStore", () => {
 
 
     async function fetchProducts () {
-        const response = await useAuthFetch(`${useApiUrl()}/variations`, {
-          body: {
-            name: nameProduct.value,
-          },
+        const response = await useAuthFetch(`${useApiUrl()}/products`, {
+            body: {
+                keyword: nameProduct.value
+            },
         })
-          addingProducts.value = response.variations;
-          console.log(addingProducts.value);
+          addingProducts.value = response.products;
       };
 
     return {

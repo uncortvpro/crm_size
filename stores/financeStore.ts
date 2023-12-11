@@ -31,7 +31,6 @@ export const useFinanceStore = defineStore("financeStore", () => {
     }
 
     function deleteTransactions(id: string) {
-        console.log(id);
         
         useAuthFetch(`${useApiUrl()}/delete_transaction`, {
             body: {
@@ -54,7 +53,6 @@ export const useFinanceStore = defineStore("financeStore", () => {
                 reverse_sort: reverseSorting.value,
             },
         }).then((res) => {
-            console.log(res);
             
             transactions.value = res.transactions;
             endPage.value = res.total_pages;

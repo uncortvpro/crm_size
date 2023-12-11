@@ -3,12 +3,6 @@ const props = defineProps<{
   modelValue: string;
   placeholder?: boolean;
 }>();
-const value = ref("");
-const addVariantOption = "+ Додати інший підсклад";
-const isModalAddSubwarehouses = ref(false);
-const switchModalAddSubwarehouses = (value: boolean) => {
-  isModalAddSubwarehouses.value = value;
-};
 
 const emits = defineEmits(["actionUpdate", "update:modelValue"]);
 
@@ -20,18 +14,28 @@ const handleUpdate = () => {
   emits("update:modelValue", value.value);
 };
 
-const subwarehouses = ref<Subwarehouses[]>([]);
+const warehousesStore = useWarehousesStore();
+
+const value = ref("");
+const addVariantOption = "+ Додати інший підсклад";
+const isModalAddSubwarehouses = ref(false);
+
+const fetchSubwarehouses = () => {
+  warehousesStore.fetchSubwarehouses();
+};
+
+const switchModalAddSubwarehouses = (value: boolean) => {
+  isModalAddSubwarehouses.value = value;
+};
+
+const subwarehouses = computed<Subwarehouses[]>(
+  () => warehousesStore.allSubwarehouses
+);
 
 const options = computed(() =>
   subwarehouses.value.map((el: Subwarehouses) => el.subwarehouse)
 );
 const fullOptions = computed(() => [...options.value, addVariantOption]);
-
-const getSubwarehouses = () => {
-  useAuthFetch(`${useApiUrl()}/subwarehouses`).then((res) => {
-    subwarehouses.value = res.subwarehouses;
-  });
-};
 
 const onChangeSelect = (value: string) => {
   if (value === addVariantOption) {
@@ -43,8 +47,6 @@ const onChangeSelect = (value: string) => {
   actionUpdate();
 };
 
-getSubwarehouses();
-
 watchDeep(
   () => value.value,
   () => {
@@ -53,7 +55,7 @@ watchDeep(
 );
 
 const actionSuccessAdded = async () => {
-  await getSubwarehouses();
+  await fetchSubwarehouses();
   switchModalAddSubwarehouses(false);
 };
 </script>

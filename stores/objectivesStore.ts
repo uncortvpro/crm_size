@@ -27,8 +27,7 @@ export const useObjectivesStore = defineStore("objectivesStore", () => {
     }
 
     function deleteObjectives(id: string) {
-        console.log(id);
-        
+
         useAuthFetch(`${useApiUrl()}/delete_task`, {
             body: {
                 task_id: id,
@@ -50,8 +49,6 @@ export const useObjectivesStore = defineStore("objectivesStore", () => {
                 reverse_sort: reverseSorting.value,
             },
         }).then((res) => {
-            console.log(res);
-            
             objectives.value = res.tasks;
             endPage.value = res.total_pages;
         }).catch(res => {

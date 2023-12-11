@@ -3,6 +3,9 @@ declare interface VariationProduct {
     colour: string;
     price: string;
     in_stock: string;
-    photos: string;
+    photos: any;
+    amount?: any;
+    name?: string;
     cost_price: string;
+    _id?: string;
 }

@@ -14,6 +14,11 @@ defineProps({
     default: 1,
     required: false,
   },
+  noMobile: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
 });
 
 const emits = defineEmits(["setPage"]);
@@ -27,10 +32,16 @@ const setPage = (page: number) => {
   <div
     class="p-[20px] 2xl:p-[30px] mt-[29px] 2xl:mt-[35px] rounded-[10px] 2xl:rounded-[20px] bg-beige"
   >
-  <slot name="additional_elements"></slot>
+    <slot name="additional_elements"></slot>
     <table class="table-auto w-full">
       <thead>
-        <tr class="hidden 3xl:table-row border-b border-beige-1">
+        <tr
+          :class="
+            cn('hidden 3xl:table-row border-b border-beige-1', {
+              '!table-row': noMobile,
+            })
+          "
+        >
           <slot name="headers"></slot>
         </tr>
       </thead>

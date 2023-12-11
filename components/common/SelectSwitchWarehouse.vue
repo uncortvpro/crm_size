@@ -1,53 +1,73 @@
 <script setup lang="ts">
-const items = [
-  [
-    {
-      label: "Profile",
-      avatar: {
-        src: "https://avatars.githubusercontent.com/u/739984?v=4",
+const props = defineProps<{
+  currentSubwarehouses: Subwarehouses;
+}>();
+
+const emits = defineEmits(["actionChangeSubwarehouses"]);
+
+const actionChangeSubwarehouses = (subwarehouses: Subwarehouses) => {
+  emits("actionChangeSubwarehouses", subwarehouses);
+};
+
+const warehousesStore = useWarehousesStore();
+
+const subwarehouses = computed(
+  () => warehousesStore.allSubwarehouses as Subwarehouses[]
+);
+
+const items = computed(() =>
+  subwarehouses.value.map((el: Subwarehouses) => {
+    return [
+      {
+        label: el.subwarehouse,
+        subwarehouse: el,
+        active:
+          props.currentSubwarehouses.subwarehouse === el.subwarehouse &&
+          props.currentSubwarehouses.warehouse === el.warehouse
+            ? true
+            : false,
+        slot: "switchWarehouse",
+        click: () => {
+          actionChangeSubwarehouses(el);
+        },
       },
-    },
-  ],
-  [
-    {
-      label: "Edit",
-      icon: "i-heroicons-pencil-square-20-solid",
-      shortcuts: ["E"],
-      click: () => {
-        console.log("Edit");
-      },
-    },
-    {
-      label: "Duplicate",
-      icon: "i-heroicons-document-duplicate-20-solid",
-      shortcuts: ["D"],
-      disabled: true,
-    },
-  ],
-  [
-    {
-      label: "Archive",
-      icon: "i-heroicons-archive-box-20-solid",
-    },
-    {
-      label: "Move",
-      icon: "i-heroicons-arrow-right-circle-20-solid",
-    },
-  ],
-  [
-    {
-      label: "Delete",
-      icon: "i-heroicons-trash-20-solid",
-      shortcuts: ["⌘", "D"],
-    },
-  ],
-];
+    ];
+  })
+);
 </script>
 
 <template>
-  <UDropdown :items="items" :popper="{ placement: 'bottom-start' }">
-    <UiButtonIconProfileOpening :value="'1'" :open="false">
+  <UDropdown
+    :ui="{
+      width: 'w-[240px]',
+      rounded: 'rounded-[2px]',
+      ring: '',
+      shadow: 'shadow-lg',
+      divide: '',
+    }"
+    :items="items"
+    :popper="{ placement: 'bottom-start' }"
+  >
+    <UiButtonIconProfileOpening
+      :value="currentSubwarehouses.subwarehouse"
+      :open="false"
+    >
     </UiButtonIconProfileOpening>
+    <template #switchWarehouse="{ item }">
+      <div class="whitespace-nowrap truncate inline-block">
+        <UiCheckbox
+          v-model="item.active"
+          :ui="{ rounded: 'rounded-[2px]', border: 'border-black' }"
+          >{{ item.subwarehouse.warehouse }}</UiCheckbox
+        >
+        <UiCheckbox
+        class="ml-[20px]"
+          v-model="item.active"
+          :ui="{ rounded: 'rounded-[2px]', border: 'border-black' }"
+          >{{ item.subwarehouse.subwarehouse }}</UiCheckbox
+        >
+      </div>
+    </template>
   </UDropdown>
 </template>
 

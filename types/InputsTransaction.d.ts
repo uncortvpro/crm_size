@@ -6,4 +6,6 @@ declare interface InputsTransaction {
     comment: string;
     category: string;
     cashier: string;
+    recuring?: boolean,
+    periodicity: 7 | 30,
 }

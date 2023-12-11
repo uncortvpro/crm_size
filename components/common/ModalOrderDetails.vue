@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const props = defineProps<{
-  products: Product[];
+  products: VariationProduct[];
   isOpen?: boolean;
   ui?: any;
   label: string;
 }>();
 
 const fullCost = computed(() =>
-  props.products.reduce((acc, el) => (acc = acc + el.price * el.amount), 0)
+  props.products.reduce((acc, el) => (acc = acc + +el.price * el.amount), 0)
 );
 </script>
 <template>
