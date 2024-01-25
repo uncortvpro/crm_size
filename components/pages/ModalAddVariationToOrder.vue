@@ -17,9 +17,12 @@ const getStartValue = () => {
   selectedItems.value = props.selectedVariations;
 };
 
-watchDeep(props.selectedVariations, () => {
-  getStartValue();
-});
+watchDeep(
+  () => props.selectedVariations,
+  () => {
+    getStartValue();
+  }
+);
 
 getStartValue();
 </script>

@@ -28,7 +28,12 @@ const getCurrentProduct = computed(() => {
 });
 
 const getCurrentVariations = computed(() => {
-  return getCurrentProduct.value.variations;
+  return getCurrentProduct.value.variations.map((el) => {
+    return {
+      ...el,
+      category: getCurrentProduct.value.category,
+    };
+  });
 });
 
 const switchModalVariations = (value: boolean) => {
@@ -98,7 +103,7 @@ getStartProductsValue();
       :variations="getCurrentVariations"
       @closeModal="switchModalVariations(false)"
     ></PagesModalAddVariationToOrder>
-    <div class="relative" ref="hiddenOutsideClickElement">
+    <div class="relative z-50" ref="hiddenOutsideClickElement">
       <CommonSearchBorder
         theme="beige"
         class="mt-[15px] xl:mt-[25px]"

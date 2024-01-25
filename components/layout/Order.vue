@@ -10,7 +10,6 @@ const emits = defineEmits(["updateInputs"]);
 const handlerChange = (value: any, type: keyof Order) => {
   emits("updateInputs", value, type);
 };
-
 </script>
 
 <template>
