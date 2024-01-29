@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  middleware: ["is-all-role"],
+  middleware: ["finance"],
 });
 
 const financeStore = useFinanceStore();

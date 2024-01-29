@@ -5,7 +5,7 @@ export const useAuthStore = defineStore("authStore", () => {
     const user = ref<User | null>(null);
     const isLoggedIn = computed(() => !!user.value);
     const token = localStorage.getItem('token');
-    const isAllRole = computed(() => user.value?.role === 'all');
+    const isFinance = computed(() => user.value?.role === 'finance');
 
 
 
@@ -64,6 +64,6 @@ export const useAuthStore = defineStore("authStore", () => {
         failedToken,
         fetchUser,
         user,
-        isAllRole
+        isFinance
     };
 });

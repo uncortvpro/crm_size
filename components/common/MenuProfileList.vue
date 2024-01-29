@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const auth = useAuthStore();
 
-const isAllRole = computed(() => auth.isAllRole);
+const isFinance = computed(() => auth.isFinance);
 </script>
 
 <template>
@@ -22,7 +22,7 @@ const isAllRole = computed(() => auth.isAllRole);
         <template #title>Задачі</template>
       </CommonMenuProfileItem>
     </li>
-    <li v-if="isAllRole">
+    <li v-if="isFinance">
       <CommonMenuProfileItem to="/profile/finance">
         <template #logo>
           <SvgoFinance
