@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: ["is-all-role"],
+});
+
 const financeStore = useFinanceStore();
 
 const transactions = computed(() => financeStore.transactions);
