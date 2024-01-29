@@ -88,6 +88,9 @@ const fetchMailingTelegrams = () => {
 };
 
 const getMailingList = () => {
+  if (!inputs.value.category) {
+    return false;
+  }
   if (props.typeMessage === "mail") {
     fetchMailingEmails();
   }
@@ -167,6 +170,7 @@ fetchCategories();
       </UiLabelProfile>
       <UiAlertDanger v-if="error">{{ error }}</UiAlertDanger>
       <UiButtonOpacityBorder
+        :disabled="!inputs.category"
         @click="getMailingList"
         class="mt-[35px] self-center xl:mt-[45px]"
         >Зберегти</UiButtonOpacityBorder
