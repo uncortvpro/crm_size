@@ -1,1 +1,0 @@
-import{_}from"./ModalTitle.vue.be1ef6f5.js";import{_ as c}from"./entry.1dbfaf80.js";import{F as n,G as r}from"./swiper-vue.7d7207a4.js";const t={};function e(s,a){const o=_;return n(),r(o,{class:"max-w-[71px] max-h-[29px]"})}const i=c(t,[["render",e]]);export{i as _};
