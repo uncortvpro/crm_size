@@ -1,6 +1,10 @@
 <script setup lang="ts">
 const clientStore = useClientsStore();
 
+definePageMeta({
+  middleware: ["only-finance"],
+});
+
 const route = useRoute();
 const clientId = computed(() => route.params.client_id);
 const inputs = ref<Client>({
@@ -120,7 +124,7 @@ getClient();
 </script>
 
 <template>
-  <LayoutProfilePage title="Редагувати клієнта">
+  <LayoutProfilePage isButtonBack title="Редагувати клієнта">
     <template #header>
       <div class="items-center gap-[40px] hidden lg:flex">
         <UiButtonOpacityBorder @click="editClient">

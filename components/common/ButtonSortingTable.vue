@@ -11,7 +11,9 @@ defineProps<{
     <SvgoArrowRight
       v-if="sortingUp || sortingDown"
       color="black"
-      :class="cn('rotate-[-90deg]', { 'rotate-[90deg]': sortingDown })"
+      :class="
+        cn('rotate-[-90deg] stroke-beige-2', { 'rotate-[90deg]': sortingDown })
+      "
     ></SvgoArrowRight>
   </UiButtonText>
 </template>

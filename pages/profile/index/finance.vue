@@ -1,7 +1,4 @@
 <script setup lang="ts">
-definePageMeta({
-  middleware: ["finance"],
-});
 
 const financeStore = useFinanceStore();
 

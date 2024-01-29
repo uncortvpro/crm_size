@@ -2,6 +2,9 @@
 const route = useRoute();
 const error = ref("");
 const messageToUser = ref("");
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const productId = computed(() => route.params.product_id);
 
@@ -96,7 +99,7 @@ fetchProduct();
 </script>
 
 <template>
-  <LayoutProfilePage title="Редагувати товар">
+  <LayoutProfilePage isButtonBack title="Редагувати товар">
     <template #header>
       <UiButtonOpacityBorder @click="onEditProduct" class="hidden lg:block">
         Редагувати

@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const error = ref("");
 const messageToUser = ref("");
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const inputs = ref<InputsCreateOrder>({
   client: "",
@@ -19,7 +22,7 @@ const handlerChangeInputs = (value: any, type: keyof InputsCreateOrder) => {
 
 const validateResponse = (message: any) => {
   if (message === true) {
-    messageToUser.value = "Замовлення успішно створено";
+    navigateTo("/profile/orders");
     inputs.value = {} as InputsCreateOrder;
     return false;
   } else {
@@ -60,7 +63,7 @@ const onCreateOrder = () => {
 </script>
 
 <template>
-  <LayoutProfilePage title="Додати замовлення">
+  <LayoutProfilePage isButtonBack title="Додати замовлення">
     <template #header>
       <UiButtonOpacityBorder @click="onCreateOrder" class="hidden lg:block">
         Створити

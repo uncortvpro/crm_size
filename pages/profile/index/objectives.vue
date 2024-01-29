@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const objectivesStore = useObjectivesStore();
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const objectives = computed(() => objectivesStore.objectives);
 const fetchObjectives = () => objectivesStore.fetchObjectives();

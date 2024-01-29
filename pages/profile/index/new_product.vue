@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const error = ref("");
 const messageToUser = ref("");
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const inputs = ref<InputsCreateProduct>({
   name: "",
@@ -20,7 +23,7 @@ const handlerChangeInputs = (value: any, type: keyof InputsCreateProduct) => {
 };
 const validateResponse = (message: any) => {
   if (message === true) {
-    messageToUser.value = "Товар успішно створено";
+    navigateTo("/profile/warehouses");
     return false;
   } else {
     error.value = "Щось не вийшло!";
@@ -46,7 +49,7 @@ const onCreateProduct = () => {
           price: +el.price,
           in_stock: +el.in_stock,
           photos: [el.photos],
-          cost_price: el.cost_price, 
+          cost_price: el.cost_price,
         };
       }),
     },
@@ -62,7 +65,7 @@ const onCreateProduct = () => {
 </script>
 
 <template>
-  <LayoutProfilePage title="Додати товар">
+  <LayoutProfilePage isButtonBack title="Додати товар">
     <template #header>
       <UiButtonOpacityBorder @click="onCreateProduct" class="hidden lg:block">
         Створити

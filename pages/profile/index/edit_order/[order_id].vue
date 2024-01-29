@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const route = useRoute();
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const error = ref("");
 const messageToUser = ref("");
@@ -87,7 +90,7 @@ fetchOrderInfo();
 </script>
 
 <template>
-  <LayoutProfilePage title="Редагувати замовлення">
+  <LayoutProfilePage isButtonBack title="Редагувати замовлення">
     <template #header>
       <UiButtonOpacityBorder @click="updateOrder" class="hidden lg:block">
         Оновити

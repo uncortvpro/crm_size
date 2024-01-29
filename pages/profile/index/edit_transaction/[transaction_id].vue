@@ -94,7 +94,7 @@ fetchTransaction();
 </script>
 
 <template>
-  <LayoutProfilePage title="Редагувати транзакцію">
+  <LayoutProfilePage isButtonBack title="Редагувати транзакцію">
     <template #header>
       <UiButtonOpacityBorder @click="onEditTransaction" class="hidden lg:block">
         Редагувати

@@ -5,6 +5,10 @@ const typeMessage = ref<"telegram" | "mail">("telegram");
 const subject = ref("");
 const textMessage = ref("");
 const error = ref("");
+definePageMeta({
+  middleware: ["only-finance"],
+});
+
 
 const onSendMail = () => {
   if (recipients.value.length === 0) {

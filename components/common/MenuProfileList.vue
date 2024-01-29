@@ -1,12 +1,12 @@
 <script setup lang="ts">
 const auth = useAuthStore();
 
-const isFinance = computed(() => auth.isFinance);
+const onlyFinance = computed(() => auth.onlyFinance);
 </script>
 
 <template>
   <ul>
-    <li>
+    <li v-if="!onlyFinance">
       <CommonMenuProfileItem to="/profile/clients">
         <template #logo>
           <SvgoClients class="!w-full !h-auto"></SvgoClients>
@@ -14,7 +14,7 @@ const isFinance = computed(() => auth.isFinance);
         <template #title>Клієнти</template>
       </CommonMenuProfileItem>
     </li>
-    <li>
+    <li v-if="!onlyFinance">
       <CommonMenuProfileItem to="/profile/objectives">
         <template #logo>
           <SvgoTasks class="!w-full !h-auto"></SvgoTasks>
@@ -22,7 +22,7 @@ const isFinance = computed(() => auth.isFinance);
         <template #title>Задачі</template>
       </CommonMenuProfileItem>
     </li>
-    <li v-if="isFinance">
+    <li>
       <CommonMenuProfileItem to="/profile/finance">
         <template #logo>
           <SvgoFinance
@@ -33,7 +33,7 @@ const isFinance = computed(() => auth.isFinance);
         <template #title>Фінанси</template>
       </CommonMenuProfileItem>
     </li>
-    <li>
+    <li v-if="!onlyFinance">
       <CommonMenuProfileItem to="/profile/warehouses">
         <template #logo>
           <SvgoStock class="!w-full !h-auto"></SvgoStock>
@@ -41,7 +41,7 @@ const isFinance = computed(() => auth.isFinance);
         <template #title>Склади</template>
       </CommonMenuProfileItem>
     </li>
-    <li>
+    <li v-if="!onlyFinance">
       <CommonMenuProfileItem to="/profile/my_orders">
         <template #logo>
           <SvgoOrders class="!w-full !h-auto"></SvgoOrders>
@@ -49,7 +49,7 @@ const isFinance = computed(() => auth.isFinance);
         <template #title>Мої замовлення</template>
       </CommonMenuProfileItem>
     </li>
-    <li>
+    <li v-if="!onlyFinance">
       <CommonMenuProfileItem to="/profile/mailing_list">
         <template #logo>
           <SvgoNewsletter class="!w-full !h-auto"></SvgoNewsletter>
@@ -57,7 +57,7 @@ const isFinance = computed(() => auth.isFinance);
         <template #title>Розсилка</template>
       </CommonMenuProfileItem>
     </li>
-    <li>
+    <li v-if="!onlyFinance">
       <CommonMenuProfileItem to="/profile/analytics">
         <template #logo>
           <SvgoAnalytics class="!w-full !h-auto"></SvgoAnalytics>

@@ -20,7 +20,7 @@ const handlerChangeInputs = (value: any, type: keyof InputsTransaction) => {
 
 const validateResponse = (message: any) => {
   if (message === true) {
-    messageToUser.value = "Транзакцію успішно створено";
+    navigateTo("/profile/finance");
     return false;
   } else {
     error.value = "Щось не вийшло!";
@@ -52,7 +52,7 @@ const onCreateTransaction = () => {
 </script>
 
 <template>
-  <LayoutProfilePage title="Додати транзакцію">
+  <LayoutProfilePage isButtonBack title="Додати транзакцію">
     <template #header>
       <UiButtonOpacityBorder
         @click="onCreateTransaction"

@@ -1,4 +1,8 @@
 <script setup lang="ts">
+definePageMeta({
+  middleware: ["only-finance"],
+});
+
 const inputs = ref<Client>({
   additional_phone: "",
   email: "",
@@ -51,7 +55,7 @@ const validateResponse = (message: string) => {
     return false;
   }
   if (message === "Client created successfully") {
-    messageToUser.value = "Клієнта успішно створено";
+    navigateTo("/profile/clients");
     inputs.value = {} as Client;
     return false;
   } else {
@@ -77,7 +81,7 @@ const createClient = () => {
 </script>
 
 <template>
-  <LayoutProfilePage title="Додати клієнта">
+  <LayoutProfilePage isButtonBack title="Додати клієнта">
     <template #header>
       <UiButtonOpacityBorder @click="createClient" class="hidden lg:block">
         Створити

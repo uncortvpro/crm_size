@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const warehousesStore = useWarehousesStore();
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const warehousesItems = warehousesStore.warehouses.map((item: Warehouse) => {
   return {

@@ -3,7 +3,10 @@
 <template>
   <UiButtonText class="!text-[12px] flex gap-[5px]">
     <span><slot /></span>
-    <SvgoArrowRight color="black" class="rotate-[-90deg]"></SvgoArrowRight>
+    <SvgoArrowRight
+      color="black"
+      class="rotate-[-90deg] stroke-black"
+    ></SvgoArrowRight>
   </UiButtonText>
 </template>
 

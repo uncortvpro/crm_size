@@ -5,6 +5,10 @@ const currentClientId = ref<string>("");
 const clients = computed(() => clientsStore.clients);
 const pageClients = computed(() => clientsStore.page);
 const endPage = computed(() => clientsStore.endPage);
+definePageMeta({
+  middleware: ["only-finance"],
+});
+
 
 const getClients = () => clientsStore.fetchClients();
 const setPage = (page: number) => clientsStore.setPage(page);

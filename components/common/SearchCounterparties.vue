@@ -46,6 +46,8 @@ const onclickClient = (counterpartie: string) => {
   switchShowCounterpartie(false);
 };
 
+search();
+
 watchDeep(
   () => props.counterpartie,
   () => {

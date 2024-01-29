@@ -2,9 +2,9 @@
 
 <template>
   <UiButtonText class="!text-[12px] flex gap-[5px]">
-    <SvgoArrowRight class="rotate-180"></SvgoArrowRight>
+    <SvgoArrowRight class="rotate-180 stroke-black"></SvgoArrowRight>
     <span><slot /></span>
-  </UiButtonText>
+  </UiButtonText> 
 </template>
 
 <style scoped></style>

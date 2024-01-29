@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const objectivesStore = useObjectivesStore();
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const route = useRoute();
 
@@ -75,7 +78,7 @@ getObjective();
 </script>
 
 <template>
-  <LayoutProfilePage title="Редагувати завдання">
+  <LayoutProfilePage isButtonBack title="Редагувати завдання">
     <template #header>
       <div class="items-center gap-[40px] hidden lg:flex">
         <UiButtonOpacityBorder @click="editObjective" class="hidden lg:block">

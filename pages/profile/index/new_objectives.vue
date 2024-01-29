@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const auth = useAuthStore();
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const creator = computed(() => auth.user?.name);
 const error = ref("");
@@ -21,7 +24,7 @@ const handlerChangeInputs = (value: any, type: keyof Objective) => {
 
 const validateResponse = (message: any) => {
   if (message === true) {
-    messageToUser.value = "Завдання успішно створено";
+    navigateTo("/profile/objectives");
     inputs.value = {} as Client;
     return false;
   } else {
@@ -53,7 +56,7 @@ const createObjective = () => {
 </script>
 
 <template>
-  <LayoutProfilePage title="Додати завдання">
+  <LayoutProfilePage isButtonBack title="Додати завдання">
     <template #header>
       <UiButtonOpacityBorder @click="createObjective" class="hidden lg:block">
         Створити

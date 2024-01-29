@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const ordersStore = useOrdersStore();
+definePageMeta({
+  middleware: ["only-finance"],
+});
 
 const orders = computed(() => ordersStore.orders);
 const fetchOrders = () => ordersStore.fetchOrders();

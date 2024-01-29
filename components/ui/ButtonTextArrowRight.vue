@@ -3,7 +3,7 @@
 <template>
   <UiButtonText class="!text-[12px] flex gap-[5px]">
     <span><slot /></span>
-    <SvgoArrowRight></SvgoArrowRight>
+    <SvgoArrowRight class="stroke-black"></SvgoArrowRight>
   </UiButtonText>
 </template>
 

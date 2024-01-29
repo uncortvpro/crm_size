@@ -28,9 +28,7 @@ const confirm = () => {
         <slot />
       </p>
       <div class="flex self-stretch gap-[20px] justify-center mt-[20px]">
-        <UiButtonOpacityBorder
-          @click="confirm"
-          class="border-gray-1 w-full max-w-[115px] text-gray-1"
+        <UiButtonOpacityBorder @click="confirm" class="w-full max-w-[115px]"
           >Так</UiButtonOpacityBorder
         >
         <UiButtonOpacityBorder
