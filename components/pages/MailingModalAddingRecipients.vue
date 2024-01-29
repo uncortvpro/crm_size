@@ -28,14 +28,34 @@ const fetchCategories = () => {
 };
 
 const fetchMailingEmails = () => {
-  useAuthFetch(`${useApiUrl()}/new_mailing_list`, {
-    body: {
-      category: inputs.value.category,
+  const body = {
+    category: inputs.value.category,
+  };
+
+  if (inputs.value.min_max_price) {
+    Object.assign(body, {
       min_max_price: +inputs.value.min_max_price,
+    });
+  }
+
+  if (inputs.value.min_total_price) {
+    Object.assign(body, {
       min_total_price: +inputs.value.min_total_price,
+    });
+  }
+  if (inputs.value.min_price) {
+    Object.assign(body, {
       min_price: +inputs.value.min_price,
+    });
+  }
+  if (inputs.value.max_price) {
+    Object.assign(body, {
       max_price: +inputs.value.max_price,
-    },
+    });
+  }
+
+  useAuthFetch(`${useApiUrl()}/new_mailing_list`, {
+    body: body,
   }).then((res: any) => {
     if (res.emails.length === 0) {
       error.value = "Нічого не знайдено!";
