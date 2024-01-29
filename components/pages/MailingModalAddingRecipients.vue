@@ -27,7 +27,7 @@ const fetchCategories = () => {
   });
 };
 
-const fetchMailingEmails = () => {
+const checkInputs = () => {
   const body = {
     category: inputs.value.category,
   };
@@ -54,27 +54,26 @@ const fetchMailingEmails = () => {
     });
   }
 
+  return body;
+};
+
+const fetchMailingEmails = () => {
   useAuthFetch(`${useApiUrl()}/new_mailing_list`, {
-    body: body,
+    body: checkInputs(),
   }).then((res: any) => {
     if (res.emails.length === 0) {
       error.value = "Нічого не знайдено!";
       return false;
     }
     updateMailingEmails(res.emails);
+    error.value = "";
     emits("switcherModal", false);
   });
 };
 
 const fetchMailingTelegrams = () => {
   useAuthFetch(`${useApiUrl()}/new_telegram_list`, {
-    body: {
-      category: inputs.value.category,
-      min_max_price: +inputs.value.min_max_price,
-      min_total_price: +inputs.value.min_total_price,
-      min_price: +inputs.value.min_price,
-      max_price: +inputs.value.max_price,
-    },
+    body: checkInputs(),
   }).then((res: any) => {
     console.log(res);
 
@@ -83,6 +82,7 @@ const fetchMailingTelegrams = () => {
       return false;
     }
     updateMailingEmails(res.tgIDs);
+    error.value = "";
     emits("switcherModal", false);
   });
 };
