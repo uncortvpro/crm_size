@@ -40,12 +40,12 @@
               },
             }"
           >
-            <SwiperSlide class="!h-auto !w-[20%] lg:!w-fit">
+            <SwiperSlide v-for="item in 6" class="!h-auto !w-[20%] lg:!w-fit">
               <div class="h-full flex justify-center items-center">
-                <img src="@img/alnest.png" alt="" />
+                <!-- <img src="@img/alnest.png" class="opa" alt="" /> -->
               </div>
             </SwiperSlide>
-            <SwiperSlide class="!h-auto !w-[20%] lg:!w-fit">
+            <!-- <SwiperSlide class="!h-auto !w-[20%] lg:!w-fit">
               <div class="h-full flex justify-center items-center">
                 <img src="@img/novitska.png" alt="" />
               </div>
@@ -64,7 +64,7 @@
               <div class="h-full flex justify-center items-center">
                 <img src="@img/di_forte.png" alt="" />
               </div>
-            </SwiperSlide>
+            </SwiperSlide> -->
           </Swiper>
         </div>
       </template>
@@ -143,10 +143,10 @@
             </div>
           </div>
           <div
-            class="pt-[20px] 3xl:pl-[30px] self-end 4xl:pl-[60px] md:pt-[30px] flex justify-center"
+            class="pt-[20px] md:pt-[30px] self-center flex flex-1 justify-center"
           >
             <div class="text-black">
-              <p class="text-[35px] md:text-[55px] xl:text-[70px] font-bold">
+              <p class="text-[40px] md:text-[60px] xl:text-[80px] font-black">
                 1500₴/<span
                   class="font-normal text-[10px] md:text-[20px] xl:text-[30px]"
                   >міс</span

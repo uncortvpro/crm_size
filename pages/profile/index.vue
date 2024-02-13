@@ -8,7 +8,7 @@ definePageMeta({
 <template>
   <div class="lg:grid relative grid-cols-12">
     <div
-      class="hidden col-span-3 2xl:col-span-2 lg:block sticky top-0 rounded-r-[20px] max-h-[700px] h-[100vh] overflow-x-scroll scroll_bar px-[30px] pt-[30px] 4xl:px-[44px] 4xl:pt-[44px] bg-beige"
+      class="hidden col-span-3 2xl:col-span-2 lg:block sticky top-0 rounded-r-[20px] max-h-[700px] h-[100vh] overflow-x-hidden scroll_bar px-[30px] pt-[30px] 4xl:px-[44px] 4xl:pt-[44px] bg-beige"
     >
       <CommonLogo></CommonLogo>
       <CommonMenuProfileList

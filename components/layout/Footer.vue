@@ -37,11 +37,15 @@
           >
           <div class="flex gap-[15px] xl:gap-[20px] md:mt-[10px]">
             <UiButtonOpacity
+              target="blanc"
+              to="https://t.me/sizecrm"
               class="rounded-[50%] flex justify-center bg-beige-1 items-center w-[27px] h-[27px] md:w-[37px] md:h-[37px] xl:w-[50px] xl:h-[50px]"
             >
               <SvgoTelegram class="!w-[40%] !h-[40%]"></SvgoTelegram>
             </UiButtonOpacity>
             <UiButtonOpacity
+              target="blanc"
+              to="https://www.instagram.com/size.crm/"
               class="rounded-[50%] flex justify-center bg-beige-1 items-center w-[27px] h-[27px] md:w-[37px] md:h-[37px] xl:w-[50px] xl:h-[50px]"
             >
               <SvgoInstagram class="!w-[40%] !h-[40%]"></SvgoInstagram>
@@ -52,7 +56,9 @@
           class="mt-[85px] xl:mt-[53px] col-span-2 flex justify-between sm:justify-end sm:gap-[50px] xl:gap-[80px]"
         >
           <PagesFooterMenuItem to="/">ГОЛОВНА</PagesFooterMenuItem>
-          <PagesFooterMenuItem to="/opportunities">МОЖЛИВОСТІ</PagesFooterMenuItem>
+          <PagesFooterMenuItem to="/opportunities"
+            >МОЖЛИВОСТІ</PagesFooterMenuItem
+          >
           <PagesFooterMenuItem to="/contacts">КОНТАКТИ</PagesFooterMenuItem>
         </div>
       </div>
