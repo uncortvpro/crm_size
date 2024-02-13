@@ -1,2 +1,0 @@
-import{k as s,F as l,Q as r}from"./swiper-vue.7d7207a4.js";const p=["value"],m=s({__name:"TextareaProfile",props:{modelValue:{}},emits:["update:modelValue"],setup(u,{emit:o}){const a=o,n=e=>{const t=e.target.value;a("update:modelValue",t)};return(e,t)=>(l(),r("textarea",{value:e.modelValue,onInput:n,class:"bg-beige rounded-[3px] text-[9px] md:text-[12px] no_scroll_bar resize-none focus:outline-none p-[10px]",resize:"false"},`\r
-  `,40,p))}});export{m as _};

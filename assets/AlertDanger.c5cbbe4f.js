@@ -1,0 +1,1 @@
+import{_ as e}from"./TextPrimary.597a46d7.js";import{_}from"./entry.9837a20a.js";import{F as r,G as n,H as s,a4 as c}from"./swiper-vue.df2f0745.js";const a={};function m(t,p){const o=e;return r(),n(o,{class:"!text-red-600 mt-[15px]"},{default:s(()=>[c(t.$slots,"default")]),_:3})}const l=_(a,[["render",m]]);export{l as _};
